@@ -1,0 +1,24 @@
+// index.js
+const express = require('express');
+const bodyParser = require('body-parser');
+const minify = require('express-minify');
+
+const app = express();
+
+// DODGE CROS
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  next();
+});
+
+app.use(minify());
+app.use(express.static("."));
+app.use(bodyParser.json())
+
+
+// start your server
+app.listen(4242, () => {
+  console.log('GMBD server listening on port 4242!');
+});
