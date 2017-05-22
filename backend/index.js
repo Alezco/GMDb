@@ -17,6 +17,14 @@ app.use(minify());
 app.use(express.static("."));
 app.use(bodyParser.json())
 
+/*app.post('/signIn', (req, res) => {
+  let login = req.body.login;
+  let pwd = req.body.pwd;
+  console.log(login);
+  console.log(pwd);
+  res.send("Done");
+});*/
+
 
 // start your server
 app.listen(4242, () => {

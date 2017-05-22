@@ -10,53 +10,55 @@ class SignIn extends Component {
 
   }
 
+  checkSignIn(event)
+  {
+    let login = document.getElementById("login").value;
+    let password =document.getElementById("password").value;
+    let rePassword = document.getElementById("rePassword").value;
+    console.log(login);
+    console.log(password);
+    console.log(rePassword);
+    if (password == rePassword)
+    {
+      let req = new XMLHttpRequest();
+      req.setRequestHeader("Content-Type", "application/json");
+      req.open('POST', 'http://localhost:4242/signIn', true);
+      let jsonToSend = JSON.stringify({"login": login, "pwd": password});
+      req.send(jsonToSend);
+    }
+    else {
+      let errorLabel = document.createElement("label");
+      errorLabel.style.color = "dark-red";
+      errorLabel.innerHTML = "Password not matching!"
+      document.getElementById("root").appendChild(errorLabel);
+    }
+  }
+
   render() {
     return(
     <div>
       <div className="form">
           <ul className="tab-group">
-            <li className="tab active"><a href="#signup">Sign Up</a></li>
-            <li className="tab"><a href="#login">Log In</a></li>
+            <li className="tab active">Sign Up</li>
+            <li className="tab">Log In</li>
           </ul>
-
           <div className="tab-content">
             <div id="signup">
               <h1>Sign Up for Free</h1>
 
-              <form action="/" method="post">
                   <div className="field-wrap">
-                    <label>Login<span className="req">*</span></label>
-                    <input type="text"required autocomplete="off"/>
+                    <input type="text"required placeholder="Login *" id="login"/>
                   </div>
                   <div className="field-wrap">
-                    <label>Set A Password<span className="req">*</span></label>
-                    <input type="password"required autocomplete="off"/>
+                    <input type="password"required placeholder="Password *" id="password"/>
                   </div>
               <div className="field-wrap">
-                <label>Repeat The Password<span className="req">*</span></label>
-                <input type="password"required autocomplete="off"/>
+                <input type="password"required placeholder="Repeat Password *" id="rePassword"/>
               </div>
-              <button type="submit" className="button button-block">Get Started</button>
-            </form>
+              <button type="submit" className="button button-block" onClick={e => this.checkSignIn(e)}>Get Started</button>
           </div>
-
-          <div id="login">
-            <h1>Welcome Back!</h1>
-            <form action="/" method="post">
-                <div className="field-wrap">
-                  <label>Email Address<span className="req">*</span></label>
-                  <input type="email"required autocomplete="off"/>
-                </div>
-
-                <div className="field-wrap">
-                  <label>Password<span className="req">*</span></label>
-                  <input type="password"required autocomplete="off"/>
-                </div>
-                <p className="forgot"><a href="#">Forgot Password?</a></p>
-                <button className="button button-block">Log In</button>
-            </form>
+          <div>
           </div>
-
         </div>
       </div>
     </div>
