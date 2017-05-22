@@ -13,8 +13,11 @@ class SignIn extends Component {
   render() {
     return(
       <div>
+        <p>Fill the fields to sign in</p>
             <form>
-
+              <input type="text" placeholder="Firstname"/><br/>
+              <input type="text" placeholder="Lastname"/><br/>
+              <input type="password" placeholder="Password"/>
             </form>
        </div>
       );
