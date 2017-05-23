@@ -2,7 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const minify = require('express-minify');
-
+const mysql = require('mysql');
 const app = express();
 
 // DODGE CROS
@@ -17,14 +17,25 @@ app.use(minify());
 app.use(express.static("."));
 app.use(bodyParser.json())
 
-/*app.post('/signIn', (req, res) => {
+
+let con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "password"
+});
+
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+});
+
+app.post('/signIn', (req, res) => {
   let login = req.body.login;
   let pwd = req.body.pwd;
   console.log(login);
   console.log(pwd);
   res.send("Done");
-});*/
-
+});
 
 // start your server
 app.listen(4242, () => {
