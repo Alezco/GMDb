@@ -2,6 +2,12 @@ DROP DATABASE gmbd;
 CREATE DATABASE gmbd;
 USE gmbd;
 
+CREATE TABLE user (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  login varchar(16) NOT NULL,
+  password varchar(60) NOT NULL,
+  PRIMARY KEY (id));
+
 CREATE TABLE movie(
   Title VARCHAR(255) NOT NULL,
   Year DOUBLE NOT NULL,

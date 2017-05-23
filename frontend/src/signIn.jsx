@@ -21,10 +21,8 @@ class SignIn extends Component {
     if (password == rePassword)
     {
       let req = new XMLHttpRequest();
-      req.setRequestHeader("Content-Type", "application/json");
-      req.open('POST', 'http://localhost:4242/signIn', true);
-      let jsonToSend = JSON.stringify({"login": login, "pwd": password});
-      req.send(jsonToSend);
+      req.open('POST', 'http://localhost:4242/signIn?username='+login+'&'+'password='+password, true);
+      req.send();
     }
     else {
       let errorLabel = document.createElement("label");
