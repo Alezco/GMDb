@@ -13,7 +13,24 @@ class SignIn extends Component {
     };
   }
 
+  checkSign()
+  {
+    if (this.state.activeIndex === 0)
+    {
+      this.checkSignUp();
+    }
+    else
+    {
+      this.checkSignIn();
+    }
+  }
+
   checkSignIn()
+  {
+    console.log("SignIn clicked!");
+  }
+
+  checkSignUp()
   {
     let login = document.getElementById("login").value;
     let password =document.getElementById("password").value;
@@ -27,17 +44,12 @@ class SignIn extends Component {
       req.open('POST', 'http://localhost:4242/signIn?username='+login+'&'+'password='+password, true);
       req.send();
     }
-    else {
+    else
+    {
       let errorLabel = document.createElement("label");
-      errorLabel.style.color = "dark-red";
-      errorLabel.innerHTML = "Password not matching!"
+      errorLabel.innerHTML = "Password not matching!";
       document.getElementById("root").appendChild(errorLabel);
     }
-  }
-
-  checkSignUp()
-  {
-    console.log("SignUp clicked");
   }
 
   handleClick(index)
@@ -50,15 +62,13 @@ class SignIn extends Component {
     {
       title.innerHTML = "Enter Your Login Now";
       rePassDiv.style.visibility = "hidden";
-      submitBtn.onclick = this.checkSignIn();
     }
     else
     {
       title.innerHTML = "Sign Up For Free";
       rePassDiv.style.visibility = "visible";
-      submitBtn.onclick = this.checkSignUp();
     }
-    this.setState({activeIndex: index})
+    this.setState({activeIndex: index});
   }
 
   render() {
@@ -82,7 +92,7 @@ class SignIn extends Component {
               <div className="field-wrap" id="rePassDiv">
                 <input type="password"required placeholder="Repeat Password *" id="rePassword"/>
               </div>
-              <button id="submitBtn" type="submit" className="button button-block" onClick={this.checkSignIn.bind(this)}>Get Started</button>
+              <button id="submitBtn" type="submit" className="button button-block" onClick={this.checkSign.bind(this)}>Get Started</button>
           </div>
           <div>
           </div>
