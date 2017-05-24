@@ -135,13 +135,18 @@ app.post('/logIn', (req, res) => {
       if (user) {
         sess = req.session;
         sess.email=req.body.login;
-        res.redirect('/ok')
+        res.send(sess.email);
       }
     });
 });
 
 
 app.get('/films', (req, res) => {
+      if(sess.email) {
+        res.send('hello ' + sess.email);
+      } else {
+        res.send('NO not authentificated');
+      }
     var newUser = getFilms(function(err, movies) {
       if (err) {
         console.log(err);

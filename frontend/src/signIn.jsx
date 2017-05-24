@@ -28,6 +28,20 @@ class SignIn extends Component {
   checkSignIn()
   {
     console.log("SignIn clicked!");
+    let login = document.getElementById("login").value;
+    let password =document.getElementById("password").value;
+    console.log(login);
+    console.log(password);
+    let req = new XMLHttpRequest();
+    req.onreadystatechange = function() {
+        if (req.readyState == XMLHttpRequest.DONE) {
+            alert(req.responseText);
+        }
+    }
+      req.open('POST', 'http://localhost:4242/logIn', true);
+        req.setRequestHeader("Content-Type", "application/json");
+        let jsonToSend = JSON.stringify({"login": login, "pwd": password});
+        req.send(jsonToSend);
   }
 
   checkSignUp()
@@ -41,10 +55,10 @@ class SignIn extends Component {
     if (password == rePassword)
     {
       let req = new XMLHttpRequest();
-        req.open('POST', 'http://localhost:4242/logIn', true);
-        req.setRequestHeader("Content-Type", "application/json");
-        let jsonToSend = JSON.stringify({"login": login, "pwd": password});
-        req.send(jsonToSend);
+      req.open('POST', 'http://localhost:4242/signIn', true);
+      req.setRequestHeader("Content-Type", "application/json");
+      let jsonToSend = JSON.stringify({"login": login, "pwd": password});
+      req.send(jsonToSend);
     }
     else
     {
