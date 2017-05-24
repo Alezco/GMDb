@@ -4,7 +4,7 @@ USE gmbd;
 
 CREATE TABLE user (
   id int(11) NOT NULL AUTO_INCREMENT,
-  login varchar(16) NOT NULL,
+  login varchar(16) NOT NULL UNIQUE,
   password varchar(60) NOT NULL,
   PRIMARY KEY (id));
 
