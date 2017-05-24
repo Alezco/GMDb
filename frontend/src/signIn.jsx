@@ -41,8 +41,10 @@ class SignIn extends Component {
     if (password == rePassword)
     {
       let req = new XMLHttpRequest();
-      req.open('POST', 'http://localhost:4242/signIn?username='+login+'&'+'password='+password, true);
-      req.send();
+        req.open('POST', 'http://localhost:4242/logIn', true);
+        req.setRequestHeader("Content-Type", "application/json");
+        let jsonToSend = JSON.stringify({"login": login, "pwd": password});
+        req.send(jsonToSend);
     }
     else
     {
