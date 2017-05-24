@@ -2,15 +2,18 @@ import React, { Component } from 'react';
 import {render} from 'react-dom';
 const Redux =require('react-redux');
 import styles from './style/index.css';
+import MyNavItem from './myNavItem.jsx';
 
 class SignIn extends Component {
 
   constructor(props) {
     super(props);
-
+    this.state = {
+      activeIndex: 0,
+    };
   }
 
-  checkSignIn(event)
+  checkSignIn()
   {
     let login = document.getElementById("login").value;
     let password =document.getElementById("password").value;
@@ -32,17 +35,43 @@ class SignIn extends Component {
     }
   }
 
+  checkSignUp()
+  {
+    console.log("SignUp clicked");
+  }
+
+  handleClick(index)
+  {
+    let title = document.getElementById('title');
+    let rePassDiv = document.getElementById('rePassDiv');
+    let submitBtn = document.getElementById('submitBtn');
+
+    if (this.state.activeIndex === 0)
+    {
+      title.innerHTML = "Enter Your Login Now";
+      rePassDiv.style.visibility = "hidden";
+      submitBtn.onclick = this.checkSignIn();
+    }
+    else
+    {
+      title.innerHTML = "Sign Up For Free";
+      rePassDiv.style.visibility = "visible";
+      submitBtn.onclick = this.checkSignUp();
+    }
+    this.setState({activeIndex: index})
+  }
+
   render() {
     return(
     <div>
       <div className="form">
           <ul className="tab-group">
-            <li className="tab active">Sign Up</li>
-            <li className="tab">Log In</li>
+            <MyNavItem content="Sign up" index={0} isActive={this.state.activeIndex===0} onClick={this.handleClick.bind(this)}/>
+            <MyNavItem content="Log In" index={1} isActive={this.state.activeIndex===1} onClick={this.handleClick.bind(this)}/>
           </ul>
           <div className="tab-content">
             <div id="signup">
-              <h1>Sign Up for Free</h1>
+              <h1 id="title">Sign Up For Free</h1>
 
                   <div className="field-wrap">
                     <input type="text"required placeholder="Login *" id="login"/>
@@ -50,10 +79,10 @@ class SignIn extends Component {
                   <div className="field-wrap">
                     <input type="password"required placeholder="Password *" id="password"/>
                   </div>
-              <div className="field-wrap">
+              <div className="field-wrap" id="rePassDiv">
                 <input type="password"required placeholder="Repeat Password *" id="rePassword"/>
               </div>
-              <button type="submit" className="button button-block" onClick={e => this.checkSignIn(e)}>Get Started</button>
+              <button id="submitBtn" type="submit" className="button button-block" onClick={this.checkSignIn.bind(this)}>Get Started</button>
           </div>
           <div>
           </div>
