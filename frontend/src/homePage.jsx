@@ -28,14 +28,14 @@ class HomePage extends Component {
       						<span className="icon-bar"></span>
       						<span className="icon-bar"></span>
       					</button>
-      					<a className="navbar-brand" href="#">Sitename</a>
+      					<a className="navbar-brand" href="#">GMDb</a>
       				</div>
 
       				<div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       					<ul className="nav navbar-nav">
-      						<li><a href="#">Nav item 1</a></li>
-      						<li><a href="#">Nav item 2</a></li>
-      						<li><a href="#">Nav item 3</a></li>
+      						<li><a href="#">Home</a></li>
+      						<li><a href="#">Search</a></li>
+      						<li><a href="#">About</a></li>
       					</ul>
       				</div>
       			</div>
@@ -45,7 +45,7 @@ class HomePage extends Component {
       			<div className="row">
       				<div className="col-sm-12">
       					<div className="page-header">
-      						<h1>Bootstrap four column image gallery</h1>
+      						<h1>Best movies of the day</h1>
       						<p>Posted by <span className="glyphicon glyphicon-user"></span> <a href="#">Matthijs Jansen</a> on <span className="glyphicon glyphicon-time"></span> 12 January 2015 10:00 am</p>
       					</div>
       				</div>
