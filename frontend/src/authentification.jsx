@@ -33,14 +33,15 @@ class Authentification extends Component {
     let password =document.getElementById("password").value;
     console.log(login);
     console.log(password);
+    let self = this;
     let req = new XMLHttpRequest();
+    req.withCredentials = true;
     req.onreadystatechange = function() {
         if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
-          this.state.loginOk = true;
-
+          self.state.loginOk = true;
         }
     }
-      req.open('POST', 'http://localhost:4242/logIn', true);
+      req.open('POST', 'http://localhost:4242/api/logIn', true);
         req.setRequestHeader("Content-Type", "application/json");
         let jsonToSend = JSON.stringify({"login": login, "pwd": password});
         req.send(jsonToSend);
@@ -57,7 +58,8 @@ class Authentification extends Component {
     if (password == rePassword)
     {
       let req = new XMLHttpRequest();
-      req.open('POST', 'http://localhost:4242/signIn', true);
+      req.withCredentials = true;
+      req.open('POST', 'http://localhost:4242/api/logIn', true);
       req.setRequestHeader("Content-Type", "application/json");
       let jsonToSend = JSON.stringify({"login": login, "pwd": password});
       req.send(jsonToSend);

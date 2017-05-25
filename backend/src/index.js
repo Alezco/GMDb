@@ -4,13 +4,13 @@ const express           = require('express');
 const bodyParser        = require('body-parser');
 const minify            = require('express-minify');
 const mysql             = require('mysql');
-const session           = require('express-session');
-
+const http              = require('http')
 const app = express();
 
 // DODGE CROS
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header("Access-Control-Allow-Origin", "http://localhost:8080");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
   next();
@@ -19,15 +19,24 @@ app.use(function(req, res, next) {
 app.use(minify());
 app.use(express.static("."));
 app.use(bodyParser.json())
-
-
+app.disable('x-powered-by');
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+const session = require('express-session');
+const sessionStore   = new session.MemoryStore({ reapInterval: 60000 * 10 })
+app.use(session({
+    resave: false,
+    store: sessionStore,
+    saveUninitialized: true,
+    secret: 'sdlfjljrowuroweu',
+    cookie: {
+              httpOnly: false
+            }
+}));
 // Use application-level middleware for common functionality, including
 // logging, parsing, and session handling.
-app.use(require('cookie-parser')());
+
 app.use(require('body-parser').urlencoded({ extended: true }));
-app.use(require('express-session')({ secret: 'shhhhh'}));
-
-
 
 // IMPORTS
 const db = require('./db.js');
@@ -35,8 +44,6 @@ const auth = require('./authentification');
 const public = require('./public');
 const user = require('./user');
 
-// SESSION USER
-var sess;
 
 
 app.get('/', function(req, res) {
@@ -117,6 +124,8 @@ app.post('/api/signIn', (req, res) => {
  *     }
  */
 app.post('/api/logIn', (req, res) => {
+  console.log("/api/login called");
+  let sess = req.session;
   if (!req.body.login || !req.body.pwd) {
     res.statusCode = 403;
     res.send('{ error : Credential can not be empty ! }');
@@ -129,8 +138,10 @@ app.post('/api/logIn', (req, res) => {
       }
       console.log(user);
       if (user) {
-        sess = req.session;
-        sess.email=req.body.login;
+        console.log("next is session id INIT can not be null");
+        console.log(user.id);
+        sess.username = user.id;
+        req.session.save();
         res.statusCode = 200;
         res.send(JSON.stringify(user));
       }
@@ -295,6 +306,7 @@ app.get('/api/favorites/:id', (req, res) => {
  *     }
  */
 app.get('/api/films', (req, res) => {
+  let sess = req.session;
     var newUser = public.getFilms(function(err, movies) {
       if (err) {
         console.log(err);
@@ -302,6 +314,8 @@ app.get('/api/films', (req, res) => {
         res.send('{ error : '+err+'}');
       }
       console.log(movies);
+      console.log('session id is :' + sess.username)
+      console.log(sess.username);
       if (movies) {
         res.statusCode = 200;
         res.send(movies);
@@ -309,7 +323,15 @@ app.get('/api/films', (req, res) => {
     });
 });
 
-// start your server
-app.listen(4242, () => {
+
+let server = http.createServer(app);
+server.listen(4242, () => {
   console.log('GMBD server listening on port 4242!');
 });
+
+
+//let server = http.createServer(app);
+// start your server
+/*app.listen(4242, () => {
+  console.log('GMBD server listening on port 4242!');
+});*/

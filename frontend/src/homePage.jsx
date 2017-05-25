@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import {render} from 'react-dom';
 const Redux =require('react-redux');
-
+import { Switch, Route } from 'react-router-dom'
 import styles from './style/index.css';
 import NavBar from './navBar.jsx';
 import MovieRow from './movieRow.jsx';
+import MovieList from './movieList.jsx';
+import Authentification from './authentification.jsx';
+import NotFound from './notFound.jsx';
 
 class HomePage extends Component {
 
@@ -17,7 +20,7 @@ class HomePage extends Component {
     let req = new XMLHttpRequest();
     req.onreadystatechange = function() {
         if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
-          alert(req.responseText);
+          //alert(req.responseText);
         }
       }
       req.open('GET', 'http://localhost:4242/api/films', true);
@@ -27,30 +30,14 @@ class HomePage extends Component {
   render() {
     {this.getBestMovies()}
     return(
-    <div>
-      <title>GMDb Homepage</title>
-      <NavBar/>
-      <div className="container-fluid">
-      		<div className="row">
-      			<div className="col-sm-12">
-      				<div className="page-header">
-      					<h1>Best movies of the day</h1>
-      					<p>Posted by <span className="glyphicon glyphicon-user"></span> <a href="#">Matthijs Jansen</a> on <span className="glyphicon glyphicon-time"></span> 12 January 2015 10:00 am</p>
-      				</div>
-      			</div>
-      		</div>
-          <MovieRow/>
-    			<MovieRow/>
-    			<MovieRow/>
-    			<MovieRow/>
-      		<footer className="margin-tb-3">
-      			<div className="row">
-      				<div className="col-lg-12">
-    						<p>EPITA MTI 2018 GREAT MOVIE DATABASE</p>
-    					</div>
-      			</div>
-      		</footer>
-      </div>
+    <div>MovieList
+          <NavBar/>
+          <Switch>
+            <Route exact component={MovieList} path="/" />
+            <Route component={Authentification} path="/login" />
+            <Route component={Authentification} path="/register" />
+            <Route component={NotFound} />
+          </Switch>
     </div>
       );
   }
