@@ -137,6 +137,31 @@ app.post('/api/logIn', (req, res) => {
 });
 
 
+
+
+
+app.post('/api/like', (req, res) => {
+  if (!req.body.movieID) {
+    res.statusCode = 400;
+    res.send('{ error : No film provided }');
+  } else {
+    sess = req.session;
+    var newUser = auth.likeMovie(req.body.movieID, sess.id, function(err, res) {
+      if (err) {
+        console.log(err);
+        res.statusCode = 400;
+        res.send('{ error : '+err+'}');
+      }
+      console.log(res);
+      if (res) {
+        res.statusCode = 200;
+        res.send(JSON.stringify('{ res : true}'));
+      }
+    });
+  }
+});
+
+
 /**
  * @api {get} /api/films Get film list
  * @apiName GetFilms
