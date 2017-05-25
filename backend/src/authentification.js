@@ -49,23 +49,3 @@ const db = require('./db.js');
           }
         });
     };
-
-
-    exports.likeMovie = function (movieID, userID, done) {
-      console.log('user ' + userID + ' liked the movie ' + movieID);
-      db.connection.query("select * from favorites where userID = '"+userID+"' AND movieID = '" + movieID+"'", function(err,rows){
-          if (err) {
-            done(err, false);
-          }
-          if (rows.length) {
-            done('movie already in favorites', false);
-          } else {
-            var insertQuery = "INSERT INTO favorites ( userID, movieID ) values ('" + userID +"','"+ movieID +"')";
-            console.log(insertQuery);
-            db.connection.query(insertQuery,function(err,rows){
-              console.log("all good nesw favorite id = " + rows.insertId);
-              done(null, true);
-            });
-          }
-        });
-    };

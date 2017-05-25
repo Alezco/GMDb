@@ -32,6 +32,7 @@ app.use(require('express-session')({ secret: 'shhhhh'}));
 const db = require('./db.js');
 const auth = require('./authentification');
 const public = require('./public');
+const user = require('./user');
 
 // SESSION USER
 var sess;
@@ -139,24 +140,90 @@ app.post('/api/logIn', (req, res) => {
 
 
 
-
+/**
+ * @api {post} /api/like add image to favorites
+ * @apiName like
+ * @apiGroup User
+ *
+ * @apiParam {string} movieID
+ * @apiParam {string} userID
+ *
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *          res : true
+ *     }
+ *
+ * @apiError Error reason could not add to favorites
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 400 Error
+ *     {
+ *       "error": "reason"
+ *     }
+ */
 app.post('/api/like', (req, res) => {
-  if (!req.body.movieID) {
+  if (!req.body.movieID || !req.body.userID) {
     res.statusCode = 400;
     res.send('{ error : No film provided }');
   } else {
     sess = req.session;
-    var newUser = auth.likeMovie(req.body.movieID, sess.id, function(err, res) {
+    var newUser = user.likeMovie(req.body.movieID, req.body.userID, function(err, isOk) {
       if (err) {
         console.log(err);
         res.statusCode = 400;
         res.send('{ error : '+err+'}');
       }
-      console.log(res);
-      if (res) {
+      console.log(isOk);
+      if (isOk) {
         res.statusCode = 200;
         res.send(JSON.stringify('{ res : true}'));
       }
+    });
+  }
+});
+
+/**
+ * @api {get} /api/favorites/:id getUserFavorites
+ * @apiName user fvorites
+ * @apiGroup User
+ *
+ * @apiParam {int} id the id of the user
+ *
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *          // movie object list
+ *     }
+ *
+ * @apiError Error reason could get favorites movies
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 400 Error
+ *     {
+ *       "error": "reason"
+ *     }
+ */
+app.get('/api/favorites/:id', (req, res) => {
+  if (!req.params.id) {
+    res.statusCode = 400;
+    res.send('{ error : No film provided }');
+  } else {
+    sess = req.session;
+    var newUser = user.myMovies(req.params.id, function(err, movies) {
+      if (err) {
+        console.log(err);
+        res.statusCode = 400;
+        res.send('{ error : '+err+'}');
+      } else {
+      console.log(movies);
+      if (movies) {
+        res.statusCode = 200;
+        res.send(movies);
+      }
+    }
     });
   }
 });
