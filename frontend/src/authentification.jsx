@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {render} from 'react-dom';
 const Redux =require('react-redux');
+
 import styles from './style/index.css';
 import MyNavItem from './myNavItem.jsx';
 
@@ -10,6 +11,7 @@ class Authentification extends Component {
     super(props);
     this.state = {
       activeIndex: 0,
+      loginOk : false
     };
   }
 
@@ -34,8 +36,9 @@ class Authentification extends Component {
     console.log(password);
     let req = new XMLHttpRequest();
     req.onreadystatechange = function() {
-        if (req.readyState == XMLHttpRequest.DONE) {
-            alert(req.responseText);
+        if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
+          this.state.loginOk = true;
+
         }
     }
       req.open('POST', 'http://localhost:4242/logIn', true);

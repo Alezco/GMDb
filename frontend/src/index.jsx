@@ -4,7 +4,9 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import Reducer from './reducers.jsx';
 import Authentification from './authentification.jsx';
+import HomePage from './homePage.jsx';
 
 let store = createStore(Reducer);
 
-render(<Provider store={store}><Authentification /></Provider>, document.getElementById('root'));
+//render(<Provider store={store}><Authentification /></Provider>, document.getElementById('root'));
+render(<Provider store={store}><HomePage /></Provider>, document.getElementById('root'));
