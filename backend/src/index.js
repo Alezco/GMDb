@@ -149,6 +149,7 @@ app.post('/api/logIn', (req, res) => {
  *     {
  *          [
  *            {
+ *              "id": 1,
  *              "Title": "2012",
  *              "Year": 2009,
  *              "Rated": "PG-13",
@@ -169,6 +170,7 @@ app.post('/api/logIn', (req, res) => {
  *              "BoxOffice": "$166,112,167"
  *            },
  *            {
+ *              "id": 2,
  *              "Title": "47 Ronin",
  *              "Year": 2013,
  *              "Rated": "PG-13",
