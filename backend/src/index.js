@@ -1,4 +1,4 @@
-// index.js
+clear// index.js
 const express           = require('express');
 const bodyParser        = require('body-parser');
 const minify            = require('express-minify');
