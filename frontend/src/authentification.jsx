@@ -4,7 +4,7 @@ const Redux =require('react-redux');
 import styles from './style/index.css';
 import MyNavItem from './myNavItem.jsx';
 
-class SignIn extends Component {
+class Authentification extends Component {
 
   constructor(props) {
     super(props);
@@ -120,4 +120,4 @@ class SignIn extends Component {
   }
 }
 
-export default SignIn;
+export default Authentification;
