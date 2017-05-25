@@ -8,7 +8,6 @@ exports.getFilms =  function(done) {
         done(err, null);
       }
       if (rows.length) {
-        db.connection.end();
         done(null, JSON.stringify(rows));
       }
     });
