@@ -1,33 +1,41 @@
 import React, { Component } from 'react';
 import {render} from 'react-dom';
 const Redux =require('react-redux');
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Router, browserHistory } from 'react-router'
 import styles from './style/index.css';
 import NavBar from './navBar.jsx';
 import MovieRow from './movieRow.jsx';
 import MovieList from './movieList.jsx';
 import Authentification from './authentification.jsx';
 import NotFound from './notFound.jsx';
+import Profil from './profil.jsx';
+
 
 class HomePage extends Component {
 
   constructor(props) {
     super(props);
+
   }
 
   render() {
     return(
-    <div>MovieList
-          <NavBar/>
-          <Switch>
-            <Route exact component={MovieList} path="/" />
-            <Route component={Authentification} path="/login" />
-            <Route component={Authentification} path="/register" />
-            <Route component={NotFound} />
-          </Switch>
-    </div>
+                    <Router history={browserHistory}>
+                        <Route>
+                          <Route exact path='/' component={MovieList} />
+                          <Route component={Authentification} router={this.props.router.router} path="/login" />
+                          <Route component={Profil} path="/profil" />
+                          <Route component={NotFound} />
+                        </Route>
+                    </Router>
       );
   }
 }
 
-export default HomePage;
+const mapStateToProps = (store, router) => {
+  return {
+    router: router
+  }
+};
+
+export default Redux.connect(mapStateToProps)(HomePage);

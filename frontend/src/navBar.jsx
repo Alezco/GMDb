@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {render} from 'react-dom';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 const Redux =require('react-redux');
 import styles from './style/index.css';
 
@@ -32,6 +32,7 @@ class NavBar extends Component {
           <ul className="nav navbar-nav">
             <li><Link to="/home" >Home</Link></li>
             <li><Link to="/profile">Search</Link></li>
+            <li><Link to="/profil">My Movies</Link></li>
           </ul>
           <ul className="nav navbar-nav navbar-right">
               <li><Link to="/login">Log In</Link></li>

@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import {render} from 'react-dom';
 const Redux =require('react-redux');
-
+const Router = require('react-router');
+import {browserHistory} from 'react-router'
 import styles from './style/index.css';
 import MyNavItem from './myNavItem.jsx';
+import NavBar from './navBar.jsx';
+
+const SET_USER_ID = 'SET_USER_ID';
 
 class Authentification extends Component {
-
   constructor(props) {
     super(props);
+
     this.state = {
       activeIndex: 0,
       loginOk : false
@@ -38,7 +42,12 @@ class Authentification extends Component {
     req.withCredentials = true;
     req.onreadystatechange = function() {
         if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
-          self.state.loginOk = true;
+          let user = JSON.parse(req.responseText);
+          self.props.dispatch({
+             type: SET_USER_ID,
+             username: user.id
+         });
+         self.props.router.push('/profil');
         }
     }
       req.open('POST', 'http://localhost:4242/api/logIn', true);
@@ -59,7 +68,7 @@ class Authentification extends Component {
     {
       let req = new XMLHttpRequest();
       req.withCredentials = true;
-      req.open('POST', 'http://localhost:4242/api/logIn', true);
+      req.open('POST', 'http://localhost:4242/api/signIn', true);
       req.setRequestHeader("Content-Type", "application/json");
       let jsonToSend = JSON.stringify({"login": login, "pwd": password});
       req.send(jsonToSend);
@@ -94,6 +103,7 @@ class Authentification extends Component {
   render() {
     return(
     <div>
+      <NavBar />
       <div className="form">
           <ul className="tab-group">
             <MyNavItem content="Sign up" index={0} isActive={this.state.activeIndex===0} onClick={this.handleClick.bind(this)}/>
@@ -119,9 +129,15 @@ class Authentification extends Component {
         </div>
       </div>
     </div>
-
       );
   }
 }
 
-export default Authentification;
+const mapStateToProps = (state)  => {
+  return {
+  };
+}
+
+export default Redux.connect(
+  mapStateToProps
+)(Authentification);

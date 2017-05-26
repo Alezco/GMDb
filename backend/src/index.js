@@ -44,6 +44,14 @@ const auth = require('./authentification');
 const public = require('./public');
 const user = require('./user');
 
+function ensureAuthentificated(req, res, next) {
+  if (req.session.username) {
+    return next;
+  } else {
+    res.statusCode = 403;
+    res.send(JSON.stringify('{ error: User not authentificated }'));
+  }
+}
 
 
 app.get('/', function(req, res) {
@@ -158,7 +166,6 @@ app.post('/api/logIn', (req, res) => {
  * @apiGroup User
  *
  * @apiParam {string} movieID
- * @apiParam {string} userID
  *
  *
  * @apiSuccessExample Success-Response:
@@ -175,13 +182,13 @@ app.post('/api/logIn', (req, res) => {
  *       "error": "reason"
  *     }
  */
-app.post('/api/like', (req, res) => {
-  if (!req.body.movieID || !req.body.userID) {
+app.post('/api/like', ensureAuthentificated, (req, res) => {
+  if (!req.body.movieID) {
     res.statusCode = 400;
     res.send('{ error : No film provided }');
   } else {
     sess = req.session;
-    var newUser = user.likeMovie(req.body.movieID, req.body.userID, function(err, isOk) {
+    var newUser = user.likeMovie(req.body.movieID, req.session.username, function(err, isOk) {
       if (err) {
         console.log(err);
         res.statusCode = 400;
@@ -218,12 +225,11 @@ app.post('/api/like', (req, res) => {
  *       "error": "reason"
  *     }
  */
-app.get('/api/favorites/:id', (req, res) => {
+app.get('/api/favorites/:id',ensureAuthentificated, (req, res) => {
   if (!req.params.id) {
     res.statusCode = 400;
     res.send('{ error : No film provided }');
   } else {
-    sess = req.session;
     var newUser = user.myMovies(req.params.id, function(err, movies) {
       if (err) {
         console.log(err);
@@ -306,7 +312,6 @@ app.get('/api/favorites/:id', (req, res) => {
  *     }
  */
 app.get('/api/films', (req, res) => {
-  let sess = req.session;
     var newUser = public.getFilms(function(err, movies) {
       if (err) {
         console.log(err);
@@ -314,8 +319,6 @@ app.get('/api/films', (req, res) => {
         res.send('{ error : '+err+'}');
       }
       console.log(movies);
-      console.log('session id is :' + sess.username)
-      console.log(sess.username);
       if (movies) {
         res.statusCode = 200;
         res.send(movies);

@@ -10,9 +10,13 @@ class MovieList extends Component {
 
   constructor(props) {
     super(props);
+<<<<<<< 728ec3dfdb15a6374092bd5d7500b428e84e00c2
     this.state = {
       movies : null
     };
+=======
+
+>>>>>>> Fix routing and authentification verification
   }
 
   componentWillMount()
@@ -60,10 +64,8 @@ class MovieList extends Component {
               </div>
             </footer>
         </div>
-      </div>
       );
     }
-
   }
 }
 
