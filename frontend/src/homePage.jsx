@@ -15,20 +15,7 @@ class HomePage extends Component {
     super(props);
   }
 
-  getBestMovies()
-  {
-    let req = new XMLHttpRequest();
-    req.onreadystatechange = function() {
-        if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
-          //alert(req.responseText);
-        }
-      }
-      req.open('GET', 'http://localhost:4242/api/films', true);
-      req.send(null);
-    }
-
   render() {
-    {this.getBestMovies()}
     return(
     <div>MovieList
           <NavBar/>

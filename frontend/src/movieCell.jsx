@@ -10,14 +10,17 @@ class MovieCell extends Component {
   }
 
 
+//Title Genre Plot
   render() {
+    if (this.props.movie != null)
+      console.log(this.props.movie.Poster);
     return(
     <div>
       <div className="col-sm-6 col-md-3">
-        <img className="img-responsive thumbnail" src="http://placehold.it/700x350" alt=""/>
+        <img className="img-responsive thumbnail" src={this.props.movie.Poster} alt=""/>
         <div className="caption">
-          <h4><a href="#">Image title</a></h4>
-          <p>Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
+          <h4>{this.props.movie.Title}</h4>
+          <p>{this.props.movie.Plot}</p>
         </div>
       </div>
     </div>
