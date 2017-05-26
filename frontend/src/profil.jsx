@@ -18,10 +18,12 @@ class Profil extends Component {
   {
     let req = new XMLHttpRequest();
     req.withCredentials = true;
+    let self = this;
     req.onreadystatechange = function() {
       console.log('call back');
         if (req.status == 403) {
-            console.log("Not AUthprized");
+            console.log("Not AUthorized");
+            self.props.router.push('/login');
         }
         else {
           console.log("All good your are authorized");
@@ -42,5 +44,12 @@ class Profil extends Component {
       );
   }
 }
+const mapStateToProps = (state)  => {
+  return {
+    state : state
+  };
+}
 
-export default Profil;
+export default Redux.connect(
+  mapStateToProps
+)(Profil);

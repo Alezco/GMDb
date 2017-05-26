@@ -55,13 +55,19 @@ function ensureAuthentificated(req, res, next) {
 
 
 app.get('/', function(req, res) {
-    // the user was found and is available in req.user
     sess = req.session;
     if(sess.email) {
       res.send('OK is authentificated');
     } else {
       res.send('NO not authentificated');
     }
+});
+
+app.post('/logOut', function(req, res) {
+    console.log('log out user ' + req.session.username)
+    req.session = null;
+    res.statusCode = 200;
+    res.send();
 });
 
 

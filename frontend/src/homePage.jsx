@@ -24,7 +24,7 @@ class HomePage extends Component {
                         <Route>
                           <Route exact path='/' component={MovieList} />
                           <Route component={Authentification} router={this.props.router.router} path="/login" />
-                          <Route component={Profil} path="/profil" />
+                          <Route component={Profil} router={this.props.router.router} path="/profil" />
                           <Route component={NotFound} />
                         </Route>
                     </Router>
