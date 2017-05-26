@@ -1,0 +1,59 @@
+import React, { Component } from 'react';
+import {render} from 'react-dom';
+const Redux =require('react-redux');
+
+import styles from './style/index.css';
+import NavBar from './navBar.jsx';
+import MovieRow from './movieRow.jsx';
+
+class MovieList extends Component {
+
+  constructor(props) {
+    super(props);
+  }
+
+  getBestMovies()
+  {
+    let req = new XMLHttpRequest();
+    req.withCredentials = true;
+    req.onreadystatechange = function() {
+        if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
+          alert(req.responseText);
+        }
+      }
+      req.open('GET', 'http://localhost:4242/api/films', true);
+      req.send(null);
+    }
+
+  render() {
+    {this.getBestMovies()}
+    return(
+    <div>
+      <title>GMDb Homepage</title>
+      <div className="container-fluid">
+      		<div className="row">
+      			<div className="col-sm-12">
+      				<div className="page-header">
+      					<h1>Best movies of the day</h1>
+      					<p>Posted by <span className="glyphicon glyphicon-user"></span> <a href="#">Matthijs Jansen</a> on <span className="glyphicon glyphicon-time"></span> 12 January 2015 10:00 am</p>
+      				</div>
+      			</div>
+      		</div>
+          <MovieRow/>
+    			<MovieRow/>
+    			<MovieRow/>
+    			<MovieRow/>
+      		<footer className="margin-tb-3">
+      			<div className="row">
+      				<div className="col-lg-12">
+    						<p>EPITA MTI 2018 GREAT MOVIE DATABASE</p>
+    					</div>
+      			</div>
+      		</footer>
+      </div>
+    </div>
+      );
+  }
+}
+
+export default MovieList;
