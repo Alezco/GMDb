@@ -47,6 +47,9 @@ class Authentification extends Component {
              type: SET_USER_ID,
              username: user.id
          });
+         self.props.dispatch({
+            type: 'SHOW_STORE'
+        });
          self.props.router.push('/profil');
         }
     }

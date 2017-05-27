@@ -16,9 +16,10 @@ class Profil extends Component {
     this.state = {
       movies : null
     }
+
   }
 
-  componentWillMount()
+  getMyMovies()
   {
     console.log("fetching user favorites emails");
     let req = new XMLHttpRequest();
@@ -40,18 +41,29 @@ class Profil extends Component {
         }
       }
     }
-      req.open('GET', 'http://localhost:4242/api/favorites/'+1, true);
+
+      console.log('props');
+      console.log(this.props.username);
+      req.open('GET', 'http://localhost:4242/api/favorites/'+this.props.username, true);
       req.send(null);
+      console.log(this.props);
   }
 
     render() {
       console.log("render profile");
       console.log(this.state.movies);
+      console.log('UPDATE MODAFUCKING PROFIL');
+      console.log(this.props.username);
+      if (this.props.username) {
+          this.getMyMovies();
+      }
       if (this.state.movies == null)
       {
         return (<div>No movies in your favorites</div>);
       }
       else {
+        console.log('props');
+        console.log(this.props);
         console.log(this.state.movies);
         let rows = [];
         this.state.movies.map((row, id) => {
@@ -83,12 +95,5 @@ class Profil extends Component {
       }
     }
 }
-const mapStateToProps = (state)  => {
-  return {
-    state : state
-  };
-}
 
-export default Redux.connect(
-  mapStateToProps
-)(Profil);
+export default Profil;

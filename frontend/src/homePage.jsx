@@ -18,12 +18,14 @@ class HomePage extends Component {
   }
 
   render() {
+    console.log('store in homePage')
+    console.log(this.props.username)
     return(
                     <Router history={hashHistory}>
                         <Route>
                           <Route exact path='/' component={MovieList} />
                           <Route component={Authentification} router={this.props.router.router} path="/login" />
-                          <Route component={Profil} router={this.props.router.router} path="/profil" />
+                          <Route component={Profil} router={this.props.router.router} username={this.props.username} path="/profil" />
                           <Route component={NotFound} />
                         </Route>
                     </Router>
@@ -31,9 +33,10 @@ class HomePage extends Component {
   }
 }
 
-const mapStateToProps = (store, router) => {
+const mapStateToProps = (state, router) => {
   return {
-    router: router
+    router: router,
+    username: state.username
   }
 };
 
