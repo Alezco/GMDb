@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {render} from 'react-dom';
 const Redux =require('react-redux');
 const Router = require('react-router');
-import {browserHistory} from 'react-router'
 import styles from './style/index.css';
 import MyNavItem from './myNavItem.jsx';
 import NavBar from './navBar.jsx';

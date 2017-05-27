@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {render} from 'react-dom';
 const Redux =require('react-redux');
+const Router = require('react-router');
 import styles from './style/index.css';
 import NavBar from './navBar.jsx';
 import MovieCell from './movieCell.jsx';
@@ -48,6 +49,10 @@ class Profil extends Component {
         req.open('GET', 'http://localhost:4242/api/favorites/'+this.props.username, true);
         req.send(null);
         console.log(this.props);
+    } else {
+      console.log("No session found");
+      console.log(this.props);
+      this.props.router.push('/login');
     }
   }
 
@@ -95,4 +100,12 @@ class Profil extends Component {
     }
 }
 
-export default Profil;
+const mapStateToProps = (state, router)  => {
+  return {
+    username: state.username
+  };
+}
+
+export default Redux.connect(
+  mapStateToProps
+)(Profil);

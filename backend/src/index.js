@@ -64,7 +64,17 @@ app.get('/', function(req, res) {
     }
 });
 
-app.post('/logOut', function(req, res) {
+app.get('/api/session', function(req, res) {
+  if (req.session.username) {
+    res.statusCode = 200;
+    res.send(JSON.stringify('{ id: '+req.session.username+' }'));
+  } else {
+    res.statusCode = 403;
+    res.send(JSON.stringify('{ error: User not authentificated }'));
+  }
+});
+
+app.post('/api/logOut', function(req, res) {
     console.log('log out user ' + req.session.username)
     req.session = null;
     res.statusCode = 200;
