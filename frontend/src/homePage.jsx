@@ -8,6 +8,8 @@ import MovieList from './movieList.jsx';
 import Authentification from './authentification.jsx';
 import NotFound from './notFound.jsx';
 import Profil from './profil.jsx';
+import Search from './search.jsx';
+
 
 
 class HomePage extends Component {
@@ -50,6 +52,8 @@ class HomePage extends Component {
                           <Route exact path='/' component={MovieList} />
                           <Route component={Authentification} router={this.props.router.router} path="/login" />
                           <Route component={Profil} router={this.props.router.router} path="/profil" />
+                          <Route component={Search} router={this.props.router.router} path="/search" />
+                          <Route component={() => (<Profil username={this.props.username} />)} router={this.props.router.router} path="/profil" />
                           <Route component={NotFound} />
                         </Route>
               </Router>

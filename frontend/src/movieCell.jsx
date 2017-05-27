@@ -17,7 +17,6 @@ class MovieCell extends Component {
     if (this.props.movieObject == null) {
       return(<div></div>);
     } else {
-      console.log(this.props.movieObject.Poster);
     return(
     <div>
       <div className="col-sm-6 col-md-3" style={divStyle}>
