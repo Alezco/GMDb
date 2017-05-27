@@ -4,7 +4,7 @@ const Redux =require('react-redux');
 
 import styles from './style/index.css';
 import NavBar from './navBar.jsx';
-import MovieRow from './movieRow.jsx';
+import MovieCell from './movieCell.jsx';
 
 class MovieList extends Component {
 
@@ -32,11 +32,18 @@ class MovieList extends Component {
     }
 
   render() {
+
     if (this.state.movies == null)
     {
       return (<div></div>);
     }
     else {
+      console.log(this.state.movies);
+      let rows = [];
+      let count = 0;
+      this.state.movies.map((row, index) => {
+          rows.push(<MovieCell key={index} index={index} movieObject={row}/>)
+      });
       return(
       <div>
         <NavBar />
@@ -45,14 +52,11 @@ class MovieList extends Component {
             <div className="row">
               <div className="col-sm-12">
                 <div className="page-header">
-                  <h1>Best movies of the day</h1>
-                  <p>Posted by <span className="glyphicon glyphicon-user"></span> <a href="#">Matthijs Jansen</a> on <span className="glyphicon glyphicon-time"></span> 12 January 2015 10:00 am</p>
-                </div>
+                  <h1>Best movies of all time</h1>
+                  </div>
               </div>
             </div>
-            <MovieRow moviesInRow={this.state.movies} nbRow={1}/>
-            <MovieRow moviesInRow={this.state.movies} nbRow={2}/>
-            <MovieRow moviesInRow={this.state.movies} nbRow={3}/>
+            {rows}
             <footer className="margin-tb-3">
               <div className="row">
                 <div className="col-lg-12">

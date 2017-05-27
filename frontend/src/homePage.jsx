@@ -4,7 +4,6 @@ const Redux =require('react-redux');
 import { Switch, Route, Router, browserHistory } from 'react-router'
 import styles from './style/index.css';
 import NavBar from './navBar.jsx';
-import MovieRow from './movieRow.jsx';
 import MovieList from './movieList.jsx';
 import Authentification from './authentification.jsx';
 import NotFound from './notFound.jsx';

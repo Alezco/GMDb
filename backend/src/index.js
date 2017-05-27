@@ -46,7 +46,8 @@ const user = require('./user');
 
 function ensureAuthentificated(req, res, next) {
   if (req.session.username) {
-    return next;
+    console.log(next);
+    return next();
   } else {
     res.statusCode = 403;
     res.send(JSON.stringify('{ error: User not authentificated }'));
@@ -231,10 +232,11 @@ app.post('/api/like', ensureAuthentificated, (req, res) => {
  *       "error": "reason"
  *     }
  */
-app.get('/api/favorites/:id',ensureAuthentificated, (req, res) => {
+app.get('/api/favorites/:id', ensureAuthentificated, (req, res) => {
+  console.log("requesting users favorites");
   if (!req.params.id) {
     res.statusCode = 400;
-    res.send('{ error : No film provided }');
+    res.send('{ error : No user provided }');
   } else {
     var newUser = user.myMovies(req.params.id, function(err, movies) {
       if (err) {
@@ -242,8 +244,8 @@ app.get('/api/favorites/:id',ensureAuthentificated, (req, res) => {
         res.statusCode = 400;
         res.send('{ error : '+err+'}');
       } else {
-      console.log(movies);
       if (movies) {
+        console.log('sending personal movies');
         res.statusCode = 200;
         res.send(movies);
       }
@@ -324,7 +326,6 @@ app.get('/api/films', (req, res) => {
         res.statusCode = 501;
         res.send('{ error : '+err+'}');
       }
-      console.log(movies);
       if (movies) {
         res.statusCode = 200;
         res.send(movies);

@@ -10,23 +10,28 @@ class MovieCell extends Component {
   }
 
 
-//Title Genre Plot
   render() {
-    if (this.props.movie != null)
-      console.log(this.props.movie.Poster);
+    const divStyle = {
+      height : '600px',
+    };
+    if (this.props.movieObject == null) {
+      return(<div></div>);
+    } else {
+      console.log(this.props.movieObject.Poster);
     return(
     <div>
-      <div className="col-sm-6 col-md-3">
-        <img className="img-responsive thumbnail" src={this.props.movie.Poster} alt=""/>
+      <div className="col-sm-6 col-md-3" style={divStyle}>
+        <img className="img-responsive thumbnail" src={this.props.movieObject.Poster} alt=""/>
         <div className="caption">
-          <h4>{this.props.movie.Title}</h4>
-          <p>{this.props.movie.Plot}</p>
+          <h4>{this.props.movieObject.Title}</h4>
+          <p>{this.props.movieObject.Plot}</p>
+
         </div>
       </div>
     </div>
-
       );
   }
+}
 }
 
 export default MovieCell;
