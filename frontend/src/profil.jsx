@@ -19,34 +19,36 @@ class Profil extends Component {
 
   }
 
-  getMyMovies()
+  componentWillMount()
   {
-    console.log("fetching user favorites emails");
-    let req = new XMLHttpRequest();
-    req.withCredentials = true;
-    let self = this;
-    req.onreadystatechange = function() {
-      console.log('call back');
-        if (req.status == 403) {
-            console.log("Not Authorized");
-            self.props.router.push('/login');
-        }
-        else {
-          console.log("Authorized");
-          if (req.status == 200 && req.readyState == XMLHttpRequest.DONE) {
-            console.log("movies received");
-            self.setState({
-              movies : JSON.parse(req.responseText)
-            });
+    if (this.props.username) {
+      console.log("fetching user favorites emails");
+      let req = new XMLHttpRequest();
+      req.withCredentials = true;
+      let self = this;
+      req.onreadystatechange = function() {
+        console.log('call back');
+          if (req.status == 403) {
+              console.log("Not Authorized");
+              self.props.router.push('/login');
+          }
+          else {
+            console.log("Authorized");
+            if (req.status == 200 && req.readyState == XMLHttpRequest.DONE) {
+              console.log("movies received");
+              self.setState({
+                movies : JSON.parse(req.responseText)
+              });
+          }
         }
       }
-    }
 
-      console.log('props');
-      console.log(this.props.username);
-      req.open('GET', 'http://localhost:4242/api/favorites/'+this.props.username, true);
-      req.send(null);
-      console.log(this.props);
+        console.log('props');
+        console.log(this.props.username);
+        req.open('GET', 'http://localhost:4242/api/favorites/'+this.props.username, true);
+        req.send(null);
+        console.log(this.props);
+    }
   }
 
     render() {
@@ -54,9 +56,6 @@ class Profil extends Component {
       console.log(this.state.movies);
       console.log('UPDATE MODAFUCKING PROFIL');
       console.log(this.props.username);
-      if (this.props.username) {
-          this.getMyMovies();
-      }
       if (this.state.movies == null)
       {
         return (<div>No movies in your favorites</div>);

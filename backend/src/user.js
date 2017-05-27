@@ -34,7 +34,7 @@ const db = require('./db.js');
           if (rows.length) {
             done(null, JSON.stringify(rows));
           } else {
-            done('user do not gave favorites', null);
+            done('user do not have favorites', null);
           };
         });
     };
