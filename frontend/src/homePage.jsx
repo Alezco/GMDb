@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {render} from 'react-dom';
 const Redux =require('react-redux');
-import { Switch, Route, Router, browserHistory } from 'react-router'
+import { Switch, Route, Router, hashHistory } from 'react-router'
 import styles from './style/index.css';
 import NavBar from './navBar.jsx';
 import MovieList from './movieList.jsx';
@@ -19,7 +19,7 @@ class HomePage extends Component {
 
   render() {
     return(
-                    <Router history={browserHistory}>
+                    <Router history={hashHistory}>
                         <Route>
                           <Route exact path='/' component={MovieList} />
                           <Route component={Authentification} router={this.props.router.router} path="/login" />
