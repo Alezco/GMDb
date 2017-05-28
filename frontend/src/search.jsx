@@ -47,6 +47,12 @@ class Search extends Component {
           console.log(i);
         }
       }
+      if (resultIndex.length === 0)
+      {
+        // No result
+        console.log("-----");
+        console.log("no more result for this search");
+      }
     }
 
   render() {
