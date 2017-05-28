@@ -20,36 +20,46 @@ class Profil extends Component {
 
   }
 
+  componentWillReceiveProps(Newprops){
+    console.log(Newprops);
+    console.log("component will receive props !");
+    if (Newprops.username) {
+    }  else {
+      console.log("NOt COnnected");
+      console.log("No session found");
+      console.log(this.props);
+      this.props.router.push('/login');
+    }
+  }
+
   componentWillMount()
   {
+    console.log("Check if connected");
+    console.log(this.props.username);
     if (this.props.username) {
-      console.log("fetching user favorites emails");
       let req = new XMLHttpRequest();
       req.withCredentials = true;
       let self = this;
       req.onreadystatechange = function() {
-        console.log('call back');
           if (req.status == 403) {
               console.log("Not Authorized");
               self.props.router.push('/login');
           }
           else {
-            console.log("Authorized");
-            if (req.status == 200 && req.readyState == XMLHttpRequest.DONE) {
-              console.log("movies received");
-              self.setState({
-                movies : JSON.parse(req.responseText)
-              });
-          }
+            if (self.state.movies == null) {
+                console.log("Authorized");
+                if (req.status == 200 && req.readyState == XMLHttpRequest.DONE) {
+                  self.setState({
+                    movies : JSON.parse(req.responseText)
+                  });
+              }
+            }
         }
       }
-
-        console.log('props');
-        console.log(this.props.username);
         req.open('GET', 'http://localhost:4242/api/favorites/'+this.props.username, true);
         req.send(null);
-        console.log(this.props);
     } else {
+      console.log("NOt COnnected");
       console.log("No session found");
       console.log(this.props);
       this.props.router.push('/login');
@@ -57,18 +67,12 @@ class Profil extends Component {
   }
 
     render() {
-      console.log("render profile");
-      console.log(this.state.movies);
       console.log('UPDATE MODAFUCKING PROFIL');
-      console.log(this.props.username);
       if (this.state.movies == null)
       {
         return (<div>No movies in your favorites</div>);
       }
       else {
-        console.log('props');
-        console.log(this.props);
-        console.log(this.state.movies);
         let rows = [];
         this.state.movies.map((row, id) => {
             console.log("in loop");
@@ -81,7 +85,7 @@ class Profil extends Component {
               <div className="row">
                 <div className="col-sm-12">
                   <div className="page-header">
-                    <h1>Hello, here are your favorites movies</h1>
+                    <h1>Hello {this.props.username} , these are your favorites movies</h1>
                     </div>
                 </div>
               </div>
@@ -101,10 +105,13 @@ class Profil extends Component {
 }
 
 const mapStateToProps = (state, router)  => {
+  console.log("UPDATING ??");
   return {
     username: state.username
   };
 }
+
+
 
 export default Redux.connect(
   mapStateToProps

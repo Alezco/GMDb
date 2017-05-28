@@ -32,7 +32,6 @@ class MovieList extends Component {
     }
 
   render() {
-
     if (this.state.movies == null)
     {
       return (<div></div>);
