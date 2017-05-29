@@ -1,4 +1,3 @@
-ls
 import React, { Component } from 'react';
 import {render} from 'react-dom';
 const Redux =require('react-redux');
@@ -6,6 +5,7 @@ const Redux =require('react-redux');
 import styles from './style/index.css';
 import NavBar from './navBar.jsx';
 import MovieCell from './movieCell.jsx';
+import Footer from './footer.jsx';
 
 class MovieList extends Component {
 
@@ -57,14 +57,15 @@ class MovieList extends Component {
               </div>
             </div>
             {rows}
-            <footer className="margin-tb-3">
-              <div className="row">
-                <div className="col-lg-12">
-                  <p>EPITA MTI 2018 GREAT MOVIE DATABASE</p>
-                </div>
-              </div>
-            </footer>
         </div>
+        <footer className="margin-tb-3">
+          <div className="row">
+            <div className="col-lg-12">
+              <p>EPITA MTI 2018 GREAT MOVIE DATABASE</p>
+            </div>
+          </div>
+        </footer>
+      }
       </div>
       );
     }
