@@ -16,6 +16,16 @@ app.use(function(req, res, next) {
   next();
 });
 
+const properties = ["Year", "Rated", "Genre", "Director", "Actors", "Language", "imdbRating"];
+
+function shuffle(a) {
+    for (let i = a.length; i; i--) {
+        let j = Math.floor(Math.random() * i);
+        [a[i - 1], a[j]] = [a[j], a[i - 1]];
+    }
+}
+
+
 app.use(minify());
 app.use(express.static("."));
 app.use(bodyParser.json())
@@ -64,6 +74,7 @@ app.get('/', function(req, res) {
     }
 });
 
+
 app.get('/api/session', function(req, res) {
   if (req.session.username) {
     res.statusCode = 200;
@@ -73,6 +84,31 @@ app.get('/api/session', function(req, res) {
     res.send(JSON.stringify('{ error: User not authentificated }'));
   }
 });
+
+app.get('/api/recommandation/:id'/*, ensureAuthentificated*/, (req, res) => {
+  console.log("requesting users recommandation");
+  if (!req.params.id) {
+    res.statusCode = 400;
+    res.send('{ error : No user provided }');
+  } else {
+      shuffle(properties);
+      var query = user.favoriteByCriteria(req.params.id, properties, function(err, movies) {
+        if (err) {
+          console.log(err);
+          res.statusCode = 400;
+          res.send('{ error : '+err+'}');
+        } else {
+        if (movies) {
+          console.log('sending personal recommandations');
+          res.statusCode = 200;
+          res.send(movies);
+        }
+      }
+    });
+  }
+});
+
+
 
 app.post('/api/logOut', function(req, res) {
     console.log('log out user ' + req.session.username)
