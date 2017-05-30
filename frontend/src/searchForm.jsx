@@ -4,7 +4,6 @@ const Redux =require('react-redux');
 import styles from './style/index.css';
 
 class SearchForm extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -12,15 +11,12 @@ class SearchForm extends Component {
     };
   }
 
-  searchByName()
-  {
-    if (document.forms[0])
-    {
+  searchByName() {
+    if (document.forms[0]) {
       this.state.searchTxt = document.forms[0].search.value;
       this.props.onKeyUp(document.forms[0].search.value);
     }
-    else
-    {
+    else {
       this.props.onKeyUp(null);
     }
   }
@@ -34,7 +30,7 @@ class SearchForm extends Component {
           </div>
         </form>
       </div>
-      );
+    );
   }
 }
 

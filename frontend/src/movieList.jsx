@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {render} from 'react-dom';
-const Redux =require('react-redux');
+import { render } from 'react-dom';
+const Redux = require('react-redux');
 
 import styles from './style/index.css';
 import NavBar from './navBar.jsx';
@@ -8,7 +8,6 @@ import MovieCell from './movieCell.jsx';
 import Footer from './footer.jsx';
 
 class MovieList extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -16,8 +15,7 @@ class MovieList extends Component {
     };
   }
 
-  componentWillMount()
-  {
+  componentWillMount() {
     let req = new XMLHttpRequest();
     req.withCredentials = true;
     let self = this;
@@ -45,28 +43,28 @@ class MovieList extends Component {
           rows.push(<MovieCell key={index} index={index} movieObject={row}/>)
       });
       return(
-      <div>
-        <NavBar />
-        <title>GMDb Homepage</title>
-        <div className="container-fluid">
+        <div>
+          <NavBar />
+          <title>GMDb Homepage</title>
+          <div className="container-fluid">
+              <div className="row">
+                <div className="col-sm-12">
+                  <div className="page-header">
+                    <h1>Best movies of all time</h1>
+                    </div>
+                </div>
+              </div>
+              {rows}
+          </div>
+          <footer className="margin-tb-3">
             <div className="row">
-              <div className="col-sm-12">
-                <div className="page-header">
-                  <h1>Best movies of all time</h1>
-                  </div>
+              <div className="col-lg-12">
+                <p>EPITA MTI 2018 GREAT MOVIE DATABASE</p>
               </div>
             </div>
-            {rows}
+          </footer>
+        }
         </div>
-        <footer className="margin-tb-3">
-          <div className="row">
-            <div className="col-lg-12">
-              <p>EPITA MTI 2018 GREAT MOVIE DATABASE</p>
-            </div>
-          </div>
-        </footer>
-      }
-      </div>
       );
     }
   }

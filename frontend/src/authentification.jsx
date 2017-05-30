@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {render} from 'react-dom';
-const Redux =require('react-redux');
+import { render } from 'react-dom';
+const Redux = require('react-redux');
 const Router = require('react-router');
 import styles from './style/index.css';
 import MyNavItem from './myNavItem.jsx';
@@ -18,22 +18,18 @@ class Authentification extends Component {
     };
   }
 
-  checkSign()
-  {
-    if (this.state.activeIndex === 0)
-    {
+  checkSign() {
+    if (this.state.activeIndex === 0) {
       this.checkSignUp();
     }
-    else
-    {
+    else {
       this.checkSignIn();
     }
   }
 
-  checkSignIn()
-  {
+  checkSignIn() {
     let login = document.getElementById("login").value;
-    let password =document.getElementById("password").value;
+    let password = document.getElementById("password").value;
     console.log(login);
     console.log(password);
     let self = this;
@@ -52,22 +48,20 @@ class Authentification extends Component {
          self.props.router.push('/profil');
         }
     }
-      req.open('POST', 'http://localhost:4242/api/logIn', true);
-        req.setRequestHeader("Content-Type", "application/json");
-        let jsonToSend = JSON.stringify({"login": login, "pwd": password});
-        req.send(jsonToSend);
+    req.open('POST', 'http://localhost:4242/api/logIn', true);
+      req.setRequestHeader("Content-Type", "application/json");
+      let jsonToSend = JSON.stringify({"login": login, "pwd": password});
+      req.send(jsonToSend);
   }
 
-  checkSignUp()
-  {
+  checkSignUp() {
     let login = document.getElementById("login").value;
-    let password =document.getElementById("password").value;
+    let password = document.getElementById("password").value;
     let rePassword = document.getElementById("rePassword").value;
     console.log(login);
     console.log(password);
     console.log(rePassword);
-    if (password == rePassword)
-    {
+    if (password == rePassword) {
       let req = new XMLHttpRequest();
       req.withCredentials = true;
       req.open('POST', 'http://localhost:4242/api/signIn', true);
@@ -75,27 +69,23 @@ class Authentification extends Component {
       let jsonToSend = JSON.stringify({"login": login, "pwd": password});
       req.send(jsonToSend);
     }
-    else
-    {
+    else {
       let errorLabel = document.createElement("label");
       errorLabel.innerHTML = "Password not matching!";
       document.getElementById("root").appendChild(errorLabel);
     }
   }
 
-  handleClick(index)
-  {
+  handleClick(index) {
     let title = document.getElementById('title');
     let rePassDiv = document.getElementById('rePassDiv');
     let submitBtn = document.getElementById('submitBtn');
 
-    if (this.state.activeIndex === 0)
-    {
+    if (this.state.activeIndex === 0) {
       title.innerHTML = "Enter Your Login Now";
       rePassDiv.style.visibility = "hidden";
     }
-    else
-    {
+    else {
       title.innerHTML = "Sign Up For Free";
       rePassDiv.style.visibility = "visible";
     }
@@ -104,34 +94,33 @@ class Authentification extends Component {
 
   render() {
     return(
-    <div>
-      <NavBar />
-      <div className="form">
-          <ul className="tab-group">
-            <MyNavItem content="Sign up" index={0} isActive={this.state.activeIndex===0} onClick={this.handleClick.bind(this)}/>
-            <MyNavItem content="Log In" index={1} isActive={this.state.activeIndex===1} onClick={this.handleClick.bind(this)}/>
-          </ul>
-          <div className="tab-content">
-            <div id="signup">
-              <h1 id="title">Sign Up For Free</h1>
-
-                  <div className="field-wrap">
-                    <input type="text"required placeholder="Login *" id="login"/>
-                  </div>
-                  <div className="field-wrap">
-                    <input type="password"required placeholder="Password *" id="password"/>
-                  </div>
-              <div className="field-wrap" id="rePassDiv">
-                <input type="password"required placeholder="Repeat Password *" id="rePassword"/>
-              </div>
-              <button id="submitBtn" type="submit" className="button button-block" onClick={this.checkSign.bind(this)}>Get Started</button>
-          </div>
-          <div>
+      <div>
+        <NavBar />
+        <div className="form">
+            <ul className="tab-group">
+              <MyNavItem content="Sign up" index={0} isActive={this.state.activeIndex===0} onClick={this.handleClick.bind(this)}/>
+              <MyNavItem content="Log In" index={1} isActive={this.state.activeIndex===1} onClick={this.handleClick.bind(this)}/>
+            </ul>
+            <div className="tab-content">
+              <div id="signup">
+                <h1 id="title">Sign Up For Free</h1>
+                <div className="field-wrap">
+                  <input type="text"required placeholder="Login *" id="login"/>
+                </div>
+                <div className="field-wrap">
+                  <input type="password"required placeholder="Password *" id="password"/>
+                </div>
+                <div className="field-wrap" id="rePassDiv">
+                  <input type="password"required placeholder="Repeat Password *" id="rePassword"/>
+                </div>
+                <button id="submitBtn" type="submit" className="button button-block" onClick={this.checkSign.bind(this)}>Get Started</button>
+            </div>
+            <div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-      );
+    );
   }
 }
 
@@ -141,6 +130,4 @@ const mapStateToProps = (state)  => {
   };
 }
 
-export default Redux.connect(
-  mapStateToProps
-)(Authentification);
+export default Redux.connect(mapStateToProps)(Authentification);
