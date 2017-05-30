@@ -1,5 +1,5 @@
 
-const mysql             = require('mysql');
+const mysql = require('mysql');
 
 // DATABASE INITIALISATION
 let connection = mysql.createConnection({

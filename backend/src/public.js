@@ -1,9 +1,8 @@
 const db = require('./db.js');
 
-
-exports.getFilms =  function(done) {
+exports.getFilms = function(done) {
   console.log('get movies');
-  db.connection.query("select * from movies", function(err,rows){
+  db.connection.query("SELECT * FROM movies", function (err, rows){
       if (err) {
         done(err, null);
       }
@@ -13,10 +12,10 @@ exports.getFilms =  function(done) {
     });
 }
 
-exports.getFilmsOrder =  function(filter, done) {
+exports.getFilmsOrder = function(filter, done) {
   console.log('get movies filtered by ' + filter);
-  let filterQuery = 'select * from movies LIMIT 20';
-  db.connection.query(filterQuery, function(err,rows){
+  let filterQuery = 'SELECT * FROM movies LIMIT 20';
+  db.connection.query(filterQuery, function(err,rows) {
       if (err) {
         done(err, null);
       }
