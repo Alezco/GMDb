@@ -1,11 +1,19 @@
-
 // index.js
-const express           = require('express');
-const bodyParser        = require('body-parser');
-const minify            = require('express-minify');
-const mysql             = require('mysql');
-const http              = require('http')
+const express = require('express');
+const bodyParser = require('body-parser');
+const minify = require('express-minify');
+const http = require('http');
+
+// IMPORTS
+const db = require('./db.js');
+const auth = require('./authentification');
+const public = require('./public');
+const user = require('./user');
+
 const app = express();
+
+const properties = ["Year", "Rated", "Genre", "Director", "Actors", "Language", "imdbRating"];
+const PORT = 4242;
 
 // DODGE CROS
 app.use(function(req, res, next) {
@@ -16,15 +24,12 @@ app.use(function(req, res, next) {
   next();
 });
 
-const properties = ["Year", "Rated", "Genre", "Director", "Actors", "Language", "imdbRating"];
-
 function shuffle(a) {
     for (let i = a.length; i; i--) {
         let j = Math.floor(Math.random() * i);
         [a[i - 1], a[j]] = [a[j], a[i - 1]];
     }
 }
-
 
 app.use(minify());
 app.use(express.static("."));
@@ -40,19 +45,12 @@ app.use(session({
     saveUninitialized: true,
     secret: 'sdlfjljrowuroweu',
     cookie: {
-              httpOnly: false
-            }
+      httpOnly: false
+    }
 }));
 // Use application-level middleware for common functionality, including
 // logging, parsing, and session handling.
-
 app.use(require('body-parser').urlencoded({ extended: true }));
-
-// IMPORTS
-const db = require('./db.js');
-const auth = require('./authentification');
-const public = require('./public');
-const user = require('./user');
 
 function ensureAuthentificated(req, res, next) {
   if (req.session.username) {
@@ -60,32 +58,30 @@ function ensureAuthentificated(req, res, next) {
     return next();
   } else {
     res.statusCode = 403;
-    res.send(JSON.stringify('{ error: User not authentificated }'));
+    res.send(JSON.stringify('{ error: User not authenticated }'));
   }
 }
 
-
 app.get('/', function(req, res) {
     sess = req.session;
-    if(sess.email) {
-      res.send('OK is authentificated');
+    if (sess.email) {
+      res.send('OK is authenticated');
     } else {
-      res.send('NO not authentificated');
+      res.send('NO not authenticated');
     }
 });
-
 
 app.get('/api/session', function(req, res) {
   if (req.session.username) {
     res.statusCode = 200;
-    res.send(JSON.stringify('{ id: '+req.session.username+' }'));
+    res.send(JSON.stringify('{ id: ' + req.session.username + ' }'));
   } else {
     res.statusCode = 403;
     res.send(JSON.stringify('{ error: User not authentificated }'));
   }
 });
 
-app.get('/api/recommandation/:id'/*, ensureAuthentificated*/, (req, res) => {
+app.get('/api/recommandation/:id', (req, res) => {
   console.log("requesting users recommandation");
   if (!req.params.id) {
     res.statusCode = 400;
@@ -96,7 +92,7 @@ app.get('/api/recommandation/:id'/*, ensureAuthentificated*/, (req, res) => {
         if (err) {
           console.log(err);
           res.statusCode = 400;
-          res.send('{ error : '+err+'}');
+          res.send('{ error : ' + err + '}');
         } else {
         if (movies) {
           console.log('sending personal recommandations');
@@ -108,15 +104,12 @@ app.get('/api/recommandation/:id'/*, ensureAuthentificated*/, (req, res) => {
   }
 });
 
-
-
 app.post('/api/logOut', function(req, res) {
-    console.log('log out user ' + req.session.username)
+    console.log('Log out user ' + req.session.username)
     req.session = null;
     res.statusCode = 200;
     res.send();
 });
-
 
 /**
  * @api {post} /api/signIn Create a new account
@@ -148,7 +141,7 @@ app.post('/api/signIn', (req, res) => {
       if (err) {
         console.log(err);
         res.statusCode = 403;
-        res.send('{ error : '+err+'}');
+        res.send('{ error : ' + err + '}');
       }
       console.log(user);
       if (user) {
@@ -157,7 +150,6 @@ app.post('/api/signIn', (req, res) => {
       }
     });
 });
-
 
 /**
  * @api {post} /api/logIn log into account
@@ -210,9 +202,6 @@ app.post('/api/logIn', (req, res) => {
   }
 });
 
-
-
-
 /**
  * @api {post} /api/like add image to favorites
  * @apiName like
@@ -245,7 +234,7 @@ app.post('/api/like', ensureAuthentificated, (req, res) => {
       if (err) {
         console.log(err);
         res.statusCode = 400;
-        res.send('{ error : '+err+'}');
+        res.send('{ error : ' + err + '}');
       }
       console.log(isOk);
       if (isOk) {
@@ -288,7 +277,7 @@ app.get('/api/favorites/:id', ensureAuthentificated, (req, res) => {
       if (err) {
         console.log(err);
         res.statusCode = 400;
-        res.send('{ error : '+err+'}');
+        res.send('{ error : ' + err + '}');
       } else {
       if (movies) {
         console.log('sending personal movies');
@@ -299,7 +288,6 @@ app.get('/api/favorites/:id', ensureAuthentificated, (req, res) => {
     });
   }
 });
-
 
 /**
  * @api {get} /api/films Get film list
@@ -370,7 +358,7 @@ app.get('/api/films', (req, res) => {
       if (err) {
         console.log(err);
         res.statusCode = 501;
-        res.send('{ error : '+err+'}');
+        res.send('{ error : ' + err + '}');
       }
       if (movies) {
         res.statusCode = 200;
@@ -379,15 +367,7 @@ app.get('/api/films', (req, res) => {
     });
 });
 
-
 let server = http.createServer(app);
-server.listen(4242, () => {
-  console.log('GMBD server listening on port 4242!');
+server.listen(PORT, () => {
+  console.log('GMBD server listening on port ' + PORT + '!');
 });
-
-
-//let server = http.createServer(app);
-// start your server
-/*app.listen(4242, () => {
-  console.log('GMBD server listening on port 4242!');
-});*/
