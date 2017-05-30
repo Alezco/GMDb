@@ -8,13 +8,15 @@ class Footer extends Component {
   }
 
   render() {
-    <footer className="margin-tb-3">
-      <div className="row">
-        <div className="col-lg-12">
-          <p>EPITA MTI 2018 GOOD MOVIE DATABASE (GMDb)</p>
+    return (
+      <footer className="margin-tb-3">
+        <div className="row">
+          <div className="col-lg-12">
+            <p>EPITA MTI 2018 GOOD MOVIE DATABASE (GMDb)</p>
+          </div>
         </div>
-      </div>
-    </footer>
+      </footer>
+    );
   }
 }
 

@@ -9,6 +9,7 @@ import Authentification from './authentification.jsx';
 import NotFound from './notFound.jsx';
 import Profil from './profil.jsx';
 import Search from './search.jsx';
+import Footer from './footer.jsx';
 
 class HomePage extends Component {
   constructor(props) {
@@ -43,6 +44,7 @@ class HomePage extends Component {
   render() {
     console.log("passign " + this.props.username);
     return (
+      <div>
         <Router history={hashHistory}>
             <Route>
                 <Route exact path='/' component={MovieList} />
@@ -53,6 +55,8 @@ class HomePage extends Component {
                 <Route component={NotFound} />
             </Route>
         </Router>
+        <Footer />
+      </div>
     );
   }
 }
