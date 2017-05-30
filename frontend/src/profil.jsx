@@ -13,16 +13,17 @@ class Profil extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      movies : null
+      movies : null,
+      redirect : null
     }
   }
 
   componentWillReceiveProps(Newprops) {
     console.log(Newprops);
     console.log("component will receive props !");
-    if (Newprops.username) {
+    if (Newprops.username >= 0) {
     } else {
-      console.log("NOt COnnected");
+      console.log("Not COnnected");
       console.log("No session found");
       console.log(this.props);
       this.props.router.push('/login');
@@ -31,7 +32,7 @@ class Profil extends Component {
 
   componentWillMount() {
     console.log("Check if connected");
-    console.log(this.props.username);
+    console.log(this.props);
     if (this.props.username) {
       let req = new XMLHttpRequest();
       req.withCredentials = true;
@@ -54,12 +55,12 @@ class Profil extends Component {
       }
       req.open('GET', 'http://localhost:4242/api/favorites/'+this.props.username, true);
       req.send(null);
-    } else {
-      console.log("NOt COnnected");
+    }/* else {
+      console.log("NOt Connected");
       console.log("No session found");
       console.log(this.props);
       this.props.router.push('/login');
-    }
+    }*/
   }
 
   render() {
@@ -93,7 +94,6 @@ class Profil extends Component {
 }
 
 const mapStateToProps = (state, router)  => {
-  console.log("UPDATING ??");
   return {
     username: state.username
   };

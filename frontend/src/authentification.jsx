@@ -38,6 +38,8 @@ class Authentification extends Component {
     req.onreadystatechange = function() {
         if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
           let user = JSON.parse(req.responseText);
+          console.log("logIn");
+          console.log(user);
           self.props.dispatch({
              type: SET_USER_ID,
              username: user.id

@@ -17,7 +17,7 @@ class NavBar extends Component {
       if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
         self.props.dispatch({
            type: 'SET_USER_ID',
-           username: null
+           username: -1
         });
         self.props.dispatch({
            type: 'SHOW_STORE'
@@ -29,7 +29,7 @@ class NavBar extends Component {
   }
 
   render() {
-    if (this.props.username) {
+    if (this.props.username && this.props.username >= 0) {
       return(
           <div>
             <nav className="navbar navbar-fixed-top navbar-inverse" role="navigation">

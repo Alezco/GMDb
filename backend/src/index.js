@@ -74,10 +74,10 @@ app.get('/', function(req, res) {
 app.get('/api/session', function(req, res) {
   if (req.session.username) {
     res.statusCode = 200;
-    res.send(JSON.stringify('{ id: ' + req.session.username + ' }'));
+    res.send('{ "id": ' + req.session.username + ' }');
   } else {
     res.statusCode = 403;
-    res.send(JSON.stringify('{ error: User not authentificated }'));
+    res.send('{ "error": "User not authentificated" }');
   }
 });
 

@@ -11,7 +11,8 @@ class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      movies : null
+      movies : null,
+      filteredMovies : null
     };
   }
 
@@ -22,7 +23,8 @@ class Search extends Component {
     req.onreadystatechange = function() {
       if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
         self.setState({
-          movies : JSON.parse(req.responseText)
+          movies : JSON.parse(req.responseText),
+          filteredMovies : JSON.parse(req.responseText)
         });
       }
     }
@@ -31,28 +33,34 @@ class Search extends Component {
   }
 
   searchByName(name) {
-    let movies = this.state.movies;
-    let movieName = "";
-    let resultIndex = [];
-    for(let i = 0; i < movies.length; i++) {
-      movieName = movies[i].Title.toUpperCase();
-      if (movieName.match(name.toUpperCase())) {
-        resultIndex.push(i);
-        console.log("----");
-        console.log(i);
+    console.log(name);
+    if (!name || name === '') {
+      this.state.filteredMovies = this.state.movies;
+    } else {
+      let movies = this.state.movies;
+      let tmp = [];
+      for(let i = 0; i < movies.length; i++) {
+        let movieName = movies[i].Title.toUpperCase();
+        if (movieName.match(name.toUpperCase())) {
+          tmp.push(movies[i]);
+        }
       }
+      this.setState({
+        movies : this.state.movies,
+        filteredMovies : tmp
+      });
     }
   }
 
   render() {
-    if (this.state.movies == null) {
+    if (this.state.filteredMovies == null) {
       return (<div></div>);
     }
     else {
-      console.log(this.state.movies);
+      console.log(this.state.filteredMovies);
       let rows = [];
       let count = 0;
-      this.state.movies.map((row, index) => {
+      this.state.filteredMovies.map((row, index) => {
         rows.push(<MovieCell key={index} index={index} movieObject={row}/>)
       });
       return(

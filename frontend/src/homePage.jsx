@@ -17,12 +17,16 @@ class HomePage extends Component {
   }
 
   componentWillMount() {
+    console.log("PARENT WILL MOUNT");
+    console.log(this.props.router.router);
     let self = this;
     let req = new XMLHttpRequest();
     req.withCredentials = true;
     req.onreadystatechange = function() {
         if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
+          console.log(req.responseText);
           let user = JSON.parse(req.responseText);
+          console.log(user.id);
           self.props.dispatch({
              type: 'SET_USER_ID',
              username: user.id
@@ -38,30 +42,38 @@ class HomePage extends Component {
       }
     }
     req.open('GET', 'http://localhost:4242/api/session', true);
+    req.setRequestHeader("Content-Type", "application/json");
     req.send(null);
   }
 
+  componentWillReceiveProps() {
+    console.log("Will receive props");
+  }
+
+
   render() {
     console.log("passign " + this.props.username);
-    return (
-      <div>
-        <Router history={hashHistory}>
-            <Route>
-                <Route exact path='/' component={MovieList} />
-                <Route component={Authentification} router={this.props.router.router} path="/login" />
-                <Route component={Profil} router={this.props.router.router} path="/profil" />
-                <Route component={Search} router={this.props.router.router} path="/search" />
-                <Route component={() => (<Profil username={this.props.username} />)} router={this.props.router.router} path="/profil" />
-                <Route component={NotFound} />
-            </Route>
-        </Router>
-        <Footer />
-      </div>
-    );
+    if (!this.props.username) {
+        return (<div>Loading</div>);
+    } else {
+          return (
+              <Router history={hashHistory}>
+                  <Route>
+                      <Route exact path='/' component={MovieList} />
+                      <Route component={Authentification} router={this.props.router.router} path="/login" />
+                      <Route component={Profil} router={this.props.router.router} path="/profil" />
+                      <Route component={Search} router={this.props.router.router} path="/search" />
+                      <Route component={() => (<Profil username={this.props.username} />)} router={this.props.router.router} path="/profil" />
+                      <Route component={NotFound} />
+                  </Route>
+              </Router>
+            );
+          }
   }
 }
 
 const mapStateToProps = (state, router) => {
+  console.log("UPDATING ??");
   return {
     router: router,
     username: state.username
