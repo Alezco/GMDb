@@ -10,6 +10,7 @@ import NotFound from './notFound.jsx';
 import Profil from './profil.jsx';
 import Search from './search.jsx';
 import Footer from './footer.jsx';
+import Loader from './loader.jsx';
 
 class HomePage extends Component {
   constructor(props) {
@@ -38,6 +39,13 @@ class HomePage extends Component {
         } else {
           if (req.readyState == XMLHttpRequest.DONE && req.status == 403) {
             console.log("User not authenticated session is not active");
+            self.props.dispatch({
+               type: 'SET_USER_ID',
+               username: -1
+           });
+           self.props.dispatch({
+              type: 'SHOW_STORE'
+          });
         }
       }
     }
@@ -54,7 +62,7 @@ class HomePage extends Component {
   render() {
     console.log("passign " + this.props.username);
     if (!this.props.username) {
-        return (<div>Loading</div>);
+        return (<Loader />);
     } else {
           return (
               <Router history={hashHistory}>

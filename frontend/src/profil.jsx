@@ -33,7 +33,7 @@ class Profil extends Component {
   componentWillMount() {
     console.log("Check if connected");
     console.log(this.props);
-    if (this.props.username) {
+    if (this.props.username >= 0) {
       let req = new XMLHttpRequest();
       req.withCredentials = true;
       let self = this;
@@ -55,12 +55,12 @@ class Profil extends Component {
       }
       req.open('GET', 'http://localhost:4242/api/favorites/'+this.props.username, true);
       req.send(null);
-    }/* else {
+    } else {
       console.log("NOt Connected");
       console.log("No session found");
       console.log(this.props);
       this.props.router.push('/login');
-    }*/
+    }
   }
 
   render() {
