@@ -2,21 +2,41 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 const Redux = require('react-redux');
 import styles from './style/index.css';
+import { withRouter } from 'react-router';
 
 class MovieCell extends Component {
 
   constructor(props) {
     super(props);
-
+    console.log("contexte");
+    const { router, params, location, routes } = this.props
+    console.log(location);
     this.likeAction = this.likeAction.bind(this);
+
     this.state = {
       style : "faveNotLike",
       isLike : false
     };
   }
 
+  WebServiceCall(movieID)
+  {
+    let req = new XMLHttpRequest();
+    req.withCredentials = true;
+    req.onreadystatechange = function() {
+        if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
+         console.log("like all good");
+        }
+    }
+    req.open('POST', 'http://localhost:4242/api/like', true);
+    req.setRequestHeader("Content-Type", "application/json");
+    let jsonToSend = JSON.stringify({"movieID": movieID});
+    req.send(jsonToSend);
+  }
+
   likeAction()
   {
+    this.WebServiceCall(this.props.movieObject.id);
     if (this.state.isLike) {
       console.log("XD i unlike it");
       this.setState({
@@ -55,4 +75,4 @@ class MovieCell extends Component {
   }
 }
 
-export default MovieCell;
+export default withRouter(MovieCell);
