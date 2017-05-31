@@ -9,11 +9,9 @@ class Footer extends Component {
 
   render() {
     return (
-      <footer className="margin-tb-3">
-        <div className="row">
-          <div className="col-lg-12">
-            <p>EPITA MTI 2018 GOOD MOVIE DATABASE (GMDb)</p>
-          </div>
+      <footer className="footer">
+        <div className="container">
+          <p className="text-muted">EPITA MTI 2018 GOOD MOVIES DATABASE (GMDb)</p>
         </div>
       </footer>
     );

@@ -105,7 +105,7 @@ class Authentification extends Component {
             </ul>
             <div className="tab-content">
               <div id="signup">
-                <h1 id="title">Sign Up For Free</h1>
+                <h1 id="title">Sign Up</h1>
                 <div className="field-wrap">
                   <input type="text"required placeholder="Login *" id="login"/>
                 </div>

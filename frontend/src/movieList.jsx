@@ -50,7 +50,7 @@ class MovieList extends Component {
               <div className="row">
                 <div className="col-sm-12">
                   <div className="page-header">
-                    <h1>Best movies of all time</h1>
+                    <h1>Good movies database</h1>
                     </div>
                 </div>
               </div>

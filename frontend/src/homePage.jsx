@@ -54,34 +54,28 @@ class HomePage extends Component {
     req.send(null);
   }
 
-  componentWillReceiveProps() {
-    console.log("Will receive props");
-  }
-
-
   render() {
-    console.log("passign " + this.props.username);
+    console.log("passing " + this.props.username);
     if (!this.props.username) {
         return (<Loader />);
     } else {
-          return (
-              <Router history={hashHistory}>
-                  <Route>
-                      <Route exact path='/' component={MovieList} />
-                      <Route component={Authentification} router={this.props.router.router} path="/login" />
-                      <Route component={Profil} router={this.props.router.router} path="/profil" />
-                      <Route component={Search} router={this.props.router.router} path="/search" />
-                      <Route component={() => (<Profil username={this.props.username} />)} router={this.props.router.router} path="/profil" />
-                      <Route component={NotFound} />
-                  </Route>
-              </Router>
-            );
-          }
+        return (
+            <Router history={hashHistory}>
+                <Route>
+                    <Route exact path='/' component={MovieList} />
+                    <Route component={Authentification} router={this.props.router.router} path="/login" />
+                    <Route component={Profil} router={this.props.router.router} path="/profil" />
+                    <Route component={Search} router={this.props.router.router} path="/search" />
+                    <Route component={() => (<Profil username={this.props.username} />)} router={this.props.router.router} path="/profil" />
+                    <Route component={NotFound} />
+                </Route>
+            </Router>
+          );
+        }
   }
 }
 
 const mapStateToProps = (state, router) => {
-  console.log("UPDATING ??");
   return {
     router: router,
     username: state.username
