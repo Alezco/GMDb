@@ -11,14 +11,13 @@ class NavBar extends Component {
 
   deleteAllCookies() {
     console.log("Deleting all cookies");
-      let cookies = document.cookie.split(";");
-
-      for (let i = 0; i < cookies.length; i++) {
-          let cookie = cookies[i];
-          let eqPos = cookie.indexOf("=");
-          let name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-          document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-      }
+    let cookies = document.cookie.split(";");
+    for (let i = 0; i < cookies.length; i++) {
+        let cookie = cookies[i];
+        let eqPos = cookie.indexOf("=");
+        let name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
   }
 
   handleClick() {
@@ -58,8 +57,7 @@ class NavBar extends Component {
               </div>
               <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul className="nav navbar-nav">
-                  <li><Link to="/home" >Home</Link></li>
-                  <li><Link to="/search">Search</Link></li>
+                  <li><Link to="/">Home</Link></li>
                   <li><Link to="/profil">My Movies</Link></li>
                 </ul>
                 <ul className="nav navbar-nav navbar-right">
