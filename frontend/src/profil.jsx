@@ -66,7 +66,12 @@ class Profil extends Component {
   render() {
     console.log('UPDATE MODAFUCKING PROFIL');
     if (this.state.movies == null) {
-      return (<div>No movies in your favorites</div>);
+      return (
+        <div>
+          <NavBar />
+          <p>No movies in your favorites</p>
+        </div>
+      );
     }
     else {
       let rows = [];
@@ -81,7 +86,7 @@ class Profil extends Component {
             <div className="row">
               <div className="col-sm-12">
                 <div className="page-header">
-                  <h1>Hello {this.props.username} , these are your favorites movies</h1>
+                  <h1>Hello {this.props.username}, these are your favorites movies</h1>
                   </div>
               </div>
             </div>
@@ -101,6 +106,4 @@ const mapStateToProps = (state, router)  => {
 
 
 
-export default Redux.connect(
-  mapStateToProps
-)(Profil);
+export default Redux.connect(mapStateToProps)(Profil);
