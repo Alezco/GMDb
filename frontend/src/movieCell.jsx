@@ -20,7 +20,7 @@ class MovieCell extends Component {
     if (this.state.isLike) {
       console.log("XD i unlike it");
       this.setState({
-        style : "faveNotLike",
+        style : "faveAnimationUnlike faveLike",
         isLike : false
       });
     } else {
