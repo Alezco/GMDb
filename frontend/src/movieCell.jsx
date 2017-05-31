@@ -7,6 +7,29 @@ class MovieCell extends Component {
 
   constructor(props) {
     super(props);
+
+    this.likeAction = this.likeAction.bind(this);
+    this.state = {
+      style : "faveNotLike",
+      isLike : false
+    };
+  }
+
+  likeAction()
+  {
+    if (this.state.isLike) {
+      console.log("XD i unlike it");
+      this.setState({
+        style : "faveNotLike",
+        isLike : false
+      });
+    } else {
+      console.log("XD i like it");
+      this.setState({
+        style : "faveAnimationLike faveNotLike",
+        isLike : true
+      });
+    }
   }
 
   render() {
@@ -19,6 +42,7 @@ class MovieCell extends Component {
       return(
         <div>
           <div className="col-sm-6 col-md-3" style={divStyle}>
+            <div className={this.state.style} onClick={this.likeAction}></div>
             <img className="img-responsive thumbnail" src={this.props.movieObject.Poster} alt=""/>
             <div className="caption">
               <h4>{this.props.movieObject.Title}</h4>

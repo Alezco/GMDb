@@ -218,6 +218,48 @@ loader {
     100% { transform: rotate(360deg); }
 }
 
+/* Like animation */
+.faveNotLike {
+  width: 70px;
+  height: 50px;
+  position: absolute;
+  background: url(https://image.noelshack.com/fichiers/2017/22/1496224662-twitter-fave.png) no-repeat;
+  background-position: 0 0;
+  cursor: pointer;
+  animation: fave-heart 0s steps(55);
+}
+
+.faveAnimationLike {
+  background-position: -3519px 0 !important;
+  transition: background 1s steps(55);
+}
+
+@keyframes fave-heart {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -2800px 0;
+  }
+}
+
+/* Like animation */
+.faveLike {
+  width: 70px;
+  height: 50px;
+  position: absolute;
+  background: url(https://image.noelshack.com/fichiers/2017/22/1496224662-twitter-fave.png) no-repeat;
+  background-position: -3519px 0;
+  cursor: pointer;
+  animation: fave-heart 0s steps(55);
+}
+
+.faveAnimationUnlike {
+  background-position: 0 0;
+  transition: background 1s steps(55);
+}
+
+
 
 
 /*------------------------------------*\
