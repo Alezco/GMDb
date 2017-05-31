@@ -13,6 +13,8 @@ class MovieCell extends Component {
     console.log(location);
     this.likeAction = this.likeAction.bind(this);
 
+    this.lockLikeAnimation = false;
+
     this.state = {
       style : "faveNotLike",
       isLike : false
@@ -34,8 +36,20 @@ class MovieCell extends Component {
     req.send(jsonToSend);
   }
 
+  removeLock(self) {
+    self.lockLikeAnimation = false;
+  }
+
   likeAction()
   {
+    if (!this.lockLikeAnimation) {
+      this.lockLikeAnimation = true;
+      let self = this;
+      setTimeout(function() { self.removeLock(self) }, 1500);
+    }
+    else {
+      return;
+    }
     this.WebServiceCall(this.props.movieObject.id);
     if (this.state.isLike) {
       console.log("XD i unlike it");
