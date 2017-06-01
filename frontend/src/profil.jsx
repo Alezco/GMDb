@@ -49,6 +49,10 @@ class Profil extends Component {
                   self.setState({
                     movies : JSON.parse(req.responseText)
                   });
+                  self.props.dispatch({
+                     type: 'INIT_FAVORITES',
+                     favorites: JSON.parse(req.responseText)
+                 });
                 }
             }
          }

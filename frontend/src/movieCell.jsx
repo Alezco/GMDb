@@ -8,17 +8,52 @@ class MovieCell extends Component {
 
   constructor(props) {
     super(props);
-    console.log("contexte");
     const { router, params, location, routes } = this.props
-    console.log(location);
     this.likeAction = this.likeAction.bind(this);
 
     this.lockLikeAnimation = false;
 
+    let self = this;
     this.state = {
       style : "faveNotLike",
       isLike : false
     };
+    if (!this.props.favorites){
+
+    } else {
+      console.log(this.props.favorites);
+      console.log(this.props.movieObject.id);
+    if (this.props.favorites.filter(function(fav){ console.log(fav.id); console.log(self.props.movieObject.id); return fav.id === self.props.movieObject.id }))
+    {
+      this.state = {
+        style : "faveNotLike",
+        isLike : false
+      };
+    }
+  }
+}
+
+  componentWillReceiveProps(Newprops) {
+    console.log("MY CELL receive new props");
+    console.log(Newprops);
+    if (!Newprops.favorites) {
+      return;
+    }
+    if (Newprops.favorites.filter(function(fav){ return fav.id === Newprops.movieObject.id }))
+    {
+      console.log("is MY FAVORITe");
+      this.setState({
+        style : "faveAnimationLike faveNotLike",
+        isLike : true
+      });
+    }
+    else {
+      console.log("is NOT MY FAVORITe");
+      this.setState({
+        style : "faveAnimationUnlike faveLike",
+        isLike : false
+      });
+    }
   }
 
   WebServiceCall(movieID)
@@ -72,8 +107,8 @@ class MovieCell extends Component {
     };
     if (this.props.movieObject == null) {
       return(<div></div>);
-    } else {
-      return(
+    }
+    return(
         <div>
           <div className="col-sm-6 col-md-3" style={divStyle}>
             <div className={this.state.style} onClick={this.likeAction}></div>
@@ -86,7 +121,14 @@ class MovieCell extends Component {
         </div>
       );
     }
-  }
+
+}
+const mapStateToProps = (state, router)  => {
+  return {
+    favorites: state.favorites
+  };
 }
 
-export default withRouter(MovieCell);
+
+
+export default Redux.connect(mapStateToProps)(MovieCell);
