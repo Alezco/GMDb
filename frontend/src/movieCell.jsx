@@ -31,9 +31,8 @@ class MovieCell extends Component {
 
   setFavoriteStyle(MyProps)
   {
-    console.log(MyProps.favorites);
-    console.log(MyProps.movieObject.id);
     for (var i = 0; i < MyProps.favorites.length; i++) {
+      console.log(MyProps.favorites[i].movieID +" == " +MyProps.movieObject.id);
       if (MyProps.favorites[i].movieID == MyProps.movieObject.id) {
         console.log("--------> favorite style Applied");
         this.state = {
@@ -63,9 +62,25 @@ class MovieCell extends Component {
   {
     let req = new XMLHttpRequest();
     req.withCredentials = true;
+    let self = this;
+    console.log(self.props);
     req.onreadystatechange = function() {
         if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
-         console.log("like all good");
+         console.log("like / unlike action called");
+         let val = JSON.parse(req.responseText);
+         if (val.res === "Liked") {
+           self.props.dispatch({
+              type: 'ADD_FAVORITES_MOVIE_ID',
+              index: self.props.index,
+              item: self.props.movieObject
+          });
+         } else {
+           self.props.dispatch({
+              type: 'REMOVE_FAVORITES_MOVIE_ID',
+              index: self.props.index - 1
+           });
+         }
+         console.log(val);
         }
     }
     req.open('POST', 'http://localhost:4242/api/like', true);
@@ -76,6 +91,7 @@ class MovieCell extends Component {
 
   removeLock(self) {
     self.lockLikeAnimation = false;
+    this.WebServiceCall(this.props.movieObject.id);
   }
 
   likeAction()
@@ -88,7 +104,7 @@ class MovieCell extends Component {
     else {
       return;
     }
-    this.WebServiceCall(this.props.movieObject.id);
+
     if (this.state.isLike) {
       console.log("XD i unlike it");
       this.setState({

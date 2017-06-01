@@ -227,19 +227,19 @@ app.post('/api/logIn', (req, res) => {
 app.post('/api/like', ensureAuthentificated, (req, res) => {
   if (!req.body.movieID) {
     res.statusCode = 400;
-    res.send('{ error : No film provided }');
+    res.send('{ "error" : No film provided }');
   } else {
     sess = req.session;
     var newUser = user.likeMovie(req.body.movieID, req.session.username, function(err, isOk) {
       if (err) {
         console.log(err);
         res.statusCode = 400;
-        res.send('{ error : ' + err + '}');
+        res.send('{ "error" : ' + err + '}');
       }
       console.log(isOk);
       if (isOk) {
         res.statusCode = 200;
-        res.send(JSON.stringify('{ res : true}'));
+        res.send('{ "res" : "'+isOk+'"}');
       }
     });
   }

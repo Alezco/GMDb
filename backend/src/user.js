@@ -7,7 +7,16 @@ exports.likeMovie = function (movieID, userID, done) {
         done(err, false);
       }
       if (rows.length) {
-        done('movie already in favorites', false);
+        var insertQuery = "DELETE FROM favorites where userID = '" + userID + "' AND movieID = '" + movieID + "'";
+        console.log(insertQuery);
+        db.connection.query(insertQuery,function(err,rows){
+          if (err) {
+            done(err, false);
+          } else {
+            console.log("all good delete favorite ");
+            done(null, 'UnLiked');
+          }
+        });
       } else {
         var insertQuery = "INSERT INTO favorites ( userID, movieID ) values ('" + userID + "','" + movieID + "')";
         console.log(insertQuery);
@@ -16,7 +25,7 @@ exports.likeMovie = function (movieID, userID, done) {
             done(err, false);
           } else {
             console.log("all good new favorite id = " + rows.insertId);
-            done(null, true);
+            done(null, 'Liked');
           }
         });
       }
