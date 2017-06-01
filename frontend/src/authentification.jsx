@@ -27,6 +27,30 @@ class Authentification extends Component {
     }
   }
 
+  getUserFavorites(userID) {
+      let req = new XMLHttpRequest();
+      req.withCredentials = true;
+      let self = this;
+      req.onreadystatechange = function() {
+          if (req.status == 403) {
+            console.log("Not Authorized");
+            self.props.router.push('/login');
+          }
+          else {
+                console.log("Authorized");
+                if (req.status == 200 && req.readyState == XMLHttpRequest.DONE) {
+                  self.props.dispatch({
+                     type: 'INIT_FAVORITES',
+                     favorites: JSON.parse(req.responseText)
+                 });
+                 self.props.router.push('/profil');
+              }
+         }
+      }
+      req.open('GET', 'http://localhost:4242/api/favorites/'+userID, true);
+      req.send(null);
+  }
+
   checkSignIn() {
     let login = document.getElementById("login").value;
     let password = document.getElementById("password").value;
@@ -47,7 +71,8 @@ class Authentification extends Component {
          self.props.dispatch({
             type: 'SHOW_STORE'
         });
-         self.props.router.push('/profil');
+        self.getUserFavorites(user.id);
+
         }
     }
     req.open('POST', 'http://localhost:4242/api/logIn', true);

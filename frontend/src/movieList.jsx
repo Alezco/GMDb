@@ -6,6 +6,7 @@ import styles from './style/index.css';
 import NavBar from './navBar.jsx';
 import MovieCell from './movieCell.jsx';
 import Footer from './footer.jsx';
+import SearchForm from './searchForm.jsx';
 
 class MovieList extends Component {
   constructor(props) {
@@ -22,7 +23,8 @@ class MovieList extends Component {
     req.onreadystatechange = function() {
         if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
           self.setState({
-            movies : JSON.parse(req.responseText)
+            movies : JSON.parse(req.responseText),
+            filteredMovies : JSON.parse(req.responseText)
           });
         }
       }
@@ -30,15 +32,33 @@ class MovieList extends Component {
       req.send(null);
     }
 
+    searchByName(name) {
+      console.log(name);
+      if (!name || name === '') {
+        this.state.filteredMovies = this.state.movies;
+      } else {
+        let movies = this.state.movies;
+        let tmp = [];
+        for(let i = 0; i < movies.length; i++) {
+          let movieName = movies[i].Title.toUpperCase();
+          if (movieName.match(name.toUpperCase())) {
+            tmp.push(movies[i]);
+          }
+        }
+        this.setState({
+          movies : this.state.movies,
+          filteredMovies : tmp
+        });
+      }
+    }
+
   render() {
-    if (this.state.movies == null) {
+    if (this.state.filteredMovies == null) {
       return (<div></div>);
     }
     else {
-      console.log(this.state.movies);
       let rows = [];
-      let count = 0;
-      this.state.movies.map((row, index) => {
+      this.state.filteredMovies.map((row, index) => {
           rows.push(<MovieCell key={index} index={index} movieObject={row}/>)
       });
       return(
@@ -51,6 +71,11 @@ class MovieList extends Component {
                   <div className="page-header">
                     <h1>Good movies database</h1>
                     </div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-sm-12">
+                  <SearchForm movies={rows} onKeyUp={this.searchByName.bind(this)}/>
                 </div>
               </div>
               {rows}

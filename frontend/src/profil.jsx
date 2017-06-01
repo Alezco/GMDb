@@ -8,13 +8,15 @@ import MovieCell from './movieCell.jsx';
 import MovieList from './movieList.jsx';
 import Authentification from './authentification.jsx';
 import NotFound from './notFound.jsx';
+import Footer from './footer.jsx';
+import SearchForm from './searchForm.jsx';
 
 class Profil extends Component {
   constructor(props) {
     super(props);
     this.state = {
       movies : null,
-      redirect : null
+      filteredMovies : null
     }
   }
 
@@ -30,46 +32,30 @@ class Profil extends Component {
     }
   }
 
-  componentWillMount() {
-    console.log("Check if connected");
-    console.log(this.props);
-    if (this.props.username >= 0) {
-      let req = new XMLHttpRequest();
-      req.withCredentials = true;
-      let self = this;
-      req.onreadystatechange = function() {
-          if (req.status == 403) {
-            console.log("Not Authorized");
-            self.props.router.push('/login');
-          }
-          else {
-            if (self.state.movies == null) {
-                console.log("Authorized");
-                if (req.status == 200 && req.readyState == XMLHttpRequest.DONE) {
-                  self.setState({
-                    movies : JSON.parse(req.responseText)
-                  });
-                  self.props.dispatch({
-                     type: 'INIT_FAVORITES',
-                     favorites: JSON.parse(req.responseText)
-                 });
-                }
-            }
-         }
-      }
-      req.open('GET', 'http://localhost:4242/api/favorites/'+this.props.username, true);
-      req.send(null);
+  searchByName(name) {
+    console.log(name);
+    if (!name || name === '') {
+      this.state.filteredMovies = this.state.movies;
     } else {
-      console.log("NOt Connected");
-      console.log("No session found");
-      console.log(this.props);
-      this.props.router.push('/login');
+      let movies = this.state.movies;
+      let tmp = [];
+      for(let i = 0; i < movies.length; i++) {
+        let movieName = movies[i].Title.toUpperCase();
+        if (movieName.match(name.toUpperCase())) {
+          tmp.push(movies[i]);
+        }
+      }
+      this.setState({
+        movies : this.state.movies,
+        filteredMovies : tmp
+      });
     }
   }
 
   render() {
     console.log('UPDATE MODAFUCKING PROFIL');
-    if (this.state.movies == null) {
+    console.log(this.props.favorites);
+    if (this.props.favorites == null) {
       return (
         <div>
           <NavBar />
@@ -79,8 +65,8 @@ class Profil extends Component {
     }
     else {
       let rows = [];
-      this.state.movies.map((row, id) => {
-          console.log("in loop");
+      this.props.favorites.map((row, id) => {
+          row.id = row.movieID;
           rows.push(<MovieCell key={id} index={id} movieObject={row}/>);
       })
       return(
@@ -94,8 +80,14 @@ class Profil extends Component {
                   </div>
               </div>
             </div>
+            <div className="row">
+              <div className="col-sm-12">
+                <SearchForm movies={rows} onKeyUp={this.searchByName.bind(this)}/>
+              </div>
+            </div>
             {rows}
         </div>
+        <Footer />
       </div>
       );
     }
@@ -104,7 +96,8 @@ class Profil extends Component {
 
 const mapStateToProps = (state, router)  => {
   return {
-    username: state.username
+    username: state.username,
+    favorites : state.favorites
   };
 }
 

@@ -8,52 +8,55 @@ class MovieCell extends Component {
 
   constructor(props) {
     super(props);
-    const { router, params, location, routes } = this.props
-    this.likeAction = this.likeAction.bind(this);
 
+    this.likeAction = this.likeAction.bind(this);
     this.lockLikeAnimation = false;
 
     let self = this;
-    this.state = {
-      style : "faveNotLike",
-      isLike : false
-    };
-    if (!this.props.favorites){
 
-    } else {
-      console.log(this.props.favorites);
-      console.log(this.props.movieObject.id);
-    if (this.props.favorites.filter(function(fav){ console.log(fav.id); console.log(self.props.movieObject.id); return fav.id === self.props.movieObject.id }))
+    console.log("movie cell constructor");
+    if (!this.props.favorites)
     {
+      console.log("default style because redux not set");
       this.state = {
         style : "faveNotLike",
         isLike : false
       };
     }
+    else
+    {
+      this.setFavoriteStyle(this.props);
+    }
   }
-}
+
+  setFavoriteStyle(MyProps)
+  {
+    console.log(MyProps.favorites);
+    console.log(MyProps.movieObject.id);
+    for (var i = 0; i < MyProps.favorites.length; i++) {
+      if (MyProps.favorites[i].movieID == MyProps.movieObject.id) {
+        console.log("--------> favorite style Applied");
+        this.state = {
+          style : "faveLike",
+          isLike : true
+        };
+        return;
+      }
+    }
+    console.log("Default style Applied");
+    this.state = {
+      style : "faveNotLike",
+      isLike : false
+    };
+  }
+
 
   componentWillReceiveProps(Newprops) {
-    console.log("MY CELL receive new props");
-    console.log(Newprops);
+    console.log("movie cell receive new props");
     if (!Newprops.favorites) {
       return;
     }
-    if (Newprops.favorites.filter(function(fav){ return fav.id === Newprops.movieObject.id }))
-    {
-      console.log("is MY FAVORITe");
-      this.setState({
-        style : "faveAnimationLike faveNotLike",
-        isLike : true
-      });
-    }
-    else {
-      console.log("is NOT MY FAVORITe");
-      this.setState({
-        style : "faveAnimationUnlike faveLike",
-        isLike : false
-      });
-    }
+    this.setFavoriteStyle(Newprops);
   }
 
   WebServiceCall(movieID)
@@ -108,6 +111,19 @@ class MovieCell extends Component {
     if (this.props.movieObject == null) {
       return(<div></div>);
     }
+    if (this.props.username < 0) {
+      return(
+          <div>
+            <div className="col-sm-6 col-md-3" style={divStyle}>
+              <img className="img-responsive thumbnail" src={this.props.movieObject.Poster} alt=""/>
+              <div className="caption">
+                <h4>{this.props.movieObject.Title}</h4>
+                <p>{this.props.movieObject.Plot}</p>
+              </div>
+            </div>
+          </div>
+        );
+    }
     return(
         <div>
           <div className="col-sm-6 col-md-3" style={divStyle}>
@@ -125,6 +141,7 @@ class MovieCell extends Component {
 }
 const mapStateToProps = (state, router)  => {
   return {
+    username: state.username,
     favorites: state.favorites
   };
 }

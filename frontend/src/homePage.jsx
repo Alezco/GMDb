@@ -17,9 +17,37 @@ class HomePage extends Component {
     super(props);
   }
 
+  componentWillReceiveProps(Newprops) {
+    console.log("update home");
+  }
+
+  getUserFavorites() {
+      let req = new XMLHttpRequest();
+      req.withCredentials = true;
+      let self = this;
+      req.onreadystatechange = function() {
+          if (req.status == 403) {
+            console.log("Not Authorized");
+            self.props.router.push('/login');
+          }
+          else {
+                console.log("Authorized");
+                if (req.status == 200 && req.readyState == XMLHttpRequest.DONE) {
+                  self.setState({
+                    movies : JSON.parse(req.responseText)
+                  });
+                  self.props.dispatch({
+                     type: 'INIT_FAVORITES',
+                     favorites: JSON.parse(req.responseText)
+                 });
+              }
+         }
+      }
+      req.open('GET', 'http://localhost:4242/api/favorites/'+this.props.username, true);
+      req.send(null);
+  }
+
   componentWillMount() {
-    console.log("PARENT WILL MOUNT");
-    console.log(this.props.router.router);
     let self = this;
     let req = new XMLHttpRequest();
     req.withCredentials = true;
@@ -35,6 +63,7 @@ class HomePage extends Component {
          self.props.dispatch({
             type: 'SHOW_STORE'
         });
+        self.getUserFavorites();
         console.log("User is authenticated session is active");
         } else {
           if (req.readyState == XMLHttpRequest.DONE && req.status == 403) {
@@ -55,7 +84,7 @@ class HomePage extends Component {
   }
 
   render() {
-    console.log("passing " + this.props.username);
+    console.log("UPDATED HOME PAGE");
     if (!this.props.username) {
         return (<Loader />);
     } else {
@@ -78,7 +107,8 @@ class HomePage extends Component {
 const mapStateToProps = (state, router) => {
   return {
     router: router,
-    username: state.username
+    username: state.username,
+    favorites : state.favorites
   }
 };
 
