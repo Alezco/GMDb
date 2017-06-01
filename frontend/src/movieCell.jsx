@@ -77,7 +77,7 @@ class MovieCell extends Component {
          } else {
            self.props.dispatch({
               type: 'REMOVE_FAVORITES_MOVIE_ID',
-              index: self.props.index - 1
+              item: self.props.movieObject
            });
          }
          console.log(val);

@@ -18,7 +18,16 @@ const Reducer = function(state, action) {
   if (action.type === 'REMOVE_FAVORITES_MOVIE_ID') {
     console.log(action);
     let newArray = state.favorites.slice();
-    newArray.splice(action.index, 1);
+    let searchTerm = action.item.Title;
+    let index = -1;
+    for(var i = 0, len = newArray.length; i < len; i++) {
+        if (newArray[i].Title === searchTerm) {
+            index = i;
+            break;
+        }
+    }
+    console.log("removing " + newArray[index].Title);
+    newArray.splice(index, 1);
     return Object.assign({}, state, { favorites: newArray });
   }
   if (action.type === 'INIT_FAVORITES') {
