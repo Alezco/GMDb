@@ -11,6 +11,7 @@ import Profil from './profil.jsx';
 import Search from './search.jsx';
 import Footer from './footer.jsx';
 import Loader from './loader.jsx';
+import MovieDetail from './movieDetail.jsx';
 
 class HomePage extends Component {
   constructor(props) {
@@ -95,6 +96,7 @@ class HomePage extends Component {
                     <Route component={Authentification} router={this.props.router.router} path="/login" />
                     <Route component={Profil} router={this.props.router.router} path="/profil" />
                     <Route component={Search} router={this.props.router.router} path="/search" />
+                    <Route component={MovieDetail} router={this.props.router.router} path="/detail/:id" />
                     <Route component={() => (<Profil username={this.props.username} />)} router={this.props.router.router} path="/profil" />
                     <Route component={NotFound} />
                 </Route>

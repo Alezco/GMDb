@@ -12,9 +12,9 @@ exports.getFilms = function(done) {
     });
 }
 
-exports.getFilmsOrder = function(filter, done) {
-  console.log('get movies filtered by ' + filter);
-  let filterQuery = 'SELECT * FROM movies LIMIT 20';
+exports.getFilmsByID = function(movieID, done) {
+  console.log('get movies filtered by ' + movieID);
+  let filterQuery = 'SELECT * FROM movies WHERE id = \''+movieID+'\'';
   db.connection.query(filterQuery, function(err,rows) {
       if (err) {
         done(err, null);

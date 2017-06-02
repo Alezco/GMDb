@@ -30,7 +30,6 @@ class MovieCell extends Component {
   setFavoriteStyle(MyProps)
   {
     for (var i = 0; i < MyProps.favorites.length; i++) {
-      console.log(MyProps.favorites[i].movieID +" == " +MyProps.movieObject.id);
       if (MyProps.favorites[i].movieID == MyProps.movieObject.id) {
         console.log("--------> favorite style Applied");
         this.state = {
@@ -127,7 +126,7 @@ class MovieCell extends Component {
       return(
           <div>
             <div className="col-sm-6 col-md-3" style={divStyle}>
-              <img className="img-responsive thumbnail btn-social" src={this.props.movieObject.Poster} alt=""/>
+              <img className="img-responsive thumbnail" src={this.props.movieObject.Poster} alt=""/>
               <div className="caption">
                 <h4>{this.props.movieObject.Title}</h4>
                 <p>{this.props.movieObject.Plot}</p>

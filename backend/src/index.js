@@ -81,6 +81,27 @@ app.get('/api/session', function(req, res) {
   }
 });
 
+app.get('/api/movie/:id', function(req, res) {
+  if (!req.params.id) {
+    res.statusCode = 400;
+    res.send('{ error : No id provided }');
+  } else {
+      var query = public.getFilmsByID(req.params.id, function(err, movie) {
+        if (err) {
+          console.log(err);
+          res.statusCode = 400;
+          res.send('{ error : ' + err + '}');
+        } else {
+        if (movie) {
+          console.log('sending movie detail');
+          res.statusCode = 200;
+          res.send(movie);
+        }
+      }
+    });
+  }
+});
+
 app.get('/api/recommandation/:id', (req, res) => {
   console.log("requesting users recommandation");
   if (!req.params.id) {
