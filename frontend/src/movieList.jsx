@@ -59,7 +59,7 @@ class MovieList extends Component {
     else {
       let rows = [];
       this.state.filteredMovies.map((row, index) => {
-          rows.push(<MovieCell key={index} index={index} movieObject={row}/>)
+          rows.push(<MovieCell key={row.id} index={index} movieObject={row}/>)
       });
       return(
         <div>

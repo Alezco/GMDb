@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 const Redux = require('react-redux');
 import styles from './style/index.css';
-import { withRouter } from 'react-router';
+import { withRouter, Link } from 'react-router';
 
 class MovieCell extends Component {
 
@@ -18,7 +18,8 @@ class MovieCell extends Component {
     {
       this.state = {
         style : "faveNotLike",
-        isLike : false
+        isLike : false,
+        link : "/detail/"+this.props.movieObject.id
       };
     }
     else
@@ -34,14 +35,16 @@ class MovieCell extends Component {
         console.log("--------> favorite style Applied");
         this.state = {
           style : "faveLike",
-          isLike : true
+          isLike : true,
+          link :"/detail/"+MyProps.movieObject.id
         };
         return;
       }
     }
     this.state = {
       style : "faveNotLike",
-      isLike : false
+      isLike : false,
+      link :"/detail/"+MyProps.movieObject.id
     };
   }
 
@@ -104,20 +107,23 @@ class MovieCell extends Component {
       console.log("XD i unlike it");
       this.setState({
         style : "faveAnimationUnlike faveLike",
-        isLike : false
+        isLike : false,
+        link :this.state.link
       });
     } else {
       console.log("XD i like it");
       this.setState({
         style : "faveAnimationLike faveNotLike",
-        isLike : true
+        isLike : true,
+        link :this.state.link
       });
     }
   }
 
   render() {
+    console.log(this.state.link);
     const divStyle = {
-      height : '600px',
+      height : '450px',
     };
     if (this.props.movieObject == null) {
       return(<div></div>);
@@ -126,10 +132,11 @@ class MovieCell extends Component {
       return(
           <div>
             <div className="col-sm-6 col-md-3" style={divStyle}>
+              <Link to={this.state.link}>
               <img className="img-responsive thumbnail" src={this.props.movieObject.Poster} alt=""/>
+                           </Link>
               <div className="caption">
                 <h4>{this.props.movieObject.Title}</h4>
-                <p>{this.props.movieObject.Plot}</p>
               </div>
             </div>
           </div>
@@ -137,18 +144,18 @@ class MovieCell extends Component {
     }
     return(
         <div>
-          <div className="col-sm-6 col-md-3" style={divStyle}>
+            <div className="col-sm-6 col-md-3" style={divStyle}>
             <div className={this.state.style} onClick={this.likeAction}></div>
-            <img className="img-responsive thumbnail" src={this.props.movieObject.Poster} alt=""/>
+            <Link to={this.state.link}>
+              <img className="img-responsive thumbnail" src={this.props.movieObject.Poster} alt=""/>
+            </Link>
             <div className="caption">
               <h4>{this.props.movieObject.Title}</h4>
-              <p>{this.props.movieObject.Plot}</p>
             </div>
-          </div>
+            </div>
         </div>
       );
     }
-
 }
 const mapStateToProps = (state, router)  => {
   return {

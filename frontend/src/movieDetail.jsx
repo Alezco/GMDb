@@ -18,7 +18,6 @@ class MovieDetail extends Component {
       movieID : this.props.routeParams.id,
       movieObject : null
     }
-
   }
 
   componentWillMount() {
