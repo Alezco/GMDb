@@ -4,12 +4,16 @@ const Redux = require('react-redux');
 import styles from './style/index.css';
 import { withRouter } from 'react-router';
 import NavBar from './navBar.jsx';
+import Modal from './modal.jsx'
+import Carousel from './carousel.jsx'
 
 class MovieDetail extends Component {
 
   constructor(props) {
     super(props);
 
+    this.showModal = this.showModal.bind(this);
+    this.dismissModal = this.dismissModal.bind(this);
 
     const { router, params, location, routes } = this.props
     console.log(location);
@@ -17,9 +21,28 @@ class MovieDetail extends Component {
 
     this.state = {
       movieID : this.props.routeParams.id,
-      movieObject : null
+      movieObject : null,
+      modalStyle : "none"
     }
   }
+
+  dismissModal() {
+  console.log("dismissing modal");
+  this.setState({
+    movieID : this.state.movieID,
+    movieObject : this.state.movieObject,
+    modalStyle : "none"
+  }, () => { console.log("modal style " + this.state.modalStyle) });
+}
+
+showModal() {
+  console.log("showing modal");
+    this.setState({
+      movieID : this.state.movieID,
+      movieObject : this.state.movieObject,
+      modalStyle : "block"
+    }, () => { console.log("modal style " + this.state.modalStyle) });
+}
 
   componentWillMount() {
     let req = new XMLHttpRequest();
@@ -38,7 +61,8 @@ class MovieDetail extends Component {
                 self.setState(
                   {
                     movieID : self.state.movieID,
-                    movieObject : movie[0]
+                    movieObject : movie[0],
+                    modalStyle : self.state.modalStyle
                   }
                 )
             }
@@ -57,12 +81,13 @@ class MovieDetail extends Component {
     return (
       <div>
         <NavBar />
+        <Modal dismissModal={this.dismissModal} visible={this.state.modalStyle} source={this.state.movieObject.Poster}/>
      <div className="container">
         <div className="card">
            <div className="container-fliud">
               <div className="wrapper row">
                  <div className="col-md-6">
-                    <img className="center-img" src={this.state.movieObject.Poster} />
+                    <img onClick={this.showModal} className="center-img" src={this.state.movieObject.Poster} />
                  </div>
                  <div className="details col-md-6">
                     <h3 className="product-title">{this.state.movieObject.Title}</h3>
@@ -103,6 +128,9 @@ class MovieDetail extends Component {
                     width="746"
                   />
               </div>
+              </div>
+              <div className="wrapper row">
+                <Carousel />
               </div>
            </div>
         </div>
