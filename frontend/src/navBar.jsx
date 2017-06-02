@@ -61,7 +61,7 @@ class NavBar extends Component {
                   <li><Link to="/profil">My Movies</Link></li>
                 </ul>
                 <ul className="nav navbar-nav navbar-right">
-                    <li><Link onClick={() => this.handleClick()}>Log out</Link></li>
+                    <li><Link href="" onClick={() => this.handleClick()}>Log out</Link></li>
                 </ul>
               </div>
             </div>

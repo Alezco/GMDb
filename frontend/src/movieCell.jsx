@@ -14,10 +14,8 @@ class MovieCell extends Component {
 
     let self = this;
 
-    console.log("movie cell constructor");
     if (!this.props.favorites)
     {
-      console.log("default style because redux not set");
       this.state = {
         style : "faveNotLike",
         isLike : false
@@ -42,7 +40,6 @@ class MovieCell extends Component {
         return;
       }
     }
-    console.log("Default style Applied");
     this.state = {
       style : "faveNotLike",
       isLike : false
@@ -51,7 +48,6 @@ class MovieCell extends Component {
 
 
   componentWillReceiveProps(Newprops) {
-    console.log("movie cell receive new props");
     if (!Newprops.favorites) {
       return;
     }
@@ -131,7 +127,7 @@ class MovieCell extends Component {
       return(
           <div>
             <div className="col-sm-6 col-md-3" style={divStyle}>
-              <img className="img-responsive thumbnail" src={this.props.movieObject.Poster} alt=""/>
+              <img className="img-responsive thumbnail btn-social" src={this.props.movieObject.Poster} alt=""/>
               <div className="caption">
                 <h4>{this.props.movieObject.Title}</h4>
                 <p>{this.props.movieObject.Plot}</p>

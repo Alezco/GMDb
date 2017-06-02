@@ -30,6 +30,18 @@ a:hover {
   box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
 }
 
+.btn-social {
+    position: relative;
+    opacity: 0.9;
+    transition: 0.1s ease;
+    cursor: pointer;
+}
+
+.btn-social:hover {
+    transform: scale(1.01, 1.01); /** default is 1, scale it to 1.5 */
+    opacity: 1;
+}
+
 #search input[type="text"] {
     background: 10px 6px #fcfcfc;
     border: 1px solid #d1d1d1;
