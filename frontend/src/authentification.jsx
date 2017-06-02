@@ -43,8 +43,8 @@ class Authentification extends Component {
                      type: 'INIT_FAVORITES',
                      favorites: JSON.parse(req.responseText)
                  });
-                 self.props.router.push('/profil');
               }
+              self.props.router.push('/profil');
          }
       }
       req.open('GET', 'http://localhost:4242/api/favorites/'+userID, true);

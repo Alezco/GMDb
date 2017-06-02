@@ -10,7 +10,12 @@ const Reducer = function(state, action) {
   }
   if (action.type === 'ADD_FAVORITES_MOVIE_ID') {
     console.log(action);
-    let newArray = state.favorites.slice();
+    let newArray;
+    if (!state.favorites) {
+      newArray = []
+    } else {
+      newArray = state.favorites.slice();
+    }
     Object.assign(action.item, { movieID: action.item.id });
     newArray.splice(action.index, 0, action.item);
     return Object.assign({}, state, { favorites: newArray });
