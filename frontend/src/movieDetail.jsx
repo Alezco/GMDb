@@ -26,13 +26,25 @@ class MovieDetail extends Component {
     }
   }
 
+componentWillReceiveProps(NewProps) {
+  console.log("new props incomming");
+  console.log(NewProps);
+  this.setState({
+    movieID : NewProps.routeParams.id,
+    movieObject : null,
+    modalStyle : "none"
+  } , () => {
+    this.updateMovieDetail();
+  });
+}
+
   dismissModal() {
   console.log("dismissing modal");
   this.setState({
     movieID : this.state.movieID,
     movieObject : this.state.movieObject,
     modalStyle : "none"
-  }, () => { console.log("modal style " + this.state.modalStyle) });
+  });
 }
 
 showModal() {
@@ -44,32 +56,37 @@ showModal() {
     }, () => { console.log("modal style " + this.state.modalStyle) });
 }
 
+
+updateMovieDetail() {
+  let req = new XMLHttpRequest();
+  req.withCredentials = true;
+  let self = this;
+  req.onreadystatechange = function() {
+      if (req.status == 403) {
+        console.log("Not Authorized");
+        self.props.router.push('/login');
+      }
+      else {
+            console.log("Authorized");
+            if (req.status == 200 && req.readyState == XMLHttpRequest.DONE) {
+              let movie = JSON.parse(req.responseText);
+              console.log(movie[0]);
+              self.setState(
+                {
+                  movieID : self.state.movieID,
+                  movieObject : movie[0],
+                  modalStyle : self.state.modalStyle
+                }
+              )
+          }
+     }
+  }
+  req.open('GET', 'http://localhost:4242/api/movie/'+self.state.movieID, true);
+  req.send(null);
+}
+
   componentWillMount() {
-    let req = new XMLHttpRequest();
-    req.withCredentials = true;
-    let self = this;
-    req.onreadystatechange = function() {
-        if (req.status == 403) {
-          console.log("Not Authorized");
-          self.props.router.push('/login');
-        }
-        else {
-              console.log("Authorized");
-              if (req.status == 200 && req.readyState == XMLHttpRequest.DONE) {
-                let movie = JSON.parse(req.responseText);
-                console.log(movie[0]);
-                self.setState(
-                  {
-                    movieID : self.state.movieID,
-                    movieObject : movie[0],
-                    modalStyle : self.state.modalStyle
-                  }
-                )
-            }
-       }
-    }
-    req.open('GET', 'http://localhost:4242/api/movie/'+self.state.movieID, true);
-    req.send(null);
+    this.updateMovieDetail();
   }
 
 
@@ -115,7 +132,6 @@ showModal() {
                        <button className="like btn btn-default" type="button"><span className="fa fa-heart"></span></button>
                     </div>
                  </div>
-
               </div>
               <div className="wrapper row">
                 <div className="center-img videoPadding">
@@ -129,9 +145,7 @@ showModal() {
                   />
               </div>
               </div>
-              <div className="wrapper row">
                 <Carousel username={this.props.username}/>
-              </div>
            </div>
         </div>
      </div>

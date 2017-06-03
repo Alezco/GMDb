@@ -42,10 +42,12 @@
   },
   "dependencies": {
     "react": "^15.5.4",
+    "react-coverflow": "^0.2.3",
     "react-dom": "^15.5.4",
     "react-hot-loader": "next",
     "react-redux": "^5.0.5",
     "react-router": "^3.0.4",
+    "react-slick": "next",
     "redux": "^3.6.0"
   }
 }
