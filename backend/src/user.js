@@ -60,7 +60,7 @@ exports.favoriteByCriteria = function (userID, properties, done) {
                     if (err) {
                       console.log(err);
                     }
-                    if (rows.length < rowsFavorites.length) {
+                    if (rows.length) {
                       console.log(rows.length + " " + criteria +" "+ rows[0][criteria]);
                       db.connection.query("SELECT * FROM movies"+
                                           " WHERE " + criteria + " = '" + rows[0][criteria] + "' LIMIT 10",
@@ -68,11 +68,11 @@ exports.favoriteByCriteria = function (userID, properties, done) {
                                             if (done !== null) {
                                                 if (rowsfinals.length) {
                                                   let description = new Object();
-                                                  description.field = rows[0][criteria];
+                                                  description.field = "based on your taste in/about " + criteria+"("+rows[0][criteria]+") these movie may interest you"
                                                   let movies = new Object();
-                                                  movies.list = rows[0][criteria];
+                                                  movies.list = rowsfinals;
                                                   let obj = new Object();
-                                                  Object.assign(obj, rowsfinals, description);
+                                                  Object.assign(obj, movies, description);
                                                   done(null, JSON.stringify(obj));
                                                   done = null;
                                                 } else {

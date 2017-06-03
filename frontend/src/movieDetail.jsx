@@ -130,7 +130,7 @@ showModal() {
               </div>
               </div>
               <div className="wrapper row">
-                <Carousel />
+                <Carousel username={this.props.username}/>
               </div>
            </div>
         </div>
