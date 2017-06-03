@@ -13,9 +13,13 @@ exports.registerUser = function (login, password, done) {
         var newUserMysql = new Object();
         newUserMysql.login    = login;
         newUserMysql.password = password;
-        var insertQuery = "INSERT INTO users ( login, password ) values ('" + login + "','" + password + "')";
+        var insertQuery = "INSERT INTO users ( login, password, url ) values ('" + login + "','"
+        + password + "', 'http://blogs.plos.org/thepanicvirus/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png')";
         console.log(insertQuery);
         db.connection.query(insertQuery, function (err, rows) {
+          if (err) {
+            console.log(err);
+          }
           newUserMysql.id = rows.insertId;
           console.log("all good");
           newUser = newUserMysql;

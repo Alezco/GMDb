@@ -5,7 +5,8 @@ USE gmbd;
 CREATE TABLE users (
   id int(11) NOT NULL AUTO_INCREMENT,
   login varchar(16) NOT NULL UNIQUE,
-  password varchar(60) NOT NULL,
+  password varchar(256) NOT NULL,
+  url varchar(256) NOT NULL,
   PRIMARY KEY (id));
 
 CREATE TABLE movies(

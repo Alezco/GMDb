@@ -252,6 +252,9 @@ loader {
 
 .glyphicon {  margin-bottom: 10px;margin-right: 10px;}
 
+.black {
+  color: #9c1c1c;
+}
 small {
     display: block;
     line-height: 1.428571429;
