@@ -63,6 +63,10 @@ class HomePage extends Component {
              username: user.id
          });
          self.props.dispatch({
+            type: 'SET_USER_OBJECT',
+            user: user
+        });
+         self.props.dispatch({
             type: 'SHOW_STORE'
         });
         self.getUserFavorites();

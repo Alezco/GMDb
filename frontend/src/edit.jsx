@@ -10,7 +10,11 @@ class Edit extends Component {
     super(props);
   }
 
+
   render() {
+    if (!this.props.user) {
+      return(<div></div>);
+    }
       return(
         <div>
           <NavBar />
@@ -21,9 +25,9 @@ class Edit extends Component {
                                     <img src="http://placehold.it/380x500" alt="" className="img-rounded img-responsive" />
                                 </div>
                                 <div className="col-sm-6 col-md-8">
-                                    <h4>{this.props.username}</h4>
+                                    <h4></h4>
                                     <p>
-                                        <i className="glyphicon glyphicon-user"></i>{this.props.username}
+                                        <i className="glyphicon glyphicon-user"></i>{this.props.user.login}
                                         <br />
                                         <i className="glyphicon glyphicon-gift"></i>nb_favrites
                                     </p>
@@ -39,7 +43,8 @@ class Edit extends Component {
 const mapStateToProps = (state, router) => {
   return {
     username: state.username,
-    favorites : state.favorites
+    favorites : state.favorites,
+    user : state.user
   }
 };
 

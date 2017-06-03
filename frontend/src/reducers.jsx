@@ -8,6 +8,10 @@ const Reducer = function(state, action) {
       console.log(action);
       return Object.assign({}, state, { username: action.username });
   }
+  if (action.type === 'SET_USER_OBJECT') {
+      console.log(action);
+      return Object.assign({}, state, { user: action.user });
+  }
   if (action.type === 'ADD_FAVORITES_MOVIE_ID') {
     console.log(action);
     let newArray;

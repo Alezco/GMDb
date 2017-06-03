@@ -53,7 +53,7 @@ app.use(session({
 app.use(require('body-parser').urlencoded({ extended: true }));
 
 function ensureAuthentificated(req, res, next) {
-  if (req.session.username) {
+  if (req.session.user) {
     console.log(next);
     return next();
   } else {
@@ -72,9 +72,9 @@ app.get('/', function(req, res) {
 });
 
 app.get('/api/session', function(req, res) {
-  if (req.session.username) {
+  if (req.session.user) {
     res.statusCode = 200;
-    res.send('{ "id": ' + req.session.username + ' }');
+    res.send(JSON.stringify(req.session.user));
   } else {
     res.statusCode = 403;
     res.send('{ "error": "User not authentificated" }');
@@ -214,7 +214,7 @@ app.post('/api/logIn', (req, res) => {
       if (user) {
         console.log("next is session id INIT can not be null");
         console.log(user.id);
-        sess.username = user.id;
+        sess.user = user;
         req.session.save();
         res.statusCode = 200;
         res.send(JSON.stringify(user));

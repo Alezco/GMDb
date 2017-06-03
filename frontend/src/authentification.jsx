@@ -69,10 +69,13 @@ class Authentification extends Component {
              username: user.id
          });
          self.props.dispatch({
+            type: 'SET_USER_OBJECT',
+            user: user
+        });
+         self.props.dispatch({
             type: 'SHOW_STORE'
         });
         self.getUserFavorites(user.id);
-
         }
     }
     req.open('POST', 'http://localhost:4242/api/logIn', true);
