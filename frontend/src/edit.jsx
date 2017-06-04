@@ -17,6 +17,11 @@ class Edit extends Component {
     }
   }
 
+  componentWillReceiveProps(newProps) {
+    console.log("new props");
+    console.log(newProps);
+  }
+
   handleChange(event) {
       this.setState({url: event.target.value});
     }
@@ -35,7 +40,7 @@ class Edit extends Component {
       req.withCredentials = true;
       let self = this;
       let user = this.props.user;
-      user.url = this.state.url
+      user.url = this.state.url;
       req.onreadystatechange = function() {
           if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
             self.props.dispatch({
@@ -58,6 +63,7 @@ class Edit extends Component {
     if (!this.props.user) {
       return(<div></div>);
     }
+    console.log(this.props.user.url);
       return(
         <div>
           <NavBar />
