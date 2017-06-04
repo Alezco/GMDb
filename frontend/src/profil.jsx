@@ -56,7 +56,7 @@ class Profil extends Component {
             <div className="row">
               <div className="col-sm-12">
                 <div className="page-header">
-                  <h1>Hello {this.props.username}, these are your favorites movies</h1>
+                  <h1>Hello {this.props.user.login}, these are your favorites movies</h1>
                   </div>
               </div>
             </div>
@@ -72,7 +72,8 @@ class Profil extends Component {
 const mapStateToProps = (state, router)  => {
   return {
     username: state.username,
-    favorites : state.favorites
+    favorites : state.favorites,
+    user: state.user
   };
 }
 

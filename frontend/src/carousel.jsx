@@ -87,7 +87,6 @@ moveLeft() {
             console.log(this.state.movies.list[index].id);
             console.log("push");
             items.push(<div key={this.state.movies.list[index].id}><CarouselItem movieObject={this.state.movies.list[index]}/></div>)
-            //items.push(<div key={this.state.movies.list[index].id}><img src='http://placekitten.com/g/400/200' /></div>)
         }
         return items
     }

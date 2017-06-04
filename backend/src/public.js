@@ -37,3 +37,16 @@ exports.getUsers = function(done) {
       }
     });
 }
+
+exports.getUserByID = function(userID, done) {
+  console.log('get user with id ' + userID);
+  let filterQuery = 'SELECT * FROM users WHERE id = \''+userID+'\'';
+  db.connection.query(filterQuery, function(err,rows) {
+      if (err) {
+        done(err, null);
+      }
+      if (rows.length) {
+        done(null, JSON.stringify(rows));
+      }
+    });
+}

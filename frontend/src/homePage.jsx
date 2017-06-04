@@ -14,6 +14,7 @@ import Loader from './loader.jsx';
 import MovieDetail from './movieDetail.jsx';
 import Edit from './edit.jsx';
 import Discover from './discover.jsx';
+import User from './user.jsx';
 
 class HomePage extends Component {
   constructor(props) {
@@ -105,6 +106,7 @@ class HomePage extends Component {
                     <Route component={Edit} router={this.props.router.router} path="/edit" />
                     <Route component={Discover} router={this.props.router.router} path="/discover" />
                     <Route component={MovieDetail} router={this.props.router.router} path="/detail/:id" />
+                    <Route component={User} router={this.props.router.router} path="/user/:id" />
                     <Route component={() => (<Profil username={this.props.username} />)} router={this.props.router.router} path="/profil" />
                     <Route component={NotFound} />
                 </Route>

@@ -425,6 +425,25 @@ app.get('/api/users', (req, res) => {
     });
 });
 
+app.get('/api/user/:id', (req, res) => {
+  if (!req.params.id) {
+    res.statusCode = 400;
+    res.send('{ error : No user provided }');
+  } else {
+    var newUser = public.getUserByID(req.params.id, function(err, user) {
+      if (err) {
+        console.log(err);
+        res.statusCode = 501;
+        res.send('{ error : ' + err + '}');
+      }
+      if (user) {
+        res.statusCode = 200;
+        res.send(user);
+      }
+    });
+  }
+});
+
 let server = http.createServer(app);
 server.listen(PORT, () => {
   console.log('GMBD server listening on port ' + PORT + '!');
