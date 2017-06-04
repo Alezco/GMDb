@@ -172,6 +172,29 @@ app.post('/api/signIn', (req, res) => {
     });
 });
 
+
+app.post('/api/updateURL', (req, res) => {
+  if (!req.body.url) {
+      res.statusCode = 400;
+      res.send('{ error : No url provided }');
+    }
+    console.log(req.session);
+    console.log(req.body);
+    console.log(req.session.user.id);
+    var urlAction = user.updateURL(req.body.url, req.session.user.id, function(err, user) {
+      if (err) {
+        console.log(err);
+        res.statusCode = 403;
+        res.send('{ error : ' + err + '}');
+      }
+      console.log(user);
+      if (user) {
+        res.statusCode = 200;
+        res.send(JSON.stringify(user));
+      }
+    });
+});
+
 /**
  * @api {post} /api/logIn log into account
  * @apiName logIn
@@ -251,7 +274,7 @@ app.post('/api/like', ensureAuthentificated, (req, res) => {
     res.send('{ "error" : No film provided }');
   } else {
     sess = req.session;
-    var newUser = user.likeMovie(req.body.movieID, req.session.username, function(err, isOk) {
+    var newUser = user.likeMovie(req.body.movieID, req.session.user.id, function(err, isOk) {
       if (err) {
         console.log(err);
         res.statusCode = 400;
@@ -384,6 +407,20 @@ app.get('/api/films', (req, res) => {
       if (movies) {
         res.statusCode = 200;
         res.send(movies);
+      }
+    });
+});
+
+app.get('/api/users', (req, res) => {
+    var newUser = public.getUsers(function(err, users) {
+      if (err) {
+        console.log(err);
+        res.statusCode = 501;
+        res.send('{ error : ' + err + '}');
+      }
+      if (users) {
+        res.statusCode = 200;
+        res.send(users);
       }
     });
 });

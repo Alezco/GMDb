@@ -57,6 +57,7 @@ class NavBar extends Component {
               </div>
               <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul className="nav navbar-nav">
+                  <li><Link to="/discover">Discover</Link></li>
                   <li><Link to="/profil">My Movies</Link></li>
                   <li><Link to="/edit">My Profil</Link></li>
                 </ul>
@@ -81,9 +82,10 @@ class NavBar extends Component {
                   <span className="icon-bar"></span>
                 </button>
                 <Link className="navbar-brand" to="/">GMDb</Link>
-              </div>
+                </div>
               <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul className="nav navbar-nav">
+                  <li><Link to="/discover">Discover</Link></li>
                 </ul>
                 <ul className="nav navbar-nav navbar-right">
                     <li><Link to="/login">Log In</Link></li>

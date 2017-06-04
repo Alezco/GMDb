@@ -46,6 +46,17 @@ exports.myMovies = function (userID, done) {
     });
 };
 
+
+exports.updateURL = function (url, userID, done) {
+  console.log('updating url to ' + url);
+  db.connection.query("UPDATE users SET url = ? WHERE id = ?", [url, userID], function(err,rows) {
+      if (err) {
+        done(err, null);
+      }
+      done(null, 'ok');
+    });
+};
+
 exports.favoriteByCriteria = function (userID, properties, done) {
   for (var i = 0; i < properties.length; i++) {
     let criteria = properties[i];

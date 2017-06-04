@@ -24,3 +24,16 @@ exports.getFilmsByID = function(movieID, done) {
       }
     });
 }
+
+exports.getUsers = function(done) {
+  console.log('get users');
+  let filterQuery = 'SELECT * FROM users';
+  db.connection.query(filterQuery, function(err,rows) {
+      if (err) {
+        done(err, null);
+      }
+      if (rows.length) {
+        done(null, JSON.stringify(rows));
+      }
+    });
+}
