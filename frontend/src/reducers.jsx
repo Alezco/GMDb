@@ -15,8 +15,10 @@ const Reducer = function(state, action) {
       return Object.assign({}, state, { user: userObj });
   }
   if (action.type === 'UPDATE_USER') {
-      console.log(action);
-      return Object.assign({}, state, { user: action.user });
+    console.log(action);
+    let userObj = new Object()
+    Object.assign(userObj, action.user);
+    return Object.assign({}, state, { user: userObj });
   }
   if (action.type === 'ADD_FAVORITES_MOVIE_ID') {
     console.log(action);
