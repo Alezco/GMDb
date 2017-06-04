@@ -41,6 +41,14 @@ CREATE TABLE favorites(
   FOREIGN KEY (movieID) REFERENCES movies(id)
 );
 
+
+INSERT INTO users VALUES (NULL, 'Hadrien', 'plop', 'https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAkIAAAAJDZhOTUwYzA3LWU5NzItNDU1ZC04ZDMyLTRkOTU4ZmU0MWYwMQ.jpg');
+INSERT INTO users VALUES (NULL, 'William', 'plop', 'https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAshAAAAJDc0ZGU3YmNjLWQ2MWMtNGRjNi1iZGM4LTNhODUwNmFmNTJiZg.jpg');
+INSERT INTO users VALUES (NULL, 'Benjamin', 'plop', 'https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAUcAAAAJDVlN2ZhOWUzLWIzZGEtNDE4ZC1hMGQzLTllMzIwMmQ2NjViYQ.jpg');
+INSERT INTO users VALUES (NULL, 'Iron man', 'plop', 'https://i.ytimg.com/vi/HrJEk2_5D5s/maxresdefault.jpg');
+INSERT INTO users VALUES (NULL, 'Tony Stark', 'plop', 'https://images.forbes.com/media/2007/12/11/fictional/stark.jpg');
+
+
 INSERT INTO movies VALUES (NULL,'Avatar',2009,'PG-13','18 Dec 2009','162 min','Action, Adventure, Fantasy','James Cameron','James Cameron','Sam Worthington, Zoe Saldana, Sigourney Weaver, Stephen Lang','A paraplegic marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting the world he feels is his home.','English, Spanish','UK, USA','Won 3 Oscars. Another 82 wins & 121 nominations.','https://images-na.ssl-images-amazon.com/images/M/MV5BMTYwOTEwNjAzMl5BMl5BanBnXkFtZTcwODc5MTUwMw@@._V1_SX300.jpg',83,'7.8','930,353','$749,700,000','https://www.youtube.com/embed/5MB3Ea6L-gw');
 INSERT INTO movies VALUES (NULL,'Pirates of the Caribbean: At World\'s End',2007,'PG-13','25 May 2007','169 min','Action, Adventure, Fantasy','Gore Verbinski','Ted Elliott, Terry Rossio, Ted Elliott (characters), Terry Rossio (characters), Stuart Beattie (characters), Jay Wolpert (characters)','Johnny Depp, Geoffrey Rush, Orlando Bloom, Keira Knightley','Captain Barbossa, Will Turner and Elizabeth Swann must sail off the edge of the map, navigate treachery and betrayal, find Jack Sparrow, and make their final alliances for one last decisive battle.','English','USA','Nominated for 2 Oscars. Another 20 wins & 42 nominations.','https://images-na.ssl-images-amazon.com/images/M/MV5BMjIyNjkxNzEyMl5BMl5BanBnXkFtZTYwMjc3MDE3._V1_SX300.jpg',50,'7.1','496,559','$309,404,152.00','https://www.youtube.com/embed/HKSZtp_OGHY');
 INSERT INTO movies VALUES (NULL, 'Spectre',2015,'PG-13','06 Nov 2015','148 min','Action, Adventure, Thriller','Sam Mendes','John Logan (screenplay), Neal Purvis (screenplay), Robert Wade (screenplay), Jez Butterworth (screenplay), John Logan (story), Neal Purvis (story), Robert Wade (story), Ian Fleming (characters)','Daniel Craig, Christoph Waltz, Léa Seydoux, Ralph Fiennes','A cryptic message from Bond\'s past sends him on a trail to uncover a sinister organization. While M battles political forces to keep the secret service alive, Bond peels back the layers of deceit to reveal the terrible truth behind SPECTRE.','English, Spanish, Italian, German, French','UK, USA','Won 1 Oscar. Another 7 wins & 30 nominations.','https://images-na.ssl-images-amazon.com/images/M/MV5BMjM2Nzg4MzkwOF5BMl5BanBnXkFtZTgwNzA0OTE3NjE@._V1_SX300.jpg',60,'6.8','307,106','$208,777,731.00','https://www.youtube.com/embed/kQx_SrKS1sQ');
@@ -137,3 +145,41 @@ INSERT INTO movies VALUES (NULL, 'Guardians of the Galaxy',2014,'PG-13','01 Aug 
 INSERT INTO movies VALUES (NULL, 'Interstellar',2014,'PG-13','07 Nov 2014','169 min','Adventure, Drama, Sci-Fi','Christopher Nolan','Jonathan Nolan, Christopher Nolan','Ellen Burstyn, Matthew McConaughey, Mackenzie Foy, John Lithgow','A team of explorers travel through a wormhole in space in an attempt to ensure humanity\'s survival.','English','USA, UK, Canada, Iceland','Won 1 Oscar. Another 41 wins & 142 nominations.','https://images-na.ssl-images-amazon.com/images/M/MV5BMjIxNTU4MzY4MF5BMl5BanBnXkFtZTgwMzM4ODI3MjE@._V1_SX300.jpg',74,'8.6','1,036,323','$158,737,441','https://www.youtube.com/embed/Rt2LHkSwdPQ');
 INSERT INTO movies VALUES (NULL, 'Inception',2010,'PG-13','16 Jul 2010','148 min','Action, Adventure, Sci-Fi','Christopher Nolan','Christopher Nolan','Leonardo DiCaprio, Joseph Gordon-Levitt, Ellen Page, Tom Hardy','A thief, who steals corporate secrets through use of dream-sharing technology, is given the inverse task of planting an idea into the mind of a CEO.','English, Japanese, French','USA, UK','Won 4 Oscars. Another 146 wins & 197 nominations.','https://images-na.ssl-images-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg',74,'8.8','1,570,807','$292,568,851','https://www.youtube.com/embed/xitHF0IPJSQ');
 INSERT INTO movies VALUES (NULL, 'The Hobbit: An Unexpected Journey',2012,'PG-13','14 Dec 2012','169 min','Adventure, Fantasy','Peter Jackson','Fran Walsh (screenplay), Philippa Boyens (screenplay), Peter Jackson (screenplay), Guillermo del Toro (screenplay), J.R.R. Tolkien (novel)','Ian McKellen, Martin Freeman, Richard Armitage, Ken Stott','A reluctant hobbit, Bilbo Baggins, sets out to the Lonely Mountain with a spirited group of dwarves to reclaim their mountain home - and the gold within it - from the dragon Smaug.','English','USA, New Zealand','Nominated for 3 Oscars. Another 10 wins & 72 nominations.','https://images-na.ssl-images-amazon.com/images/M/MV5BMTcwNTE4MTUxMl5BMl5BanBnXkFtZTcwMDIyODM4OA@@._V1_SX300.jpg',58,'7.9','666,597','$303,001,229','https://www.youtube.com/embed/SZ6WX0EI31Q');
+
+
+
+
+INSERT INTO favorites VALUES (NULL, 1, 3);
+INSERT INTO favorites VALUES (NULL, 1, 6);
+INSERT INTO favorites VALUES (NULL, 1, 9);
+INSERT INTO favorites VALUES (NULL, 1, 12);
+INSERT INTO favorites VALUES (NULL, 1, 15);
+
+INSERT INTO favorites VALUES (NULL, 2, 2);
+INSERT INTO favorites VALUES (NULL, 2, 4);
+INSERT INTO favorites VALUES (NULL, 2, 8);
+INSERT INTO favorites VALUES (NULL, 2, 12);
+INSERT INTO favorites VALUES (NULL, 2, 16);
+INSERT INTO favorites VALUES (NULL, 2, 20);
+INSERT INTO favorites VALUES (NULL, 2, 24);
+
+INSERT INTO favorites VALUES (NULL, 3, 10);
+INSERT INTO favorites VALUES (NULL, 3, 20);
+INSERT INTO favorites VALUES (NULL, 3, 30);
+INSERT INTO favorites VALUES (NULL, 3, 40);
+INSERT INTO favorites VALUES (NULL, 3, 50);
+INSERT INTO favorites VALUES (NULL, 3, 60);
+INSERT INTO favorites VALUES (NULL, 3, 70);
+INSERT INTO favorites VALUES (NULL, 3, 80);
+
+INSERT INTO favorites VALUES (NULL, 4, 10);
+INSERT INTO favorites VALUES (NULL, 4, 20);
+INSERT INTO favorites VALUES (NULL, 4, 30);
+INSERT INTO favorites VALUES (NULL, 4, 40);
+INSERT INTO favorites VALUES (NULL, 4, 50);
+INSERT INTO favorites VALUES (NULL, 4, 60);
+INSERT INTO favorites VALUES (NULL, 4, 70);
+
+INSERT INTO favorites VALUES (NULL, 5, 11);
+INSERT INTO favorites VALUES (NULL, 5, 22);
+INSERT INTO favorites VALUES (NULL, 5, 33);
