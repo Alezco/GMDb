@@ -32,26 +32,6 @@ class Profil extends Component {
     }
   }
 
-  searchByName(name) {
-    console.log(name);
-    if (!name || name === '') {
-      this.state.filteredMovies = this.state.movies;
-    } else {
-      let movies = this.state.movies;
-      let tmp = [];
-      for(let i = 0; i < movies.length; i++) {
-        let movieName = movies[i].Title.toUpperCase();
-        if (movieName.match(name.toUpperCase())) {
-          tmp.push(movies[i]);
-        }
-      }
-      this.setState({
-        movies : this.state.movies,
-        filteredMovies : tmp
-      });
-    }
-  }
-
   render() {
     console.log('UPDATE MODAFUCKING PROFIL');
     console.log(this.props.favorites);
@@ -78,11 +58,6 @@ class Profil extends Component {
                 <div className="page-header">
                   <h1>Hello {this.props.username}, these are your favorites movies</h1>
                   </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-sm-12">
-                <SearchForm movies={rows} onKeyUp={this.searchByName.bind(this)}/>
               </div>
             </div>
             {rows}

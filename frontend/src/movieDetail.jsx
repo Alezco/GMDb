@@ -145,7 +145,7 @@ updateMovieDetail() {
                   />
               </div>
               </div>
-                <Carousel username={this.props.username}/>
+                <Carousel username={this.props.username} />
            </div>
         </div>
      </div>
