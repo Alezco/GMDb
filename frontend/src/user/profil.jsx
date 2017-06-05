@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import {render} from 'react-dom';
 const Redux = require('react-redux');
 const Router = require('react-router');
-import styles from './style/index.css';
-import NavBar from './navBar.jsx';
-import MovieCell from './movieCell.jsx';
-import MovieList from './movieList.jsx';
-import Authentification from './authentification.jsx';
-import NotFound from './notFound.jsx';
-import Footer from './footer.jsx';
-import SearchForm from './searchForm.jsx';
+import styles from '../style/index.css';
+import NavBar from '../global/navBar.jsx';
+import MovieCell from '../movieCell/movieCell.jsx';
+import MovieList from '../home/movieList.jsx';
+import Authentification from '../authentification/authentification.jsx';
+import NotFound from '../global/notFound.jsx';
+import Footer from '../global/footer.jsx';
+import SearchForm from '../home/searchForm.jsx';
 
 class Profil extends Component {
   constructor(props) {

@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import {render} from 'react-dom';
 const Redux =require('react-redux');
 
-import styles from './style/index.css';
-import NavBar from './navBar.jsx';
-import MovieCell from './movieCell.jsx';
+import styles from '../style/index.css';
+import NavBar from '../global/navBar.jsx';
+import MovieCell from '../movieCell/movieCell.jsx';
 import SearchForm from './searchForm.jsx';
 
 class Search extends Component {

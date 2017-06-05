@@ -2,19 +2,19 @@ import React, { Component } from 'react';
 import {render} from 'react-dom';
 const Redux = require('react-redux');
 import { Switch, Route, Router, hashHistory } from 'react-router'
-import styles from './style/index.css';
-import NavBar from './navBar.jsx';
+import styles from '../style/index.css';
+import NavBar from '../global/navBar.jsx';
 import MovieList from './movieList.jsx';
-import Authentification from './authentification.jsx';
-import NotFound from './notFound.jsx';
-import Profil from './profil.jsx';
+import Authentification from '../authentification/authentification.jsx';
+import NotFound from '../global/notFound.jsx';
+import Profil from '../user/profil.jsx';
 import Search from './search.jsx';
-import Footer from './footer.jsx';
-import Loader from './loader.jsx';
-import MovieDetail from './movieDetail.jsx';
-import Edit from './edit.jsx';
-import Discover from './discover.jsx';
-import User from './user.jsx';
+import Footer from '../global/footer.jsx';
+import Loader from '../global/loader.jsx';
+import MovieDetail from '../movieDetail/movieDetail.jsx';
+import Edit from '../user/edit.jsx';
+import Discover from '../user/discover.jsx';
+import User from '../user/user.jsx';
 
 class HomePage extends Component {
   constructor(props) {

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import styles from './style/index.css';
+import styles from '../style/index.css';
 import { withRouter } from 'react-router';
 const Redux = require('react-redux');
-import NavBar from './navBar.jsx';
-import MovieCell from './movieCell.jsx';
-import Footer from './footer.jsx';
+import NavBar from '../global/navBar.jsx';
+import MovieCell from '../movieCell/movieCell.jsx';
+import Footer from '../global/footer.jsx';
 
 class User extends Component {
   constructor(props) {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { Link } from 'react-router';
 const Redux =require('react-redux');
-import styles from './style/index.css';
+import styles from '../style/index.css';
 
 class NavBar extends Component {
   constructor(props) {

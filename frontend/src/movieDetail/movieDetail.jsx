@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 const Redux = require('react-redux');
-import styles from './style/index.css';
+import styles from '../style/index.css';
 import { withRouter } from 'react-router';
-import NavBar from './navBar.jsx';
+import NavBar from '../global/navBar.jsx';
 import Modal from './modal.jsx'
-import Carousel from './carousel.jsx'
+import Carousel from '../carousel/carousel.jsx'
 
 class MovieDetail extends Component {
 

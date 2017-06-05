@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 const Redux = require('react-redux');
 const Router = require('react-router');
-import styles from './style/index.css';
+import styles from '../style/index.css';
 import MyNavItem from './myNavItem.jsx';
-import NavBar from './navBar.jsx';
+import NavBar from '../global/navBar.jsx';
 
 const SET_USER_ID = 'SET_USER_ID';
 

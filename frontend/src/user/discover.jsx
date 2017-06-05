@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {render} from 'react-dom';
 import DiscoverItem from './discoveritem.jsx'
-import NavBar from './navBar.jsx';
+import NavBar from '../global/navBar.jsx';
 
 
 class Discover extends Component {

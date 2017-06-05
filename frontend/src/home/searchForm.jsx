@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {render} from 'react-dom';
 const Redux =require('react-redux');
-import styles from './style/index.css';
+import styles from '../style/index.css';
 
 class SearchForm extends Component {
   constructor(props) {

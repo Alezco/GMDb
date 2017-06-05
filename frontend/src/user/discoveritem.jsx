@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {render} from 'react-dom';
 import {Link} from 'react-router';
-import Carousel from './carousel.jsx';
+import Carousel from '../carousel/carousel.jsx';
 
 
 class DiscoverItem extends Component {
