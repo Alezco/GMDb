@@ -28,7 +28,6 @@ class HomePage extends Component {
   getUserFavorites(userID) {
       let req = new XMLHttpRequest();
       req.withCredentials = true;
-      let self = this;
       req.onreadystatechange = () => {
           if (req.status == 403) {
             console.log("Not Authorized");
@@ -52,7 +51,6 @@ class HomePage extends Component {
   }
 
   componentWillMount() {
-    let self = this;
     let req = new XMLHttpRequest();
     req.withCredentials = true;
     req.onreadystatechange = () => {

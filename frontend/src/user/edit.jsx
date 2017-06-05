@@ -38,7 +38,6 @@ class Edit extends Component {
       }
       let req = new XMLHttpRequest();
       req.withCredentials = true;
-      let self = this;
       let user = this.props.user;
       user.url = this.state.url;
       req.onreadystatechange = () => {

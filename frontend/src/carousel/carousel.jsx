@@ -24,7 +24,7 @@ componentWillMount() {
   req.onreadystatechange = () => {
       if (req.status == 403) {
         console.log("Not Authorized");
-        self.props.router.push('/login');
+        this.props.router.push('/login');
       }
       else {
             console.log("Authorized");
@@ -32,8 +32,8 @@ componentWillMount() {
               let NewMovies = JSON.parse(req.responseText);
               this.setState({
                 movies : NewMovies,
-                active: self.state.active,
-                direction: self.state.direction
+                active: this.state.active,
+                direction: this.state.direction
               });
           }
      }

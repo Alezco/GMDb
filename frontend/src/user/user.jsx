@@ -32,8 +32,8 @@ class User extends Component {
                 console.log("Authorized");
                 if (req.status == 200 && req.readyState == XMLHttpRequest.DONE) {
                   this.setState({
-                    userID : self.state.userID,
-                    userObject : self.state.userObject,
+                    userID : this.state.userID,
+                    userObject : this.state.userObject,
                     favorites : JSON.parse(req.responseText)
                   });
               }
@@ -55,11 +55,11 @@ class User extends Component {
               console.log("Authorized");
               if (req.status == 200 && req.readyState == XMLHttpRequest.DONE) {
                 this.setState({
-                  userID : self.state.userID,
+                  userID : this.state.userID,
                   userObject : JSON.parse(req.responseText)[0],
-                  favorites : self.state.favorites
+                  favorites : this.state.favorites
                 });
-                this.getUserFavorites(self.state.userID);
+                this.getUserFavorites(this.state.userID);
             }
        }
     }

@@ -12,8 +12,6 @@ class MovieCell extends Component {
     this.likeAction = this.likeAction.bind(this);
     this.lockLikeAnimation = false;
 
-    let self = this;
-
     if (!this.props.favorites)
     {
       this.state = {
@@ -60,8 +58,7 @@ class MovieCell extends Component {
   {
     let req = new XMLHttpRequest();
     req.withCredentials = true;
-    let self = this;
-    console.log(self.props);
+    console.log(this.props);
     req.onreadystatechange = () => {
         if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
          console.log("like / unlike action called");
@@ -69,13 +66,13 @@ class MovieCell extends Component {
          if (val.res === "Liked") {
            this.props.dispatch({
               type: 'ADD_FAVORITES_MOVIE_ID',
-              index: self.props.index,
-              item: self.props.movieObject
+              index: this.props.index,
+              item: this.props.movieObject
           });
          } else {
            this.props.dispatch({
               type: 'REMOVE_FAVORITES_MOVIE_ID',
-              item: self.props.movieObject
+              item: this.props.movieObject
            });
          }
          console.log(val);
@@ -87,8 +84,8 @@ class MovieCell extends Component {
     req.send(jsonToSend);
   }
 
-  removeLock(self) {
-    self.lockLikeAnimation = false;
+  removeLock() {
+    this.lockLikeAnimation = false;
     this.WebServiceCall(this.props.movieObject.id);
   }
 
@@ -96,8 +93,7 @@ class MovieCell extends Component {
   {
     if (!this.lockLikeAnimation) {
       this.lockLikeAnimation = true;
-      let self = this;
-      setTimeout(function() { self.removeLock(self) }, 1500);
+      setTimeout(() => { this.removeLock() }, 1500);
     }
     else {
       return;

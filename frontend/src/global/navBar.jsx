@@ -22,7 +22,6 @@ class NavBar extends Component {
 
   handleClick() {
     this.deleteAllCookies();
-    let self = this;
     let req = new XMLHttpRequest();
     req.withCredentials = true;
     req.onreadystatechange = () => {

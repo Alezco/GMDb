@@ -19,7 +19,6 @@ class MovieList extends Component {
   componentWillMount() {
     let req = new XMLHttpRequest();
     req.withCredentials = true;
-    let self = this;
     req.onreadystatechange = () => {
         if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
           this.setState({

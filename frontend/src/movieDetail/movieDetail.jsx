@@ -60,28 +60,27 @@ showModal() {
 updateMovieDetail() {
   let req = new XMLHttpRequest();
   req.withCredentials = true;
-  let self = this;
-  req.onreadystatechange = function() {
+  req.onreadystatechange = () => {
       if (req.status == 403) {
         console.log("Not Authorized");
-        self.props.router.push('/login');
+        this.props.router.push('/login');
       }
       else {
             console.log("Authorized");
             if (req.status == 200 && req.readyState == XMLHttpRequest.DONE) {
               let movie = JSON.parse(req.responseText);
               console.log(movie[0]);
-              self.setState(
+              this.setState(
                 {
-                  movieID : self.state.movieID,
+                  movieID : this.state.movieID,
                   movieObject : movie[0],
-                  modalStyle : self.state.modalStyle
+                  modalStyle : this.state.modalStyle
                 }
               )
           }
      }
   }
-  req.open('GET', 'http://localhost:4242/api/movie/'+self.state.movieID, true);
+  req.open('GET', 'http://localhost:4242/api/movie/'+this.state.movieID, true);
   req.send(null);
 }
 

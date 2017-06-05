@@ -71,7 +71,7 @@ class Authentification extends Component {
          this.props.dispatch({
             type: 'SHOW_STORE'
         });
-        self.getUserFavorites(user.id);
+        this.getUserFavorites(user.id);
         }
     }
     req.open('POST', 'http://localhost:4242/api/logIn', true);

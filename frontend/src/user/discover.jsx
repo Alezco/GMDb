@@ -18,14 +18,13 @@ class Discover extends Component {
   componentWillMount() {
     let req = new XMLHttpRequest();
     req.withCredentials = true;
-    let self = this;
     req.onreadystatechange = () => {
         if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
           console.log(JSON.parse(req.responseText));
           this.setState({
             users : JSON.parse(req.responseText),
-            showDetail : self.state.showDetail,
-            detailID : self.state.detailID
+            showDetail : this.state.showDetail,
+            detailID : this.state.detailID
           });
         }
       }
