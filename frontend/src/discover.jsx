@@ -60,13 +60,8 @@ class Discover extends Component {
                     </div>
                 </div>
               </div>
-
-
               {rows}
-
-
           </div>
-
       </div>
       );
   }
