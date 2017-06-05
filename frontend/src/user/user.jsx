@@ -23,16 +23,15 @@ class User extends Component {
   getUserFavorites(userID) {
       let req = new XMLHttpRequest();
       req.withCredentials = true;
-      let self = this;
-      req.onreadystatechange = function() {
+      req.onreadystatechange = () => {
           if (req.status == 403) {
             console.log("Not Authorized");
-            self.props.router.push('/login');
+            this.props.router.push('/login');
           }
           else {
                 console.log("Authorized");
                 if (req.status == 200 && req.readyState == XMLHttpRequest.DONE) {
-                  self.setState({
+                  this.setState({
                     userID : self.state.userID,
                     userObject : self.state.userObject,
                     favorites : JSON.parse(req.responseText)
@@ -47,21 +46,20 @@ class User extends Component {
   componentWillMount() {
     let req = new XMLHttpRequest();
     req.withCredentials = true;
-    let self = this;
-    req.onreadystatechange = function() {
+    req.onreadystatechange = () => {
         if (req.status == 403) {
           console.log("Not Authorized");
-          self.props.router.push('/login');
+          this.props.router.push('/login');
         }
         else {
               console.log("Authorized");
               if (req.status == 200 && req.readyState == XMLHttpRequest.DONE) {
-                self.setState({
+                this.setState({
                   userID : self.state.userID,
                   userObject : JSON.parse(req.responseText)[0],
                   favorites : self.state.favorites
                 });
-                self.getUserFavorites(self.state.userID);
+                this.getUserFavorites(self.state.userID);
             }
        }
     }

@@ -62,18 +62,18 @@ class MovieCell extends Component {
     req.withCredentials = true;
     let self = this;
     console.log(self.props);
-    req.onreadystatechange = function() {
+    req.onreadystatechange = () => {
         if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
          console.log("like / unlike action called");
          let val = JSON.parse(req.responseText);
          if (val.res === "Liked") {
-           self.props.dispatch({
+           this.props.dispatch({
               type: 'ADD_FAVORITES_MOVIE_ID',
               index: self.props.index,
               item: self.props.movieObject
           });
          } else {
-           self.props.dispatch({
+           this.props.dispatch({
               type: 'REMOVE_FAVORITES_MOVIE_ID',
               item: self.props.movieObject
            });

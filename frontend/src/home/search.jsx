@@ -20,9 +20,9 @@ class Search extends Component {
     let req = new XMLHttpRequest();
     req.withCredentials = true;
     let self = this;
-    req.onreadystatechange = function() {
+    req.onreadystatechange = () => {
       if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
-        self.setState({
+        this.setState({
           movies : JSON.parse(req.responseText),
           filteredMovies : JSON.parse(req.responseText)
         });

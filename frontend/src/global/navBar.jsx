@@ -25,13 +25,13 @@ class NavBar extends Component {
     let self = this;
     let req = new XMLHttpRequest();
     req.withCredentials = true;
-    req.onreadystatechange = function() {
+    req.onreadystatechange = () => {
       if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
-        self.props.dispatch({
+        this.props.dispatch({
            type: 'SET_USER_ID',
            username: -1
         });
-        self.props.dispatch({
+        this.props.dispatch({
            type: 'SHOW_STORE'
         });
       }

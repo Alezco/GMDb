@@ -29,18 +29,18 @@ class HomePage extends Component {
       let req = new XMLHttpRequest();
       req.withCredentials = true;
       let self = this;
-      req.onreadystatechange = function() {
+      req.onreadystatechange = () => {
           if (req.status == 403) {
             console.log("Not Authorized");
-            self.props.router.push('/login');
+            this.props.router.push('/login');
           }
           else {
                 console.log("Authorized");
                 if (req.status == 200 && req.readyState == XMLHttpRequest.DONE) {
-                  self.setState({
+                  this.setState({
                     movies : JSON.parse(req.responseText)
                   });
-                  self.props.dispatch({
+                  this.props.dispatch({
                      type: 'INIT_FAVORITES',
                      favorites: JSON.parse(req.responseText)
                  });
@@ -55,32 +55,32 @@ class HomePage extends Component {
     let self = this;
     let req = new XMLHttpRequest();
     req.withCredentials = true;
-    req.onreadystatechange = function() {
+    req.onreadystatechange = () => {
         if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
           console.log(req.responseText);
           let user = JSON.parse(req.responseText);
           console.log(user.id);
-          self.props.dispatch({
+          this.props.dispatch({
              type: 'SET_USER_ID',
              username: user.id
          });
-         self.props.dispatch({
+         this.props.dispatch({
             type: 'SET_USER_OBJECT',
             user: user
         });
-         self.props.dispatch({
+         this.props.dispatch({
             type: 'SHOW_STORE'
         });
-        self.getUserFavorites(user.id);
+        this.getUserFavorites(user.id);
         console.log("User is authenticated session is active");
         } else {
           if (req.readyState == XMLHttpRequest.DONE && req.status == 403) {
             console.log("User not authenticated session is not active");
-            self.props.dispatch({
+            this.props.dispatch({
                type: 'SET_USER_ID',
                username: -1
            });
-           self.props.dispatch({
+           this.props.dispatch({
               type: 'SHOW_STORE'
           });
         }

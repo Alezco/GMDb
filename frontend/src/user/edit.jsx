@@ -41,9 +41,9 @@ class Edit extends Component {
       let self = this;
       let user = this.props.user;
       user.url = this.state.url;
-      req.onreadystatechange = function() {
+      req.onreadystatechange = () => {
           if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
-            self.props.dispatch({
+            this.props.dispatch({
                type: 'UPDATE_USER',
                user: user
            });

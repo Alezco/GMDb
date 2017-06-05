@@ -53,25 +53,22 @@ class Authentification extends Component {
   checkSignIn() {
     let login = document.getElementById("login").value;
     let password = document.getElementById("password").value;
-    console.log(login);
-    console.log(password);
-    let self = this;
     let req = new XMLHttpRequest();
     req.withCredentials = true;
-    req.onreadystatechange = function() {
+    req.onreadystatechange = () => {
         if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
           let user = JSON.parse(req.responseText);
           console.log("logIn");
           console.log(user);
-          self.props.dispatch({
+          this.props.dispatch({
              type: SET_USER_ID,
              username: user.id
          });
-         self.props.dispatch({
+         this.props.dispatch({
             type: 'SET_USER_OBJECT',
             user: user
         });
-         self.props.dispatch({
+         this.props.dispatch({
             type: 'SHOW_STORE'
         });
         self.getUserFavorites(user.id);
@@ -87,9 +84,6 @@ class Authentification extends Component {
     let login = document.getElementById("login").value;
     let password = document.getElementById("password").value;
     let rePassword = document.getElementById("rePassword").value;
-    console.log(login);
-    console.log(password);
-    console.log(rePassword);
     if (password == rePassword) {
       let req = new XMLHttpRequest();
       req.withCredentials = true;

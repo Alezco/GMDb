@@ -21,8 +21,7 @@ class Carousel extends Component {
 componentWillMount() {
   let req = new XMLHttpRequest();
   req.withCredentials = true;
-  let self = this;
-  req.onreadystatechange = function() {
+  req.onreadystatechange = () => {
       if (req.status == 403) {
         console.log("Not Authorized");
         self.props.router.push('/login');
@@ -31,7 +30,7 @@ componentWillMount() {
             console.log("Authorized");
             if (req.status == 200 && req.readyState == XMLHttpRequest.DONE) {
               let NewMovies = JSON.parse(req.responseText);
-              self.setState({
+              this.setState({
                 movies : NewMovies,
                 active: self.state.active,
                 direction: self.state.direction

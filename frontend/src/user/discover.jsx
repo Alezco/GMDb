@@ -19,10 +19,10 @@ class Discover extends Component {
     let req = new XMLHttpRequest();
     req.withCredentials = true;
     let self = this;
-    req.onreadystatechange = function() {
+    req.onreadystatechange = () => {
         if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
           console.log(JSON.parse(req.responseText));
-          self.setState({
+          this.setState({
             users : JSON.parse(req.responseText),
             showDetail : self.state.showDetail,
             detailID : self.state.detailID
@@ -31,14 +31,6 @@ class Discover extends Component {
       }
       req.open('GET', 'http://localhost:4242/api/users', true);
       req.send(null);
-  }
-
-  showDetailIndex(idDetail) {
-    self.setState({
-      users : JSON.parse(req.responseText),
-      showDetail : true,
-      detailID : idDetail
-    });
   }
 
   render() {

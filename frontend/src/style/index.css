@@ -11,6 +11,10 @@ body {
   font-family: 'Titillium Web', sans-serif;
 }
 
+h4 {
+  color: #ffffff;
+}
+
 a {
   text-decoration: none;
   color: #1ab188;

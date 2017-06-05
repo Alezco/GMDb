@@ -135,7 +135,7 @@ updateMovieDetail() {
               </div>
               <div className="wrapper row">
                 <div className="center-img videoPadding">
-                <p>Trailer of the movie</p>
+                <h3>Trailer of the movie</h3>
                 <iframe
                     allowFullScreen
                     frameBorder="0"
