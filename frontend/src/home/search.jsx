@@ -75,9 +75,7 @@ class Search extends Component {
                 </div>
               </div>
               <div className="row">
-                <div className="col-sm-12">
                   <SearchForm movies={rows} onKeyUp={this.searchByName.bind(this)}/>
-                </div>
               </div>
               {rows}
           </div>
