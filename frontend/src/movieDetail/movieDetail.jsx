@@ -15,6 +15,7 @@ class MovieDetail extends Component {
 
     this.showModal = this.showModal.bind(this);
     this.dismissModal = this.dismissModal.bind(this);
+    this.likeAction = this.likeAction.bind(this);
 
     const { router, params, location, routes } = this.props
 
@@ -65,9 +66,9 @@ class MovieDetail extends Component {
             {
               movieID : this.state.movieID,
               movieObject : movie[0],
-              modalStyle : this.state.modalStyle
+              modalStyle : "none"
             }
-          )
+          );
         }
       }
     }
@@ -75,11 +76,47 @@ class MovieDetail extends Component {
     req.send(null);
   }
 
+  WebServiceCall(movieID)
+  {
+    let req = new XMLHttpRequest();
+    req.withCredentials = true;
+    req.onreadystatechange = () => {
+      if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
+        let val = JSON.parse(req.responseText);
+        if (val.res === "Liked") {
+          this.props.dispatch({
+            type: 'ADD_FAVORITES_MOVIE_ID',
+            index: this.props.index,
+            item: this.state.movieObject
+          });
+        } else {
+          this.props.dispatch({
+            type: 'REMOVE_FAVORITES_MOVIE_ID',
+            item: this.state.movieObject
+          });
+        }
+      }
+    }
+    req.open('POST', 'http://localhost:4242/api/like', true);
+    req.setRequestHeader("Content-Type", "application/json");
+    let jsonToSend = JSON.stringify({"movieID": movieID});
+    req.send(jsonToSend);
+  }
+
+  likeAction()
+  {
+    this.WebServiceCall(this.state.movieObject.id);
+  }
+
   componentWillMount() {
     this.updateMovieDetail();
   }
 
   render() {
+    let style = "btn btn-grey";
+    if (this.props.favorites && this.state.movieObject && this.props.favorites.filter(e => e.id == this.state.movieObject.id).length > 0) {
+      style = "btn btn-yellow";
+    }
     if (!this.state.movieObject) {
       return (<div></div>);
     }
@@ -91,11 +128,27 @@ class MovieDetail extends Component {
           <div className="well well-sm customCard">
             <div className="container-fliud">
               <div className="wrapper row">
+                <div className="details col-md-6">
+                    <h1 className="product-title">{this.state.movieObject.Title}</h1>
+                </div>
+                <div className="details col-md-6">
+                { this.props.username !== -1 ?
+                  <div className="action">
+                    <button className={style} type="button" onClick={this.likeAction}>
+                      <span className="fa fa-star"></span>
+                    </button>
+                  </div>
+                 :
+               <div></div>
+               }
+             </div>
+              </div>
+              <div className="wrapper row">
                 <div className="col-md-6">
                   <img onClick={this.showModal} className="center-img" src={this.state.movieObject.Poster} />
                 </div>
                 <div className="details col-md-6">
-                  <h3 className="product-title">{this.state.movieObject.Title}</h3>
+
                   <p className="product-description">
                     <strong>Plot: </strong>
                     {this.state.movieObject.Plot}
@@ -136,9 +189,8 @@ class MovieDetail extends Component {
                     <strong>Duration: </strong>
                     {this.state.movieObject.Runtime}
                   </p>
-                  <div className="action">
-                    <button className="btn btn-pink" type="button"><span className="fa fa-heart"></span></button>
-                  </div>
+
+
                 </div>
               </div>
               <div className="wrapper row">
