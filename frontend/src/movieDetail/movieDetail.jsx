@@ -22,7 +22,8 @@ class MovieDetail extends Component {
     this.state = {
       movieID : this.props.routeParams.id,
       movieObject : null,
-      modalStyle : "none"
+      modalStyle : "none",
+      style : ""
     }
   }
 
@@ -30,7 +31,8 @@ class MovieDetail extends Component {
     this.setState({
       movieID : NewProps.routeParams.id,
       movieObject : null,
-      modalStyle : "none"
+      modalStyle : "none",
+      style : this.state.style
     }, () => {
       this.updateMovieDetail();
     });
@@ -40,7 +42,8 @@ class MovieDetail extends Component {
     this.setState({
       movieID : this.state.movieID,
       movieObject : this.state.movieObject,
-      modalStyle : "none"
+      modalStyle : "none",
+      style : this.state.style
     });
   }
 
@@ -48,7 +51,8 @@ class MovieDetail extends Component {
     this.setState({
       movieID : this.state.movieID,
       movieObject : this.state.movieObject,
-      modalStyle : "block"
+      modalStyle : "block",
+      style : this.state.style
     });
   }
 
@@ -66,9 +70,11 @@ class MovieDetail extends Component {
             {
               movieID : this.state.movieID,
               movieObject : movie[0],
-              modalStyle : "none"
+              modalStyle : "none",
+              style: this.state.style
             }
           );
+          this.refreshButtonStyle();
         }
       }
     }
@@ -112,11 +118,30 @@ class MovieDetail extends Component {
     this.updateMovieDetail();
   }
 
-  render() {
-    let style = "btn btn-grey";
+  refreshButtonStyle() {
     if (this.props.favorites && this.state.movieObject && this.props.favorites.filter(e => e.id == this.state.movieObject.id).length > 0) {
-      style = "btn btn-yellow";
+      this.setState(
+        {
+          movieID : this.state.movieID,
+          movieObject : this.state.movieObject,
+          modalStyle : this.state.modalStyle,
+          style: "btn btn-yellow"
+        }
+      );
     }
+      else {
+        this.setState(
+          {
+            movieID : this.state.movieID,
+            movieObject : this.state.movieObject,
+            modalStyle : this.state.modalStyle,
+            style: "btn btn-grey"
+          }
+        );
+      }
+    }
+
+  render() {
     if (!this.state.movieObject) {
       return (<div></div>);
     }
@@ -134,7 +159,7 @@ class MovieDetail extends Component {
                 <div className="details col-md-6">
                 { this.props.username !== -1 ?
                   <div className="action">
-                    <button className={style} type="button" onClick={this.likeAction}>
+                    <button className={this.state.style} type="button" onClick={this.likeAction}>
                       <span className="fa fa-star"></span>
                     </button>
                   </div>
