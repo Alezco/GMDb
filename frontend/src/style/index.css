@@ -12,6 +12,7 @@ body {
 }
 
 h4 {
+  text-align: center;
   color: #000000;
 }
 
@@ -97,7 +98,7 @@ a:hover {
 
 h1 {
   text-align: center;
-  color: #ffffff;
+  color: #424242;
   font-weight: 300;
   margin: 0 0 40px;
 }

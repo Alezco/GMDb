@@ -50,30 +50,40 @@ class SearchForm extends Component {
       <div>
         <div className="container">
           <div className="row">
-            <div className="col-xs-8 col-xs-offset-2">
-              <div className="input-group">
-                <div className="input-group-btn search-panel">
-                  <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    <span id="search_concept">Filter by</span>
-                    <span className="caret"></span>
-                  </button>
-                  <ul className="dropdown-menu" role="menu">
-                    <li><a href="#contains">Contains</a></li>
-                    <li><a href="#its_equal">It's equal</a></li>
-                    <li><a href="#greather_than">Greather than</a></li>
-                    <li><a href="#less_than">Less than </a></li>
-                    <li className="divider"></li>
-                    <li><a href="#all">Anything</a></li>
-                  </ul>
+            <div className="col-lg-12 col-lg-offset-3">
+
+              <form className="form-inline">
+
+                <div className="md-form input-group">
+                  <div className="input-group-btn search-panel">
+                    <button type="button" className="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                      <span id="search_concept">Filter by</span>
+                      <span className="caret"></span>
+                    </button>
+                    <ul className="dropdown-menu" role="menu">
+                      <li><a href="#contains">Contains</a></li>
+                      <li><a href="#its_equal">It's equal</a></li>
+                      <li><a href="#greather_than">Greather than</a></li>
+                      <li><a href="#less_than">Less than</a></li>
+                      <li className="divider"></li>
+                      <li><a href="#all">Anything</a></li>
+                    </ul>
+                  </div>
+                  <div className="md-group form-group">
+                    <input type="hidden" name="search_param" value="all" id="search_param" onChange={this.handleChangeFilterType}/>
+                  </div>
+                  <div className="md-group form-group">
+                    <input type="text" className="form-control" name="x" placeholder="Search term..." onChange={this.handleChange} />
+                  </div>
+                  <span className="md-group form-group">
+                    <button className="btn btn-primary" type="button">
+                      <span className="glyphicon glyphicon-search"></span>
+                    </button>
+                  </span>
                 </div>
-                <input type="hidden" name="search_param" value="all" id="search_param" onChange={this.handleChangeFilterType}/>
-                <input type="text" className="form-control" name="x" placeholder="Search term..." onChange={this.handleChange} />
-                <span className="input-group-btn">
-                  <button className="btn btn-default" type="button">
-                    <span className="glyphicon glyphicon-search"></span>
-                  </button>
-                </span>
-              </div>
+
+              </form>
+
             </div>
           </div>
         </div>

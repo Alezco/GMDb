@@ -62,7 +62,6 @@ class MovieList extends Component {
       return(
         <div>
           <NavBar />
-          <title>GMDb Homepage</title>
           <div className="container-fluid">
             <div className="row">
               <div className="col-sm-12">
