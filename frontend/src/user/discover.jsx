@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {render} from 'react-dom';
 import DiscoverItem from './discoveritem.jsx'
 import NavBar from '../global/navBar.jsx';
-
+import Footer from '../global/footer.jsx';
 
 class Discover extends Component {
   constructor(props) {
@@ -52,6 +52,7 @@ class Discover extends Component {
           </div>
           {rows}
         </div>
+        <Footer />
       </div>
     );
   }

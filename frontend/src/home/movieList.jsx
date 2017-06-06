@@ -77,6 +77,7 @@ class MovieList extends Component {
             </div>
             {rows}
           </div>
+          <Footer />
         </div>
       );
     }

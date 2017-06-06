@@ -57,7 +57,7 @@ class NavBar extends Component {
                 <ul className="nav navbar-nav">
                   <li className="nav-item"><Link className="nav-link" to="/discover">Discover</Link></li>
                   <li className="nav-item"><Link to="/profil">My Movies</Link></li>
-                  <li className="nav-item"><Link to="/edit">My Profil</Link></li>
+                  <li className="nav-item"><Link to="/edit">My Profile</Link></li>
                 </ul>
                 <ul className="nav navbar-nav navbar-right">
                   <li className="nav-item"><Link href="" onClick={() => this.handleClick()}>Log out</Link></li>

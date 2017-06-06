@@ -62,8 +62,8 @@ class Edit extends Component {
         <div className="container">
           <div className="well well-sm">
             <div className="row">
-              <div className="col-sm-6 col-md-4">
-                <img src={this.props.user.url} alt="" className="img-rounded img-responsive profil-pic" />
+              <div className="col-sm-4">
+                <img src="https://ukla.org/images/icons/user-icon.svg" alt="" className="img-rounded img-responsive profil-pic" />
               </div>
               <div className="col-sm-6 col-md-8">
                 <h4></h4>
@@ -79,21 +79,18 @@ class Edit extends Component {
                   <br />
                   <br />
                   <div className="row">
-                    <div className="form-group">
-                      <label className="control-label col-sm-2 black">New profile url:</label>
+                    <form className="form-inline">
                       <div className="col-sm-10">
-                        <input onChange={this.handleChange} className="form-control" id="pwd" placeholder="Enter url"></input>
+                        <div className="md-form from-sm">
+                          <input onChange={this.handleChange} className="form-control" id="pwd" placeholder="New profile url"></input>
+                          <button type="submit" onClick={this.updateUrl} className="btn btn-primary">Submit</button>
+                        </div>
                       </div>
-                    </div>
-                    <br />
-                    <div className="form-group">
-                      <div className="col-sm-offset-2 col-sm-10">
-                        <button type="submit" onClick={this.updateUrl} className="btn btn-default">Submit</button>
-                      </div>
-                    </div>
+                    </form>
                   </div>
                 </div>
               </div>
+              <Footer />
             </div>
           );
         }

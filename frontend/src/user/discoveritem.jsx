@@ -21,7 +21,7 @@ class DiscoverItem extends Component {
             <div className="panel-body text-center">
               <div className="userprofile">
                 <div className="userpic">
-                  <img src={this.props.userObject.url} alt="" className="userpicimg"></img>
+                  <img src="https://ukla.org/images/icons/user-icon.svg" alt="" className="userpicimg"></img>
                 </div>
                 <h3 className="username">{this.props.userObject.login}</h3>
                 <p></p>

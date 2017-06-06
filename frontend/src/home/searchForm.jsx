@@ -51,9 +51,7 @@ class SearchForm extends Component {
         <div className="container">
           <div className="row">
             <div className="col-lg-12 col-lg-offset-3">
-
               <form className="form-inline">
-
                 <div className="md-form input-group">
                   <div className="input-group-btn search-panel">
                     <button type="button" className="btn btn-primary dropdown-toggle" data-toggle="dropdown">
@@ -79,9 +77,7 @@ class SearchForm extends Component {
                     </button>
                   </span>
                 </div>
-
               </form>
-
             </div>
           </div>
         </div>
