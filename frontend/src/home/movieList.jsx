@@ -35,8 +35,19 @@ class MovieList extends Component {
     req.send(null);
   }
 
-  searchByName(name) {
-    console.log(this.state);
+  filterByTitle(elt) {
+    return (elt.Title.toUpperCase().match(this.toUpperCase()));
+  }
+
+  filterByActor(elt) {
+    return (elt.Actors.toUpperCase().match(this.toUpperCase()));
+  }
+
+  filterByDirector(elt) {
+    return (elt.Director.toUpperCase().match(this.toUpperCase()));
+  }
+
+  searchByName(name, elt) {
     if (!name || name === '') {
       this.setState({
         movies : this.state.movies,
@@ -45,11 +56,14 @@ class MovieList extends Component {
     } else {
       let movies = this.state.movies;
       let tmp = [];
-      for(let i = 0; i < movies.length; i++) {
-        let movieName = movies[i].Title.toUpperCase();
-        if (movieName.match(name.toUpperCase())) {
-          tmp.push(movies[i]);
-        }
+      if (elt === "Title") {
+        tmp = movies.filter(this.filterByTitle, name);
+      }
+      if (elt === "Actors") {
+        tmp = movies.filter(this.filterByActor, name);
+      }
+      if (elt === "Director") {
+        tmp = movies.filter(this.filterByDirector, name);
       }
       this.setState({
         movies : this.state.movies,

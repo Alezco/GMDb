@@ -28,7 +28,7 @@ class SearchForm extends Component {
 
   handleChange(event) {
     console.log(event.target.value);
-    this.props.onKeyUp(event.target.value);
+    this.props.onKeyUp(event.target.value, this.state.selected);
   }
 
 
