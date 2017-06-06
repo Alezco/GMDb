@@ -21,47 +21,47 @@ class User extends Component {
   }
 
   getUserFavorites(userID) {
-      let req = new XMLHttpRequest();
-      req.withCredentials = true;
-      req.onreadystatechange = () => {
-          if (req.status == 403) {
-            console.log("Not Authorized");
-            this.props.router.push('/login');
-          }
-          else {
-                console.log("Authorized");
-                if (req.status == 200 && req.readyState == XMLHttpRequest.DONE) {
-                  this.setState({
-                    userID : this.state.userID,
-                    userObject : this.state.userObject,
-                    favorites : JSON.parse(req.responseText)
-                  });
-              }
-         }
+    let req = new XMLHttpRequest();
+    req.withCredentials = true;
+    req.onreadystatechange = () => {
+      if (req.status == 403) {
+        console.log("Not Authorized");
+        this.props.router.push('/login');
       }
-      req.open('GET', 'http://localhost:4242/api/favorites/'+userID, true);
-      req.send(null);
+      else {
+        console.log("Authorized");
+        if (req.status == 200 && req.readyState == XMLHttpRequest.DONE) {
+          this.setState({
+            userID : this.state.userID,
+            userObject : this.state.userObject,
+            favorites : JSON.parse(req.responseText)
+          });
+        }
+      }
+    }
+    req.open('GET', 'http://localhost:4242/api/favorites/'+userID, true);
+    req.send(null);
   }
 
   componentWillMount() {
     let req = new XMLHttpRequest();
     req.withCredentials = true;
     req.onreadystatechange = () => {
-        if (req.status == 403) {
-          console.log("Not Authorized");
-          this.props.router.push('/login');
+      if (req.status == 403) {
+        console.log("Not Authorized");
+        this.props.router.push('/login');
+      }
+      else {
+        console.log("Authorized");
+        if (req.status == 200 && req.readyState == XMLHttpRequest.DONE) {
+          this.setState({
+            userID : this.state.userID,
+            userObject : JSON.parse(req.responseText)[0],
+            favorites : this.state.favorites
+          });
+          this.getUserFavorites(this.state.userID);
         }
-        else {
-              console.log("Authorized");
-              if (req.status == 200 && req.readyState == XMLHttpRequest.DONE) {
-                this.setState({
-                  userID : this.state.userID,
-                  userObject : JSON.parse(req.responseText)[0],
-                  favorites : this.state.favorites
-                });
-                this.getUserFavorites(this.state.userID);
-            }
-       }
+      }
     }
     req.open('GET', 'http://localhost:4242/api/user/'+this.state.userID, true);
     req.send(null);
@@ -79,25 +79,24 @@ class User extends Component {
     else {
       let rows = [];
       this.state.favorites.map((row, id) => {
-          row.id = row.movieID;
-          rows.push(<MovieCell key={id} index={id} movieObject={row}/>);
+        row.id = row.movieID;
+        rows.push(<MovieCell key={id} index={id} movieObject={row}/>);
       })
-      console.log(this.state.userObject);
       return(
-      <div>
-        <NavBar />
-        <div className="container-fluid">
+        <div>
+          <NavBar />
+          <div className="container-fluid">
             <div className="row">
               <div className="col-sm-12">
                 <div className="page-header">
                   <h1>These are the favorite movies of {this.state.userObject.login}</h1>
-                  </div>
+                </div>
               </div>
             </div>
             {rows}
+          </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
       );
     }
   }
@@ -110,7 +109,5 @@ const mapStateToProps = (state, router) => {
     user: state.user
   }
 };
-
-
 
 export default withRouter(Redux.connect(mapStateToProps)(User));

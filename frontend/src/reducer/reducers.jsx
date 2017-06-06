@@ -1,27 +1,21 @@
 const Reducer = function(state, action) {
-  console.log("reducer call");
   if (state == undefined) {
     state = { };
   }
-  console.log("reducer " + action.type);
   if (action.type === 'SET_USER_ID') {
-      console.log(action);
-      return Object.assign({}, state, { username: action.username });
+    return Object.assign({}, state, { username: action.username });
   }
   if (action.type === 'SET_USER_OBJECT') {
-      console.log(action);
-      let userObj = new Object()
-      Object.assign(userObj, action.user);
-      return Object.assign({}, state, { user: userObj });
+    let userObj = new Object()
+    Object.assign(userObj, action.user);
+    return Object.assign({}, state, { user: userObj });
   }
   if (action.type === 'UPDATE_USER') {
-    console.log(action);
     let userObj = new Object()
     Object.assign(userObj, action.user);
     return Object.assign({}, state, { user: userObj });
   }
   if (action.type === 'ADD_FAVORITES_MOVIE_ID') {
-    console.log(action);
     let newArray;
     if (!state.favorites) {
       newArray = []
@@ -33,26 +27,22 @@ const Reducer = function(state, action) {
     return Object.assign({}, state, { favorites: newArray });
   }
   if (action.type === 'REMOVE_FAVORITES_MOVIE_ID') {
-    console.log(action);
     let newArray = state.favorites.slice();
     let searchTerm = action.item.Title;
     let index = -1;
     for(var i = 0, len = newArray.length; i < len; i++) {
-        if (newArray[i].Title === searchTerm) {
-            index = i;
-            break;
-        }
+      if (newArray[i].Title === searchTerm) {
+        index = i;
+        break;
+      }
     }
-    console.log("removing " + newArray[index].Title);
     newArray.splice(index, 1);
     return Object.assign({}, state, { favorites: newArray });
   }
   if (action.type === 'INIT_FAVORITES') {
-    console.log(action);
     let newArray = action.favorites
     return Object.assign({}, state, { favorites: newArray });
   }
-  console.log(state);
   return state;
 }
 export default Reducer;

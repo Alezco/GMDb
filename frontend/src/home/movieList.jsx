@@ -20,36 +20,35 @@ class MovieList extends Component {
     let req = new XMLHttpRequest();
     req.withCredentials = true;
     req.onreadystatechange = () => {
-        if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
-          this.setState({
-            movies : JSON.parse(req.responseText),
-            filteredMovies : JSON.parse(req.responseText)
-          });
-        }
-      }
-      req.open('GET', 'http://localhost:4242/api/films', true);
-      req.send(null);
-    }
-
-    searchByName(name) {
-      console.log(name);
-      if (!name || name === '') {
-        this.state.filteredMovies = this.state.movies;
-      } else {
-        let movies = this.state.movies;
-        let tmp = [];
-        for(let i = 0; i < movies.length; i++) {
-          let movieName = movies[i].Title.toUpperCase();
-          if (movieName.match(name.toUpperCase())) {
-            tmp.push(movies[i]);
-          }
-        }
+      if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
         this.setState({
-          movies : this.state.movies,
-          filteredMovies : tmp
+          movies : JSON.parse(req.responseText),
+          filteredMovies : JSON.parse(req.responseText)
         });
       }
     }
+    req.open('GET', 'http://localhost:4242/api/films', true);
+    req.send(null);
+  }
+
+  searchByName(name) {
+    if (!name || name === '') {
+      this.state.filteredMovies = this.state.movies;
+    } else {
+      let movies = this.state.movies;
+      let tmp = [];
+      for(let i = 0; i < movies.length; i++) {
+        let movieName = movies[i].Title.toUpperCase();
+        if (movieName.match(name.toUpperCase())) {
+          tmp.push(movies[i]);
+        }
+      }
+      this.setState({
+        movies : this.state.movies,
+        filteredMovies : tmp
+      });
+    }
+  }
 
   render() {
     if (this.state.filteredMovies == null) {
@@ -58,26 +57,26 @@ class MovieList extends Component {
     else {
       let rows = [];
       this.state.filteredMovies.map((row, index) => {
-          rows.push(<MovieCell key={row.id} index={index} movieObject={row}/>)
+        rows.push(<MovieCell key={row.id} index={index} movieObject={row}/>)
       });
       return(
         <div>
           <NavBar />
           <title>GMDb Homepage</title>
           <div className="container-fluid">
-              <div className="row">
-                <div className="col-sm-12">
-                  <div className="page-header">
-                    <h1>Good movies database</h1>
-                    </div>
+            <div className="row">
+              <div className="col-sm-12">
+                <div className="page-header">
+                  <h1>Good movies database</h1>
                 </div>
               </div>
-              <div className="row">
-                <div className="col-sm-12">
-                  <SearchForm movies={rows} onKeyUp={this.searchByName.bind(this)}/>
-                </div>
+            </div>
+            <div className="row">
+              <div className="col-sm-12">
+                <SearchForm movies={rows} onKeyUp={this.searchByName.bind(this)}/>
               </div>
-              {rows}
+            </div>
+            {rows}
           </div>
         </div>
       );

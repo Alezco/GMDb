@@ -10,89 +10,74 @@ class Carousel extends Component {
     this.rightClick = this.moveRight.bind(this)
     this.leftClick = this.moveLeft.bind(this)
 
-
     this.state = {
       movies : null,
       active: 2,
       direction: ''
     }
-}
+  }
 
-componentWillMount() {
-  let req = new XMLHttpRequest();
-  req.withCredentials = true;
-  req.onreadystatechange = () => {
+  componentWillMount() {
+    let req = new XMLHttpRequest();
+    req.withCredentials = true;
+    req.onreadystatechange = () => {
       if (req.status == 403) {
         console.log("Not Authorized");
         this.props.router.push('/login');
       }
       else {
-            console.log("Authorized");
-            if (req.status == 200 && req.readyState == XMLHttpRequest.DONE) {
-              let NewMovies = JSON.parse(req.responseText);
-              this.setState({
-                movies : NewMovies,
-                active: this.state.active,
-                direction: this.state.direction
-              });
-          }
-     }
-  }
-  req.open('GET', 'http://localhost:4242/api/recommandation/'+this.props.username, true);
-  req.send(null);
-}
-
-
-moveLeft() {
-        let newActive = this.state.active
-        newActive--
-        this.setState({
-            movies : this.state.movies,
-            active: newActive < 0 ? this.state.movies.list.length - 1 : newActive,
-            direction: 'left'
-        })
-    }
-
-    moveRight() {
-        let newActive = this.state.active
-        this.setState({
-            movies : this.state.movies,
-            active: (newActive + 1) % this.state.movies.list.length,
-            direction: 'right'
-        })
-    }
-
-    slickNext() {
-      console.log("get next one");
-    }
-
-    slickPrev() {
-      console.log("get prev one");
-    }
-
-    generateItems() {
-        var items = []
-        var level
-        console.log(this.state.active)
-        for (var i = this.state.active - 2; i < this.state.active + 3; i++) {
-            var index = i
-            if (i < 0) {
-                index = this.state.movies.list.length + i
-            } else if (i >= this.state.movies.list.length) {
-                index = i % this.state.movies.list.length
-            }
-            level = this.state.active - i
-            console.log("key");
-            console.log(this.state.movies.list[index].id);
-            console.log("push");
-            items.push(<div key={this.state.movies.list[index].id}><CarouselItem movieObject={this.state.movies.list[index]}/></div>)
+        console.log("Authorized");
+        if (req.status == 200 && req.readyState == XMLHttpRequest.DONE) {
+          let NewMovies = JSON.parse(req.responseText);
+          this.setState({
+            movies : NewMovies,
+            active: this.state.active,
+            direction: this.state.direction
+          });
         }
-        return items
+      }
     }
+    req.open('GET', 'http://localhost:4242/api/recommandation/'+this.props.username, true);
+    req.send(null);
+  }
+
+
+  moveLeft() {
+    let newActive = this.state.active
+    newActive--
+    this.setState({
+      movies : this.state.movies,
+      active: newActive < 0 ? this.state.movies.list.length - 1 : newActive,
+      direction: 'left'
+    })
+  }
+
+  moveRight() {
+    let newActive = this.state.active
+    this.setState({
+      movies : this.state.movies,
+      active: (newActive + 1) % this.state.movies.list.length,
+      direction: 'right'
+    })
+  }
+
+  generateItems() {
+    var items = []
+    var level
+    for (var i = this.state.active - 2; i < this.state.active + 3; i++) {
+      var index = i
+      if (i < 0) {
+        index = this.state.movies.list.length + i
+      } else if (i >= this.state.movies.list.length) {
+        index = i % this.state.movies.list.length
+      }
+      level = this.state.active - i
+      items.push(<div key={this.state.movies.list[index].id}><CarouselItem movieObject={this.state.movies.list[index]}/></div>)
+    }
+    return items
+  }
 
   render() {
-    console.log("recommanded movies");
-    console.log(this.state.movies);
     if (!this.state.movies) {
       return(<div></div>);
     }
@@ -101,20 +86,20 @@ moveLeft() {
       rows.push(<div key={row.id} style={{'maxWidth': '100px !important'}}><CarouselItem movieObject={row}/></div>)
     });
     let settings = {
-            dots: true,
-            speed: 500,
-            arrows: true,
-            autoplay: true,
-            slidesToShow: 5
-        };
+      dots: true,
+      speed: 500,
+      arrows: true,
+      autoplay: true,
+      slidesToShow: 5
+    };
     return(
       <div>
         {this.state.movies.field}
-      <Slider {...settings}>
-        	{rows}
+        <Slider {...settings}>
+          {rows}
         </Slider>
       </div>
-      );
+    );
   }
 }
 export default Carousel;

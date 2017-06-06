@@ -11,13 +11,13 @@ class CarouselItem extends Component {
     let route = "/detail/"+this.props.movieObject.id
     return(
       <div>
-            <div>
-              <Link to={route}>
-                <img src={this.props.movieObject.Poster} alt="Image" className="img-responsive small-img"/>
-              </Link>
-            </div>
+        <div>
+          <Link to={route}>
+            <img src={this.props.movieObject.Poster} alt="Image" className="img-responsive small-img"/>
+          </Link>
+        </div>
       </div>
-      );
+    );
   }
 }
 

@@ -21,20 +21,15 @@ class Profil extends Component {
   }
 
   componentWillReceiveProps(Newprops) {
-    console.log(Newprops);
-    console.log("component will receive props !");
     if (Newprops.username >= 0) {
     } else {
-      console.log("Not COnnected");
+      console.log("Not connected");
       console.log("No session found");
-      console.log(this.props);
       this.props.router.push('/login');
     }
   }
 
   render() {
-    console.log('UPDATE MODAFUCKING PROFIL');
-    console.log(this.props.favorites);
     if (this.props.favorites == null) {
       return (
         <div>
@@ -46,24 +41,24 @@ class Profil extends Component {
     else {
       let rows = [];
       this.props.favorites.map((row, id) => {
-          row.id = row.movieID;
-          rows.push(<MovieCell key={id} index={id} movieObject={row}/>);
+        row.id = row.movieID;
+        rows.push(<MovieCell key={id} index={id} movieObject={row}/>);
       })
       return(
-      <div>
-        <NavBar />
-        <div className="container-fluid">
+        <div>
+          <NavBar />
+          <div className="container-fluid">
             <div className="row">
               <div className="col-sm-12">
                 <div className="page-header">
                   <h1>Hello {this.props.user.login}, these are your favorites movies</h1>
-                  </div>
+                </div>
               </div>
             </div>
             {rows}
+          </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
       );
     }
   }
@@ -76,7 +71,5 @@ const mapStateToProps = (state, router)  => {
     user: state.user
   };
 }
-
-
 
 export default Redux.connect(mapStateToProps)(Profil);

@@ -12,16 +12,14 @@ class MovieCell extends Component {
     this.likeAction = this.likeAction.bind(this);
     this.lockLikeAnimation = false;
 
-    if (!this.props.favorites)
-    {
+    if (!this.props.favorites) {
       this.state = {
         style : "faveNotLike",
         isLike : false,
         link : "/detail/"+this.props.movieObject.id
       };
     }
-    else
-    {
+    else {
       this.setFavoriteStyle(this.props);
     }
   }
@@ -30,7 +28,6 @@ class MovieCell extends Component {
   {
     for (var i = 0; i < MyProps.favorites.length; i++) {
       if (MyProps.favorites[i].movieID == MyProps.movieObject.id) {
-        console.log("--------> favorite style Applied");
         this.state = {
           style : "faveLike",
           isLike : true,
@@ -58,25 +55,22 @@ class MovieCell extends Component {
   {
     let req = new XMLHttpRequest();
     req.withCredentials = true;
-    console.log(this.props);
     req.onreadystatechange = () => {
-        if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
-         console.log("like / unlike action called");
-         let val = JSON.parse(req.responseText);
-         if (val.res === "Liked") {
-           this.props.dispatch({
-              type: 'ADD_FAVORITES_MOVIE_ID',
-              index: this.props.index,
-              item: this.props.movieObject
+      if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
+        let val = JSON.parse(req.responseText);
+        if (val.res === "Liked") {
+          this.props.dispatch({
+            type: 'ADD_FAVORITES_MOVIE_ID',
+            index: this.props.index,
+            item: this.props.movieObject
           });
-         } else {
-           this.props.dispatch({
-              type: 'REMOVE_FAVORITES_MOVIE_ID',
-              item: this.props.movieObject
-           });
-         }
-         console.log(val);
+        } else {
+          this.props.dispatch({
+            type: 'REMOVE_FAVORITES_MOVIE_ID',
+            item: this.props.movieObject
+          });
         }
+      }
     }
     req.open('POST', 'http://localhost:4242/api/like', true);
     req.setRequestHeader("Content-Type", "application/json");
@@ -100,14 +94,12 @@ class MovieCell extends Component {
     }
 
     if (this.state.isLike) {
-      console.log("XD i unlike it");
       this.setState({
         style : "faveAnimationUnlike faveLike",
         isLike : false,
         link :this.state.link
       });
     } else {
-      console.log("XD i like it");
       this.setState({
         style : "faveAnimationLike faveNotLike",
         isLike : true,
@@ -117,7 +109,6 @@ class MovieCell extends Component {
   }
 
   render() {
-    console.log(this.state.link);
     const divStyle = {
       height : '450px',
     };
@@ -126,32 +117,32 @@ class MovieCell extends Component {
     }
     if (this.props.username < 0) {
       return(
-          <div>
-            <div className="col-sm-6 col-md-3" style={divStyle}>
-              <Link to={this.state.link}>
-              <img className="img-responsive thumbnail" src={this.props.movieObject.Poster} alt=""/>
-                           </Link>
-              <div className="caption">
-                <h4>{this.props.movieObject.Title}</h4>
-              </div>
-            </div>
-          </div>
-        );
-    }
-    return(
         <div>
-            <div className="col-sm-6 col-md-3" style={divStyle}>
-            <div className={this.state.style} onClick={this.likeAction}></div>
+          <div className="col-sm-6 col-md-3" style={divStyle}>
             <Link to={this.state.link}>
               <img className="img-responsive thumbnail" src={this.props.movieObject.Poster} alt=""/>
             </Link>
             <div className="caption">
               <h4>{this.props.movieObject.Title}</h4>
             </div>
-            </div>
+          </div>
         </div>
       );
     }
+    return(
+      <div>
+        <div className="col-sm-6 col-md-3" style={divStyle}>
+          <div className={this.state.style} onClick={this.likeAction}></div>
+          <Link to={this.state.link}>
+            <img className="img-responsive thumbnail" src={this.props.movieObject.Poster} alt=""/>
+          </Link>
+          <div className="caption">
+            <h4>{this.props.movieObject.Title}</h4>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 const mapStateToProps = (state, router)  => {
   return {
@@ -159,7 +150,5 @@ const mapStateToProps = (state, router)  => {
     favorites: state.favorites
   };
 }
-
-
 
 export default Redux.connect(mapStateToProps)(MovieCell);

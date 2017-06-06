@@ -28,26 +28,26 @@ class Authentification extends Component {
   }
 
   getUserFavorites(userID) {
-      let req = new XMLHttpRequest();
-      req.withCredentials = true;
-      req.onreadystatechange = () => {
-          if (req.status == 403) {
-            console.log("Not Authorized");
-            this.props.router.push('/login');
-          }
-          else {
-                console.log("Authorized");
-                if (req.status == 200 && req.readyState == XMLHttpRequest.DONE) {
-                  this.props.dispatch({
-                     type: 'INIT_FAVORITES',
-                     favorites: JSON.parse(req.responseText)
-                 });
-              }
-              this.props.router.push('/profil');
-         }
+    let req = new XMLHttpRequest();
+    req.withCredentials = true;
+    req.onreadystatechange = () => {
+      if (req.status == 403) {
+        console.log("Not Authorized");
+        this.props.router.push('/login');
       }
-      req.open('GET', 'http://localhost:4242/api/favorites/'+userID, true);
-      req.send(null);
+      else {
+        console.log("Authorized");
+        if (req.status == 200 && req.readyState == XMLHttpRequest.DONE) {
+          this.props.dispatch({
+            type: 'INIT_FAVORITES',
+            favorites: JSON.parse(req.responseText)
+          });
+        }
+        this.props.router.push('/profil');
+      }
+    }
+    req.open('GET', 'http://localhost:4242/api/favorites/'+userID, true);
+    req.send(null);
   }
 
   checkSignIn() {
@@ -56,28 +56,27 @@ class Authentification extends Component {
     let req = new XMLHttpRequest();
     req.withCredentials = true;
     req.onreadystatechange = () => {
-        if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
-          let user = JSON.parse(req.responseText);
-          console.log("logIn");
-          console.log(user);
-          this.props.dispatch({
-             type: SET_USER_ID,
-             username: user.id
-         });
-         this.props.dispatch({
-            type: 'SET_USER_OBJECT',
-            user: user
+      if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
+        let user = JSON.parse(req.responseText);
+        console.log("logIn");
+        this.props.dispatch({
+          type: SET_USER_ID,
+          username: user.id
         });
-         this.props.dispatch({
-            type: 'SHOW_STORE'
+        this.props.dispatch({
+          type: 'SET_USER_OBJECT',
+          user: user
+        });
+        this.props.dispatch({
+          type: 'SHOW_STORE'
         });
         this.getUserFavorites(user.id);
-        }
+      }
     }
     req.open('POST', 'http://localhost:4242/api/logIn', true);
-      req.setRequestHeader("Content-Type", "application/json");
-      let jsonToSend = JSON.stringify({"login": login, "pwd": password});
-      req.send(jsonToSend);
+    req.setRequestHeader("Content-Type", "application/json");
+    let jsonToSend = JSON.stringify({"login": login, "pwd": password});
+    req.send(jsonToSend);
   }
 
   checkSignUp() {
@@ -105,11 +104,11 @@ class Authentification extends Component {
     let submitBtn = document.getElementById('submitBtn');
 
     if (this.state.activeIndex === 0) {
-      title.innerHTML = "Enter Your Login Now";
+      title.innerHTML = "Enter your login";
       rePassDiv.style.visibility = "hidden";
     }
     else {
-      title.innerHTML = "Sign Up For Free";
+      title.innerHTML = "Sign Up";
       rePassDiv.style.visibility = "visible";
     }
     this.setState({activeIndex: index});
@@ -120,23 +119,23 @@ class Authentification extends Component {
       <div>
         <NavBar />
         <div className="form">
-            <ul className="tab-group">
-              <MyNavItem content="Sign up" index={0} isActive={this.state.activeIndex===0} onClick={this.handleClick.bind(this)}/>
-              <MyNavItem content="Log In" index={1} isActive={this.state.activeIndex===1} onClick={this.handleClick.bind(this)}/>
-            </ul>
-            <div className="tab-content">
-              <div id="signup">
-                <h1 id="title">Sign Up</h1>
-                <div className="field-wrap">
-                  <input type="text"required placeholder="Login *" id="login"/>
-                </div>
-                <div className="field-wrap">
-                  <input type="password"required placeholder="Password *" id="password"/>
-                </div>
-                <div className="field-wrap" id="rePassDiv">
-                  <input type="password"required placeholder="Repeat Password *" id="rePassword"/>
-                </div>
-                <button id="submitBtn" type="submit" className="button button-block" onClick={this.checkSign.bind(this)}>Get Started</button>
+          <ul className="tab-group">
+            <MyNavItem content="Sign up" index={0} isActive={this.state.activeIndex===0} onClick={this.handleClick.bind(this)}/>
+            <MyNavItem content="Log In" index={1} isActive={this.state.activeIndex===1} onClick={this.handleClick.bind(this)}/>
+          </ul>
+          <div className="tab-content">
+            <div id="signup">
+              <h1 id="title">Sign Up</h1>
+              <div className="field-wrap">
+                <input type="text"required placeholder="Login *" id="login"/>
+              </div>
+              <div className="field-wrap">
+                <input type="password"required placeholder="Password *" id="password"/>
+              </div>
+              <div className="field-wrap" id="rePassDiv">
+                <input type="password"required placeholder="Repeat Password *" id="rePassword"/>
+              </div>
+              <button id="submitBtn" type="submit" className="button button-block" onClick={this.checkSign.bind(this)}>Get Started</button>
             </div>
             <div>
             </div>

@@ -19,17 +19,16 @@ class Discover extends Component {
     let req = new XMLHttpRequest();
     req.withCredentials = true;
     req.onreadystatechange = () => {
-        if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
-          console.log(JSON.parse(req.responseText));
-          this.setState({
-            users : JSON.parse(req.responseText),
-            showDetail : this.state.showDetail,
-            detailID : this.state.detailID
-          });
-        }
+      if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
+        this.setState({
+          users : JSON.parse(req.responseText),
+          showDetail : this.state.showDetail,
+          detailID : this.state.detailID
+        });
       }
-      req.open('GET', 'http://localhost:4242/api/users', true);
-      req.send(null);
+    }
+    req.open('GET', 'http://localhost:4242/api/users', true);
+    req.send(null);
   }
 
   render() {
@@ -38,23 +37,23 @@ class Discover extends Component {
     }
     let rows = [];
     this.state.users.map((row, index) => {
-        rows.push(<DiscoverItem key={row.id} index={index} userObject={row}/>)
+      rows.push(<DiscoverItem key={row.id} index={index} userObject={row}/>)
     });
     return(
       <div>
         <NavBar />
-          <div className="container-fluid">
-              <div className="row">
-                <div className="col-sm-12">
-                  <div className="page-header">
-                    <h1>Good movies database</h1>
-                    </div>
-                </div>
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-sm-12">
+              <div className="page-header">
+                <h1>Good movies database</h1>
               </div>
-              {rows}
+            </div>
           </div>
+          {rows}
+        </div>
       </div>
-      );
+    );
   }
 }
 

@@ -32,7 +32,6 @@ class Search extends Component {
   }
 
   searchByName(name) {
-    console.log(name);
     if (!name || name === '') {
       this.state.filteredMovies = this.state.movies;
     } else {
@@ -56,7 +55,6 @@ class Search extends Component {
       return (<div></div>);
     }
     else {
-      console.log(this.state.filteredMovies);
       let rows = [];
       let count = 0;
       this.state.filteredMovies.map((row, index) => {
@@ -67,17 +65,17 @@ class Search extends Component {
           <NavBar />
           <title>GMDb Homepage</title>
           <div className="container-fluid">
-              <div className="row">
-                <div className="col-sm-12">
-                  <div className="page-header">
-                    <h1>Search your movie</h1>
-                    </div>
+            <div className="row">
+              <div className="col-sm-12">
+                <div className="page-header">
+                  <h1>Search your movie</h1>
                 </div>
               </div>
-              <div className="row">
-                  <SearchForm movies={rows} onKeyUp={this.searchByName.bind(this)}/>
-              </div>
-              {rows}
+            </div>
+            <div className="row">
+              <SearchForm movies={rows} onKeyUp={this.searchByName.bind(this)}/>
+            </div>
+            {rows}
           </div>
         </div>
       );
