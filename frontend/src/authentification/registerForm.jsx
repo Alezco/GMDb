@@ -18,7 +18,8 @@ class RegisterForm extends Component {
     this.state = {
       login: '',
       password: '',
-      rePassword: ''
+      rePassword: '',
+      formError: ''
     }
   }
 
@@ -33,13 +34,12 @@ class RegisterForm extends Component {
       req.setRequestHeader("Content-Type", "application/json");
       let jsonToSend = JSON.stringify({"login": login, "pwd": password});
       req.send(jsonToSend);
+      req.onreadystatechange = () => {
+        this.setState({formError: req.responseText});
+      }
     }
     else {
-      let errorLabel = document.createElement("label");
-      errorLabel.innerHTML = "Password not matching!";
-      errorLabel.innerHTML = password;
-      errorLabel.innerHTML = rePassword;
-      document.getElementById("root").appendChild(errorLabel);
+      this.setState({formError: 'Passwords not matching'});
     }
   }
 
@@ -47,7 +47,8 @@ class RegisterForm extends Component {
     this.setState({
       login: event.target.value,
       password: this.state.password,
-      rePassword: this.state.rePassword
+      rePassword: this.state.rePassword,
+      formError: this.state.formError
     });
   }
 
@@ -55,7 +56,8 @@ class RegisterForm extends Component {
     this.setState({
       login: this.state.login,
       password: event.target.value,
-      rePassword: this.state.rePassword
+      rePassword: this.state.rePassword,
+      formError: this.state.formError
     });
   }
 
@@ -63,11 +65,20 @@ class RegisterForm extends Component {
     this.setState({
       login: this.state.login,
       password: this.state.password,
-      rePassword: event.target.value
+      rePassword: event.target.value,
+      formError: this.state.formError
     });
   }
 
   render() {
+    let error = null;
+    if (this.state.formError) {
+      error = <div>
+        <h4>
+          <span className="badge badge-default">{this.state.formError}</span>
+        </h4>
+      </div>
+    }
     return(
       <div>
         <NavBar />
@@ -79,6 +90,7 @@ class RegisterForm extends Component {
                   <h3>Register</h3>
                   <hr className="mt-2 mb-2"/>
                 </div>
+                {error}
                 <div className="md-form">
                   <i className="fa fa-user prefix"></i>
                   <input type="text" id="form2" className="form-control" placeholder="Login" required onChange={this.handleLogin}/>

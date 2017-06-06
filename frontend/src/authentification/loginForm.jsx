@@ -16,7 +16,8 @@ class LoginForm extends Component {
     this.handlePassword = this.handlePassword.bind(this);
     this.state = {
       login: '',
-      password: ''
+      password: '',
+      formError: ''
     }
   }
 
@@ -25,11 +26,9 @@ class LoginForm extends Component {
     req.withCredentials = true;
     req.onreadystatechange = () => {
       if (req.status == 403) {
-        console.log("Not Authorized");
         this.props.router.push('/login');
       }
       else {
-        console.log("Authorized");
         if (req.status == 200 && req.readyState == XMLHttpRequest.DONE) {
           this.props.dispatch({
             type: 'INIT_FAVORITES',
@@ -51,7 +50,6 @@ class LoginForm extends Component {
     req.onreadystatechange = () => {
       if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
         let user = JSON.parse(req.responseText);
-        console.log("logIn");
         this.props.dispatch({
           type: SET_USER_ID,
           username: user.id
@@ -65,6 +63,7 @@ class LoginForm extends Component {
         });
         this.getUserFavorites(user.id);
       }
+      this.setState({formError: req.responseText});
     }
     req.open('POST', 'http://localhost:4242/api/logIn', true);
     req.setRequestHeader("Content-Type", "application/json");
@@ -75,18 +74,28 @@ class LoginForm extends Component {
   handleLogin(event) {
     this.setState({
       login: event.target.value,
-      password: this.state.password
+      password: this.state.password,
+      formError: this.state.formError
     });
   }
 
   handlePassword(event) {
     this.setState({
       login: this.state.login,
-      password: event.target.value
+      password: event.target.value,
+      formError: this.state.formError
     });
   }
 
   render() {
+    let error = null;
+    if (this.state.formError) {
+      error = <div>
+        <h4>
+          <span className="badge badge-default">{this.state.formError}</span>
+        </h4>
+      </div>
+    }
     return(
       <div>
         <NavBar />
@@ -98,6 +107,7 @@ class LoginForm extends Component {
                     <h3>Login</h3>
                     <hr className="mt-2 mb-2"/>
                   </div>
+                  {error}
                   <div className="md-form">
                     <i className="fa fa-user prefix"></i>
                     <input type="text" id="form2" className="form-control" placeholder="Login" required onChange={this.handleLogin}/>
