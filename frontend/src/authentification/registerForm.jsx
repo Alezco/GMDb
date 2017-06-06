@@ -35,7 +35,12 @@ class RegisterForm extends Component {
       let jsonToSend = JSON.stringify({"login": login, "pwd": password});
       req.send(jsonToSend);
       req.onreadystatechange = () => {
-        this.setState({formError: req.responseText});
+        if (req.status == 200) {
+          this.setState({formError: 'Successfully registered!'});
+        }
+        else {
+          this.setState({formError: req.responseText});
+        }
       }
     }
     else {

@@ -60,7 +60,7 @@ function ensureAuthentificated(req, res, next) {
     return next();
   } else {
     res.statusCode = 403;
-    res.send(JSON.stringify('{ error: User not authenticated }'));
+    res.send(JSON.stringify('User not authenticated'));
   }
 }
 
@@ -95,7 +95,7 @@ app.get('/api/session', function(req, res) {
     res.send(JSON.stringify(req.session.user));
   } else {
     res.statusCode = 403;
-    res.send('{ "error": "User not authentificated" }');
+    res.send('User not authentificated');
   }
 });
 
@@ -208,7 +208,7 @@ app.post('/api/signIn', (req, res) => {
     if (err) {
       console.log(err);
       res.statusCode = 403;
-      res.send('{ error : ' + err + '}');
+      res.send(err);
     }
     console.log(user);
     if (user) {
@@ -239,7 +239,7 @@ app.post('/api/updateURL', (req, res) => {
     if (err) {
       console.log(err);
       res.statusCode = 403;
-      res.send('{ error : ' + err + '}');
+      res.send(err);
     }
     console.log(user);
     if (user) {
@@ -286,7 +286,7 @@ app.post('/api/logIn', (req, res) => {
       if (err) {
         console.log(err);
         res.statusCode = 403;
-        res.send('{ error : '+err+'}');
+        res.send(err);
       }
       console.log(user);
       if (user) {
@@ -502,7 +502,7 @@ app.get('/api/user/:id', (req, res) => {
       if (err) {
         console.log(err);
         res.statusCode = 501;
-        res.send('{ error : ' + err + '}');
+        res.send(err);
       }
       if (user) {
         res.statusCode = 200;
