@@ -37,6 +37,8 @@ class RegisterForm extends Component {
     else {
       let errorLabel = document.createElement("label");
       errorLabel.innerHTML = "Password not matching!";
+      errorLabel.innerHTML = password;
+      errorLabel.innerHTML = rePassword;
       document.getElementById("root").appendChild(errorLabel);
     }
   }
@@ -57,7 +59,7 @@ class RegisterForm extends Component {
     });
   }
 
-  handlePassword(event) {
+  handleRePassword(event) {
     this.setState({
       login: this.state.login,
       password: this.state.password,
