@@ -8,7 +8,6 @@ import MovieList from './movieList.jsx';
 import Authentification from '../authentification/authentification.jsx';
 import NotFound from '../global/notFound.jsx';
 import Profil from '../user/profil.jsx';
-import Search from './search.jsx';
 import Footer from '../global/footer.jsx';
 import Loader from '../global/loader.jsx';
 import MovieDetail from '../movieDetail/movieDetail.jsx';
@@ -91,7 +90,6 @@ class HomePage extends Component {
             <Route exact path='/' component={MovieList} />
             <Route component={Authentification} router={this.props.router.router} path="/login" />
             <Route component={Profil} router={this.props.router.router} path="/profil" />
-            <Route component={Search} router={this.props.router.router} path="/search" />
             <Route component={Edit} router={this.props.router.router} path="/edit" />
             <Route component={Discover} router={this.props.router.router} path="/discover" />
             <Route component={MovieDetail} router={this.props.router.router} path="/detail/:id" />

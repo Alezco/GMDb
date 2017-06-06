@@ -16,10 +16,9 @@ h4 {
   color: #000000;
 }
 
-.height-dropdown {
-  height: 34px;
-  font-size: 15px;
-  font-family: none;
+
+.heightRadio {
+  height: 15px;
 }
 
 a {

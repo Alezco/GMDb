@@ -11,8 +11,12 @@ import SearchForm from './searchForm.jsx';
 class MovieList extends Component {
   constructor(props) {
     super(props);
+
+    this.searchByName = this.searchByName.bind(this);
+
     this.state = {
-      movies : null
+      movies : null,
+      filteredMovies : null
     };
   }
 
@@ -32,8 +36,12 @@ class MovieList extends Component {
   }
 
   searchByName(name) {
+    console.log(this.state);
     if (!name || name === '') {
-      this.state.filteredMovies = this.state.movies;
+      this.setState({
+        movies : this.state.movies,
+        filteredMovies : this.state.movies
+      });
     } else {
       let movies = this.state.movies;
       let tmp = [];
@@ -72,7 +80,7 @@ class MovieList extends Component {
             </div>
             <div className="row">
               <div className="col-sm-12">
-                <SearchForm movies={rows} onKeyUp={this.searchByName.bind(this)}/>
+                <SearchForm movies={rows} onKeyUp={this.searchByName}/>
               </div>
             </div>
             {rows}
