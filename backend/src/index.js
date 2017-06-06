@@ -12,7 +12,7 @@ const user = require('./user');
 const crypto = require('crypto');
 const app = express();
 
-const properties = ["Year", "Rated", "Genre", "Director", "Actors", "Language", "imdbRating"];
+const properties = ["Year", "Rated", "Genre", "Director", "Language", "imdbRating"];
 const PORT = 4242;
 
 // DODGE CROS

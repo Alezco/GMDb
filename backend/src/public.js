@@ -14,8 +14,8 @@ exports.getFilms = function(done) {
 
 exports.getFilmsByID = function(movieID, done) {
   console.log('Get movies filtered by ' + movieID);
-  let filterQuery = 'SELECT * FROM movies WHERE id = \''+movieID+'\'';
-  db.connection.query(filterQuery, function(err,rows) {
+  let filterQuery = 'SELECT * FROM movies WHERE id = ?';
+  db.connection.query(filterQuery,[movieID], function(err,rows) {
     if (err) {
       done(err, null);
     }
@@ -40,8 +40,8 @@ exports.getUsers = function(done) {
 
 exports.getUserByID = function(userID, done) {
   console.log('Get user with id ' + userID);
-  let filterQuery = 'SELECT * FROM users WHERE id = \''+userID+'\'';
-  db.connection.query(filterQuery, function(err,rows) {
+  let filterQuery = 'SELECT * FROM users WHERE id = ?';
+  db.connection.query(filterQuery, [userID], function(err,rows) {
     if (err) {
       done(err, null);
     }

@@ -2,14 +2,14 @@ const db = require('./db.js');
 
 exports.likeMovie = function (movieID, userID, done) {
   console.log('User ' + userID + ' liked the movie ' + movieID);
-  db.connection.query("SELECT * FROM favorites WHERE userID = '" + userID + "' AND movieID = '" + movieID + "'", function(err,rows) {
+  db.connection.query("SELECT * FROM favorites WHERE userID = ? AND movieID = ?", [userID, movieID], function(err,rows) {
     if (err) {
       done(err, false);
     }
     if (rows.length) {
-      var insertQuery = "DELETE FROM favorites where userID = '" + userID + "' AND movieID = '" + movieID + "'";
+      var insertQuery = "DELETE FROM favorites where userID = ? AND movieID = ?";
       console.log(insertQuery);
-      db.connection.query(insertQuery,function(err,rows){
+      db.connection.query(insertQuery,[userID, movieID],function(err,rows){
         if (err) {
           done(err, false);
         } else {
@@ -18,9 +18,9 @@ exports.likeMovie = function (movieID, userID, done) {
         }
       });
     } else {
-      var insertQuery = "INSERT INTO favorites ( userID, movieID ) values ('" + userID + "','" + movieID + "')";
+      var insertQuery = "INSERT INTO favorites ( userID, movieID ) values (?,?)";
       console.log(insertQuery);
-      db.connection.query(insertQuery,function(err,rows){
+      db.connection.query(insertQuery, [userID, movieID], function(err,rows){
         if (err) {
           done(err, false);
         } else {
@@ -34,7 +34,7 @@ exports.likeMovie = function (movieID, userID, done) {
 
 exports.myMovies = function (userID, done) {
   console.log('User ' + userID + 'wants to see his favorites movies');
-  db.connection.query("SELECT * FROM movies JOIN favorites ON favorites.movieID = movies.id WHERE userID = '" + userID + "'", function(err,rows) {
+  db.connection.query("SELECT * FROM movies JOIN favorites ON favorites.movieID = movies.id WHERE userID = ?", [userID], function(err,rows) {
     if (err) {
       done(err, null);
     }
@@ -63,11 +63,11 @@ exports.favoriteByCriteria = function (userID, properties, done) {
     console.log('User ' + userID + 'wants to see recommandation based on ' + criteria);
     db.connection.query("select * from movies" +
     " JOIN favorites on favorites.movieID = movies.id" +
-    " where userID = '" + userID + "'", function(err, rowsFavorites) {
+    " where userID = ?", [userID],function(err, rowsFavorites) {
       db.connection.query("SELECT COUNT("+criteria+") AS " + criteria + ", movies." + criteria + " FROM movies" +
       " JOIN favorites ON favorites.movieID = movies.id" +
-      " WHERE userID = '" + userID + "'" +
-      " GROUP BY " + criteria, function(err,rows) {
+      " WHERE userID = ?" +
+      " GROUP BY " + criteria, [userID] ,function(err,rows) {
         if (err) {
           console.log(err);
         }

@@ -3,7 +3,7 @@ const crypto = require('crypto');
 
 exports.registerUser = function (login, password, done) {
   console.log('Registering new user ' + login);
-  db.connection.query("SELECT * FROM users WHERE login = '" + login + "'", function (err,rows){
+  db.connection.query("SELECT * FROM users WHERE login = ?", [login], function (err,rows){
     var newUser = null;
     if (err) {
       done(err, newUser);
@@ -14,10 +14,9 @@ exports.registerUser = function (login, password, done) {
       var newUserMysql = new Object();
       newUserMysql.login    = login;
       newUserMysql.password = password;
-      var insertQuery = "INSERT INTO users ( login, password, url ) values ('" + login + "','"
-      + password + "', 'https://ukla.org/images/icons/user-icon.svg')";
+      var insertQuery = "INSERT INTO users ( login, password, url ) values (?,?, 'https://ukla.org/images/icons/user-icon.svg')";
       console.log(insertQuery);
-      db.connection.query(insertQuery, function (err, rows) {
+      db.connection.query(insertQuery, [login, password], function (err, rows) {
         if (err) {
           console.log(err);
         }
@@ -32,7 +31,7 @@ exports.registerUser = function (login, password, done) {
 
 exports.logUser = function (login, password, done) {
   console.log('Login user ' + login);
-  db.connection.query("SELECT * FROM users WHERE login = '" + login + "'", function (err, rows){
+  db.connection.query("SELECT * FROM users WHERE login = ?", [login], function (err, rows){
     if (err) {
       return done(err, null);
     }
