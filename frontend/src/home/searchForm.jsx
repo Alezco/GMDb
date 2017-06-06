@@ -11,10 +11,8 @@ class SearchForm extends Component {
     this.handleChangeFilterType = this.handleChangeFilterType.bind(this);
     this.handleChange = this.handleChange.bind(this);
 
-<<<<<<< 1ef45e3df6b8318e114b36f72faf4bf2c792b513
-    this.state = {
-      searchTxt : null
-    };
+
+    this.state = {value: 'coconut'};
   }
 
   searchByName() {
@@ -26,9 +24,6 @@ class SearchForm extends Component {
     else {
       this.props.onKeyUp(null);
     }
-=======
-    this.state = {value: 'coconut'};
->>>>>>> Improve search bar
   }
 
   // TODO

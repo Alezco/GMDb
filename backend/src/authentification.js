@@ -14,7 +14,7 @@ exports.registerUser = function (login, password, done) {
       newUserMysql.login    = login;
       newUserMysql.password = password;
       var insertQuery = "INSERT INTO users ( login, password, url ) values ('" + login + "','"
-      + password + "', 'http://blogs.plos.org/thepanicvirus/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png')";
+      + password + "', 'https://ukla.org/images/icons/user-icon.svg')";
       console.log(insertQuery);
       db.connection.query(insertQuery, function (err, rows) {
         if (err) {

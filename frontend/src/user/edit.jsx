@@ -63,7 +63,7 @@ class Edit extends Component {
           <div className="well well-sm">
             <div className="row">
               <div className="col-sm-4">
-                <img src="https://ukla.org/images/icons/user-icon.svg" alt="" className="img-rounded img-responsive profil-pic" />
+                <img src={this.props.user.url} alt="" className="img-rounded img-responsive profil-pic" />
               </div>
               <div className="col-sm-6 col-md-8">
                 <h4></h4>
