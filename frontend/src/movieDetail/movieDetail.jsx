@@ -47,7 +47,7 @@ class MovieDetail extends Component {
       movieID : this.state.movieID,
       movieObject : this.state.movieObject,
       modalStyle : "block"
-    }, () => { console.log("modal style " + this.state.modalStyle) });
+    });
   }
 
   updateMovieDetail() {
@@ -62,7 +62,6 @@ class MovieDetail extends Component {
         console.log("Authorized");
         if (req.status == 200 && req.readyState == XMLHttpRequest.DONE) {
           let movie = JSON.parse(req.responseText);
-          console.log(movie[0]);
           this.setState(
             {
               movieID : this.state.movieID,
@@ -98,34 +97,54 @@ class MovieDetail extends Component {
                 </div>
                 <div className="details col-md-6">
                   <h3 className="product-title">{this.state.movieObject.Title}</h3>
-                  <div className="rating">
-                    <div className="stars">
-                      <span className="fa fa-star checked"></span>
-                      <span className="fa fa-star checked"></span>
-                      <span className="fa fa-star checked"></span>
-                      <span className="fa fa-star"></span>
-                      <span className="fa fa-star"></span>
-                    </div>
-                    <span className="review-no">41 reviews</span>
-                  </div>
-                  <p className="product-description">Suspendisse quos? Tempus cras iure temporibus? Eu laudantium cubilia sem sem! Repudiandae et! Massa senectus enim minim sociosqu delectus posuere.</p>
-                  <h4 className="price">current price: <span>$ 299</span></h4>
-                  <p className="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
-                  <h5 className="sizes">sizes:
-                    <span className="size" data-toggle="tooltip" title="small">s</span>
-                    <span className="size" data-toggle="tooltip" title="medium">m</span>
-                    <span className="size" data-toggle="tooltip" title="large">l</span>
-                    <span className="size" data-toggle="tooltip" title="xtra large">xl</span>
-                  </h5>
+                  <p className="product-description">
+                    <strong>Plot: </strong>
+                    {this.state.movieObject.Plot}
+                  </p>
+                  <p className="product-description">
+                    <strong>Actors: </strong>
+                    {this.state.movieObject.Actors}
+                  </p>
+                  <p className="product-description">
+                    <strong>Awards: </strong>
+                    {this.state.movieObject.Awards}
+                  </p>
+                  <p className="product-description">
+                    <strong>Country: </strong>
+                    {this.state.movieObject.Country}
+                  </p>
+                  <p className="product-description">
+                    <strong>Director: </strong>
+                    {this.state.movieObject.Director}
+                  </p>
+                  <p className="product-description">
+                    <strong>Genre: </strong>
+                    {this.state.movieObject.Genre}
+                  </p>
+                  <p className="product-description">
+                    <strong>Language: </strong>
+                    {this.state.movieObject.Language}
+                  </p>
+                  <p className="product-description">
+                    <strong>Metascore: </strong>
+                    {this.state.movieObject.Metascore}
+                  </p>
+                  <p className="product-description">
+                    <strong>Released: </strong>
+                    {this.state.movieObject.Released}
+                  </p>
+                  <p className="product-description">
+                    <strong>Duration: </strong>
+                    {this.state.movieObject.Runtime}
+                  </p>
                   <div className="action">
-                    <button className="add-to-cart btn btn-default" type="button">add to cart</button>
-                    <button className="like btn btn-default" type="button"><span className="fa fa-heart"></span></button>
+                    <button className="btn btn-pink" type="button"><span className="fa fa-heart"></span></button>
                   </div>
                 </div>
               </div>
               <div className="wrapper row">
                 <div className="center-img videoPadding">
-                  <h3>Trailer of the movie</h3>
+                  <h3>Movie trailer</h3>
                   <iframe
                     allowFullScreen
                     frameBorder="0"

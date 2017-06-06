@@ -57,17 +57,15 @@ class SearchForm extends Component {
                 <div className="md-form input-group">
                   <div className="input-group-btn search-panel">
                     <button type="button" className="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                      <span id="search_concept">Filter by</span>
+                      <span id="search_concept">Filter by </span>
                       <span className="caret"></span>
                     </button>
-                    <ul className="dropdown-menu" role="menu">
-                      <li><a href="#contains">Contains</a></li>
-                      <li><a href="#its_equal">It's equal</a></li>
-                      <li><a href="#greather_than">Greather than</a></li>
-                      <li><a href="#less_than">Less than</a></li>
-                      <li className="divider"></li>
-                      <li><a href="#all">Anything</a></li>
-                    </ul>
+                    <div className="dropdown-menu" role="menu">
+                      <a className="dropdown-item" href="#movie">Movie</a>
+                      <a className="dropdown-item" href="#producer">Producer</a>
+                      <a className="dropdown-item" href="#director">Director</a>
+                      <a className="dropdown-item" href="#section">Section</a>
+                    </div>
                   </div>
                   <div className="md-group form-group">
                     <input type="hidden" name="search_param" value="all" id="search_param" onChange={this.handleChangeFilterType}/>

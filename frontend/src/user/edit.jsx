@@ -80,7 +80,7 @@ class Edit extends Component {
                   <br />
                   <div className="row">
                     <div className="form-group">
-                      <label className="control-label col-sm-2 black">New profil url:</label>
+                      <label className="control-label col-sm-2 black">New profile url:</label>
                       <div className="col-sm-10">
                         <input onChange={this.handleChange} className="form-control" id="pwd" placeholder="Enter url"></input>
                       </div>

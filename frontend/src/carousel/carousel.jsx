@@ -41,7 +41,6 @@ class Carousel extends Component {
     req.send(null);
   }
 
-
   moveLeft() {
     let newActive = this.state.active
     newActive--
