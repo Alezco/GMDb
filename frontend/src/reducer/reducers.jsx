@@ -10,6 +10,7 @@ const Reducer = function(state, action) {
   }
   if (action.type === 'SET_USER_OBJECT') {
     let userObj = new Object()
+    console.log(action.user);
     Object.assign(userObj, action.user);
     return Object.assign({}, state, { user: userObj });
   }

@@ -1,4 +1,5 @@
 const db = require('./db.js');
+const crypto = require('crypto');
 
 exports.registerUser = function (login, password, done) {
   console.log('Registering new user ' + login);
@@ -38,7 +39,7 @@ exports.logUser = function (login, password, done) {
     if (!rows.length) {
       return done('No user matching', null);
     }
-    if (!(rows[0].password == password)) {
+    if (!(rows[0].password == crypto.createHash('md5').update(password).digest("hex"))) {
       return done('Password mismatch', null);
     }
     console.log('All good');

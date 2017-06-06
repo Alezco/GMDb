@@ -9,7 +9,7 @@ const db = require('./db.js');
 const auth = require('./authentification');
 const public = require('./public');
 const user = require('./user');
-
+const crypto = require('crypto');
 const app = express();
 
 const properties = ["Year", "Rated", "Genre", "Director", "Actors", "Language", "imdbRating"];
@@ -202,7 +202,9 @@ app.post('/api/logOut', function(req, res) {
 *     }
 */
 app.post('/api/signIn', (req, res) => {
-  var newUser = auth.registerUser(req.body.login, req.body.pwd, function(err, user) {
+  console.log(req.body.pwd);
+  console.log(crypto.createHash('md5').update(req.body.pwd).digest("hex"));
+  var newUser = auth.registerUser(req.body.login, crypto.createHash('md5').update(req.body.pwd).digest("hex"), function(err, user) {
     if (err) {
       console.log(err);
       res.statusCode = 403;
@@ -210,6 +212,7 @@ app.post('/api/signIn', (req, res) => {
     }
     console.log(user);
     if (user) {
+      delete user.password;
       res.statusCode = 200;
       res.send(JSON.stringify(user));
     }
@@ -240,6 +243,7 @@ app.post('/api/updateURL', (req, res) => {
     }
     console.log(user);
     if (user) {
+      delete user.password;
       res.statusCode = 200;
       res.send(JSON.stringify(user));
     }
@@ -286,6 +290,7 @@ app.post('/api/logIn', (req, res) => {
       }
       console.log(user);
       if (user) {
+        delete user.password;
         console.log("Next is session id INIT can not be null");
         console.log(user.id);
         sess.user = user;

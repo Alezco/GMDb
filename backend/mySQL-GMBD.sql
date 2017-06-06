@@ -42,11 +42,11 @@ CREATE TABLE favorites(
 );
 
 
-INSERT INTO users VALUES (NULL, 'Hadrien', 'plop', 'https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAkIAAAAJDZhOTUwYzA3LWU5NzItNDU1ZC04ZDMyLTRkOTU4ZmU0MWYwMQ.jpg');
-INSERT INTO users VALUES (NULL, 'William', 'plop', 'https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAshAAAAJDc0ZGU3YmNjLWQ2MWMtNGRjNi1iZGM4LTNhODUwNmFmNTJiZg.jpg');
-INSERT INTO users VALUES (NULL, 'Benjamin', 'plop', 'https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAUcAAAAJDVlN2ZhOWUzLWIzZGEtNDE4ZC1hMGQzLTllMzIwMmQ2NjViYQ.jpg');
-INSERT INTO users VALUES (NULL, 'Iron man', 'plop', 'https://i.ytimg.com/vi/HrJEk2_5D5s/maxresdefault.jpg');
-INSERT INTO users VALUES (NULL, 'Tony Stark', 'plop', 'https://images.forbes.com/media/2007/12/11/fictional/stark.jpg');
+INSERT INTO users VALUES (NULL, 'Hadrien', '64a4e8faed1a1aa0bf8bf0fc84938d25', 'https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAkIAAAAJDZhOTUwYzA3LWU5NzItNDU1ZC04ZDMyLTRkOTU4ZmU0MWYwMQ.jpg');
+INSERT INTO users VALUES (NULL, 'William', '64a4e8faed1a1aa0bf8bf0fc84938d25', 'https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAshAAAAJDc0ZGU3YmNjLWQ2MWMtNGRjNi1iZGM4LTNhODUwNmFmNTJiZg.jpg');
+INSERT INTO users VALUES (NULL, 'Benjamin', '64a4e8faed1a1aa0bf8bf0fc84938d25', 'https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAUcAAAAJDVlN2ZhOWUzLWIzZGEtNDE4ZC1hMGQzLTllMzIwMmQ2NjViYQ.jpg');
+INSERT INTO users VALUES (NULL, 'Iron man', '64a4e8faed1a1aa0bf8bf0fc84938d25', 'https://i.ytimg.com/vi/HrJEk2_5D5s/maxresdefault.jpg');
+INSERT INTO users VALUES (NULL, 'Tony Stark', '64a4e8faed1a1aa0bf8bf0fc84938d25', 'https://images.forbes.com/media/2007/12/11/fictional/stark.jpg');
 
 
 INSERT INTO movies VALUES (NULL,'Avatar',2009,'PG-13','18 Dec 2009','162 min','Action, Adventure, Fantasy','James Cameron','James Cameron','Sam Worthington, Zoe Saldana, Sigourney Weaver, Stephen Lang','A paraplegic marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting the world he feels is his home.','English, Spanish','UK, USA','Won 3 Oscars. Another 82 wins & 121 nominations.','https://images-na.ssl-images-amazon.com/images/M/MV5BMTYwOTEwNjAzMl5BMl5BanBnXkFtZTcwODc5MTUwMw@@._V1_SX300.jpg',83,'7.8','930,353','$749,700,000','https://www.youtube.com/embed/5MB3Ea6L-gw');
