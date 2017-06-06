@@ -11,9 +11,7 @@ import SearchForm from './searchForm.jsx';
 class MovieList extends Component {
   constructor(props) {
     super(props);
-
     this.searchByName = this.searchByName.bind(this);
-
     this.state = {
       movies : null,
       filteredMovies : null

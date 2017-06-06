@@ -92,11 +92,15 @@ class Carousel extends Component {
       slidesToShow: 5
     };
     return(
-      <div>
+      <div className="customCarousel">
         {this.state.movies.field}
+        <br/>
+        <br/>
         <Slider {...settings}>
           {rows}
         </Slider>
+        <br/>
+        <br/>
       </div>
     );
   }

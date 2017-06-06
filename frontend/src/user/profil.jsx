@@ -22,8 +22,6 @@ class Profil extends Component {
   componentWillReceiveProps(Newprops) {
     if (Newprops.username >= 0) {
     } else {
-      console.log("Not connected");
-      console.log("No session found");
       this.props.router.push('/login');
     }
   }

@@ -25,11 +25,9 @@ class User extends Component {
     req.withCredentials = true;
     req.onreadystatechange = () => {
       if (req.status == 403) {
-        console.log("Not Authorized");
         this.props.router.push('/login');
       }
       else {
-        console.log("Authorized");
         if (req.status == 200 && req.readyState == XMLHttpRequest.DONE) {
           this.setState({
             userID : this.state.userID,
@@ -48,11 +46,9 @@ class User extends Component {
     req.withCredentials = true;
     req.onreadystatechange = () => {
       if (req.status == 403) {
-        console.log("Not Authorized");
         this.props.router.push('/login');
       }
       else {
-        console.log("Authorized");
         if (req.status == 200 && req.readyState == XMLHttpRequest.DONE) {
           this.setState({
             userID : this.state.userID,

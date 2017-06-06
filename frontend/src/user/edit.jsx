@@ -27,7 +27,6 @@ class Edit extends Component {
 
   updateUrl() {
     if (!this.checkURL(this.state.url)) {
-      console.log("Url is not valid");
       return;
     }
     let req = new XMLHttpRequest();
@@ -66,45 +65,35 @@ class Edit extends Component {
                 <img src={this.props.user.url} alt="" className="img-rounded img-responsive profil-pic" />
               </div>
               <div className="col-sm-6 col-md-8">
-                <h4></h4>
-                <p>
-                  <i className="glyphicon glyphicon-user"></i>{this.props.user.login}
-                    <br />
-                    <i className="glyphicon glyphicon-gift"></i>{favNumber}
-                      <br />
-                      <i className="glyphicon glyphicon-globe"></i>{this.props.user.url}
-                      </p>
-                    </div>
-                  </div>
-                  <br />
-                  <br />
-                  <div className="row">
-                    <form className="form-inline">
-                      <div className="col-sm-10">
-                        <div className="md-form from-sm">
-                          <input onChange={this.handleChange} className="form-control" id="pwd" placeholder="New profile url"></input>
-                          <button type="submit" onClick={this.updateUrl} className="btn btn-primary">Submit</button>
-                        </div>
+                <h3><i className="fa fa-user"></i> {this.props.user.login}</h3>
+                <h3><i className="fa fa-star"></i> {favNumber}</h3>
+                <h3><i className="fa fa-globe"></i> {this.props.user.url}</h3>
+                <div className="row">
+                  <form className="form-inline">
+                    <div className="col-sm-10">
+                      <div className="md-form from-sm">
+                        <input onChange={this.handleChange} className="form-control" id="pwd" placeholder="New profile url"></input>
+                        <button type="submit" onClick={this.updateUrl} className="btn btn-primary">Submit</button>
                       </div>
-                    </form>
-                  </div>
+                    </div>
+                  </form>
                 </div>
               </div>
-              <Footer />
             </div>
-          );
-        }
-      }
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+}
 
+const mapStateToProps = (state, router) => {
+  return {
+    username: state.username,
+    favorites : state.favorites,
+    user : state.user
+  }
+};
 
-      const mapStateToProps = (state, router) => {
-        return {
-          username: state.username,
-          favorites : state.favorites,
-          user : state.user
-        }
-      };
-
-
-
-      export default Redux.connect(mapStateToProps)(Edit);
+export default Redux.connect(mapStateToProps)(Edit);

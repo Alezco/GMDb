@@ -43,7 +43,6 @@ class MovieCell extends Component {
     };
   }
 
-
   componentWillReceiveProps(Newprops) {
     if (!Newprops.favorites) {
       return;
