@@ -48,13 +48,15 @@ app.use(session({
     httpOnly: false
   }
 }));
+
 // Use application-level middleware for common functionality, including
 // logging, parsing, and session handling.
 app.use(require('body-parser').urlencoded({ extended: true }));
 
+
+// Function ensure that user is connected
 function ensureAuthentificated(req, res, next) {
   if (req.session.user) {
-    console.log(next);
     return next();
   } else {
     res.statusCode = 403;
@@ -62,6 +64,12 @@ function ensureAuthentificated(req, res, next) {
   }
 }
 
+/**
+* @api {get} / Entry point
+* @apiName /
+* @apiGroup All
+*
+*/
 app.get('/', function(req, res) {
   sess = req.session;
   if (sess.email) {
@@ -71,6 +79,16 @@ app.get('/', function(req, res) {
   }
 });
 
+/**
+* @api {get} /api/session Session
+* @apiName session
+* @apiGroup All
+*
+* @apiDescription
+* Allow to retreive user session info
+*
+*
+*/
 app.get('/api/session', function(req, res) {
   if (req.session.user) {
     res.statusCode = 200;
@@ -81,6 +99,16 @@ app.get('/api/session', function(req, res) {
   }
 });
 
+
+/**
+* @api {get} /api/movie/:id Movie by id
+* @apiGroup Movies
+*
+* @apiParam {int} id
+*
+* @apiDescription
+* Get movie detail by id
+*/
 app.get('/api/movie/:id', function(req, res) {
   if (!req.params.id) {
     res.statusCode = 400;
@@ -102,6 +130,15 @@ app.get('/api/movie/:id', function(req, res) {
   }
 });
 
+/**
+* @api {get} /api/recommandation/:id Recommandation
+* @apiGroup User
+*
+* @apiParam {int} id
+*
+* @apiDescription
+* Get recommandation for a specific userID
+*/
 app.get('/api/recommandation/:id', (req, res) => {
   console.log("Requesting users recommandation");
   if (!req.params.id) {
@@ -125,6 +162,13 @@ app.get('/api/recommandation/:id', (req, res) => {
   }
 });
 
+/**
+* @api {post} /api/logOut Log out
+* @apiGroup Authentification
+*
+* @apiDescription
+* Log out the user
+*/
 app.post('/api/logOut', function(req, res) {
   console.log('Logout user ' + req.session.username)
   req.session = null;
@@ -173,6 +217,13 @@ app.post('/api/signIn', (req, res) => {
 });
 
 
+/**
+* @api {post} /api/updateURL Update user Url
+* @apiGroup User
+*
+* @apiDescription
+* Update the url of the user profile picture
+*/
 app.post('/api/updateURL', (req, res) => {
   if (!req.body.url) {
     res.statusCode = 400;
@@ -196,7 +247,7 @@ app.post('/api/updateURL', (req, res) => {
 });
 
 /**
-* @api {post} /api/logIn log into account
+* @api {post} /api/logIn Log into account
 * @apiName logIn
 * @apiGroup Authentification
 *
@@ -247,9 +298,8 @@ app.post('/api/logIn', (req, res) => {
 });
 
 /**
-* @api {post} /api/like add image to favorites
-* @apiName like
-* @apiGroup User
+* @api {post} /api/like Add image to favorites
+* @apiGroup Favorite
 *
 * @apiParam {string} movieID
 *
@@ -290,9 +340,8 @@ app.post('/api/like', ensureAuthentificated, (req, res) => {
 });
 
 /**
-* @api {get} /api/favorites/:id getUserFavorites
-* @apiName user fvorites
-* @apiGroup User
+* @api {get} /api/favorites/:id Get user favorites
+* @apiGroup Favorite
 *
 * @apiParam {int} id the id of the user
 *
@@ -411,6 +460,13 @@ app.get('/api/films', (req, res) => {
   });
 });
 
+/**
+* @api {get}/api/users Get user list
+* @apiGroup User
+*
+* @apiDescription
+* Retreive a list of all users
+*/
 app.get('/api/users', (req, res) => {
   var newUser = public.getUsers(function(err, users) {
     if (err) {
@@ -425,6 +481,13 @@ app.get('/api/users', (req, res) => {
   });
 });
 
+/**
+* @api {get} /api/user/:id Get user info by id
+* @apiGroup User
+*
+* @apiDescription
+* Retreive basic user info by their id
+*/
 app.get('/api/user/:id', (req, res) => {
   if (!req.params.id) {
     res.statusCode = 400;
