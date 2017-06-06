@@ -12,12 +12,20 @@ const SET_USER_ID = 'SET_USER_ID';
 class RegisterForm extends Component {
   constructor(props) {
     super(props);
+    this.handleLogin = this.handleLogin.bind(this);
+    this.handlePassword = this.handlePassword.bind(this);
+    this.handleRePassword = this.handlePassword.bind(this);
+    this.state = {
+      login: '',
+      password: '',
+      rePassword: ''
+    }
   }
 
   checkSignUp() {
-    let login = document.getElementById("login").value;
-    let password = document.getElementById("password").value;
-    let rePassword = document.getElementById("rePassword").value;
+    let login = this.state.login;
+    let password = this.state.password;
+    let rePassword = this.state.rePassword;
     if (password == rePassword) {
       let req = new XMLHttpRequest();
       req.withCredentials = true;
@@ -31,6 +39,30 @@ class RegisterForm extends Component {
       errorLabel.innerHTML = "Password not matching!";
       document.getElementById("root").appendChild(errorLabel);
     }
+  }
+
+  handleLogin(event) {
+    this.setState({
+      login: event.target.value,
+      password: this.state.password,
+      rePassword: this.state.rePassword
+    });
+  }
+
+  handlePassword(event) {
+    this.setState({
+      login: this.state.login,
+      password: event.target.value,
+      rePassword: this.state.rePassword
+    });
+  }
+
+  handlePassword(event) {
+    this.setState({
+      login: this.state.login,
+      password: this.state.password,
+      rePassword: event.target.value
+    });
   }
 
   render() {
@@ -47,18 +79,18 @@ class RegisterForm extends Component {
                 </div>
                 <div className="md-form">
                   <i className="fa fa-user prefix"></i>
-                  <input type="text" id="form2" className="form-control" placeholder="Login" required/>
+                  <input type="text" id="form2" className="form-control" placeholder="Login" required onChange={this.handleLogin}/>
                 </div>
                 <div className="md-form">
                   <i className="fa fa-lock prefix"></i>
-                  <input type="password" id="form4" className="form-control" placeholder="Password" required/>
+                  <input type="password" id="form4" className="form-control" placeholder="Password" required onChange={this.handlePassword}/>
                 </div>
                 <div className="md-form">
                   <i className="fa fa-lock prefix"></i>
-                  <input type="password" id="form4" className="form-control" placeholder="Repeat password" required/>
+                  <input type="password" id="form4" className="form-control" placeholder="Repeat password" required onChange={this.handleRePassword}/>
                 </div>
                 <div className="text-center">
-                  <button className="btn btn-primary" id="submitBtn" type="submit" onClick={this.checkSignUp.bind(this)}>Login</button>
+                  <button className="btn btn-primary" id="submitBtn" type="submit" onClick={this.checkSignUp.bind(this)}>Register</button>
                 </div>
               </div>
             </div>

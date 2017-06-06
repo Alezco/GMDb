@@ -12,6 +12,12 @@ const SET_USER_ID = 'SET_USER_ID';
 class LoginForm extends Component {
   constructor(props) {
     super(props);
+    this.handleLogin = this.handleLogin.bind(this);
+    this.handlePassword = this.handlePassword.bind(this);
+    this.state = {
+      login: '',
+      password: ''
+    }
   }
 
   getUserFavorites(userID) {
@@ -38,8 +44,8 @@ class LoginForm extends Component {
   }
 
   checkSignIn() {
-    let login = document.getElementById("login").value;
-    let password = document.getElementById("password").value;
+    let login = this.state.login;
+    let password = this.state.password;
     let req = new XMLHttpRequest();
     req.withCredentials = true;
     req.onreadystatechange = () => {
@@ -66,6 +72,20 @@ class LoginForm extends Component {
     req.send(jsonToSend);
   }
 
+  handleLogin(event) {
+    this.setState({
+      login: event.target.value,
+      password: this.state.password
+    });
+  }
+
+  handlePassword(event) {
+    this.setState({
+      login: this.state.login,
+      password: event.target.value
+    });
+  }
+
   render() {
     return(
       <div>
@@ -80,11 +100,11 @@ class LoginForm extends Component {
                   </div>
                   <div className="md-form">
                     <i className="fa fa-user prefix"></i>
-                    <input type="text" id="form2" className="form-control" placeholder="Login" required/>
+                    <input type="text" id="form2" className="form-control" placeholder="Login" required onChange={this.handleLogin}/>
                   </div>
                   <div className="md-form">
                     <i className="fa fa-lock prefix"></i>
-                    <input type="password" id="form4" className="form-control" placeholder="Password" required/>
+                    <input type="password" id="form4" className="form-control" placeholder="Password" required onChange={this.handlePassword}/>
                   </div>
                   <div className="text-center">
                     <button className="btn btn-primary" id="submitBtn" type="submit" onClick={this.checkSignIn.bind(this)}>Login</button>

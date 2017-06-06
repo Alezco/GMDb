@@ -5,7 +5,6 @@ import { Switch, Route, Router, hashHistory } from 'react-router'
 import styles from '../style/index.css';
 import NavBar from '../global/navBar.jsx';
 import MovieList from './movieList.jsx';
-import Authentification from '../authentification/authentification.jsx';
 import LoginForm from '../authentification/loginForm.jsx';
 import RegisterForm from '../authentification/registerForm.jsx';
 import NotFound from '../global/notFound.jsx';

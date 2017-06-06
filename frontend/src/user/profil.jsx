@@ -6,7 +6,6 @@ import styles from '../style/index.css';
 import NavBar from '../global/navBar.jsx';
 import MovieCell from '../movieCell/movieCell.jsx';
 import MovieList from '../home/movieList.jsx';
-import Authentification from '../authentification/authentification.jsx';
 import NotFound from '../global/notFound.jsx';
 import Footer from '../global/footer.jsx';
 import SearchForm from '../home/searchForm.jsx';
