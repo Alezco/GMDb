@@ -7,12 +7,12 @@ html {
 }
 
 body {
-  background: #233373;
-  font-family: 'Titillium Web', sans-serif;
+  background: #E3F2FD;
+  font-family: 'Roboto', sans-serif;
 }
 
 h4 {
-  color: #ffffff;
+  color: #000000;
 }
 
 a {
@@ -34,30 +34,29 @@ a:hover {
   box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
 }
 
-
 #search input[type="text"] {
-    background: 10px 6px #fcfcfc;
-    border: 1px solid #d1d1d1;
-    font: bold 12px Arial,Helvetica,Sans-serif;
-    color: #bebebe;
-    width: 150px;
-    padding: 6px 15px 6px 35px;
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-    border-radius: 20px;
-    text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
-    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
-    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
-    -webkit-transition: all 0.7s ease 0s;
-    -moz-transition: all 0.7s ease 0s;
-    -o-transition: all 0.7s ease 0s;
-    transition: all 0.7s ease 0s;
-    }
+  background: 10px 6px #fcfcfc;
+  border: 1px solid #d1d1d1;
+  font: bold 12px Arial,Helvetica,Sans-serif;
+  color: #bebebe;
+  width: 150px;
+  padding: 6px 15px 6px 35px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+  -webkit-transition: all 0.7s ease 0s;
+  -moz-transition: all 0.7s ease 0s;
+  -o-transition: all 0.7s ease 0s;
+  transition: all 0.7s ease 0s;
+}
 
 #search input[type="text"]:focus {
-    width: 200px;
-    }
+  width: 200px;
+}
 
 .tab-group {
   list-style: none;
@@ -106,7 +105,7 @@ h1 {
 label {
   position: absolute;
   -webkit-transform: translateY(6px);
-          transform: translateY(6px);
+  transform: translateY(6px);
   left: 13px;
   color: rgba(255, 255, 255, 0.5);
   -webkit-transition: all 0.25s ease;
@@ -122,7 +121,7 @@ label .req {
 
 label.active {
   -webkit-transform: translateY(50px);
-          transform: translateY(50px);
+  transform: translateY(50px);
   left: 2px;
   font-size: 14px;
 }
@@ -206,21 +205,19 @@ textarea {
   text-align: right;
 }
 
-
-
 /* LOADER CSS */
 loader {
-    border: 16px solid #f3f3f3; /* Light grey */
-    border-top: 16px solid #3498db; /* Blue */
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    animation: spin 2s linear infinite;
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 /* Like animation */
@@ -261,9 +258,9 @@ loader {
 }
 
 .small {
-    display: block;
-    line-height: 1.428571429;
-    color: #999;
+  display: block;
+  line-height: 1.428571429;
+  color: #999;
 }
 
 /* Like animation */
@@ -286,17 +283,17 @@ loader {
 
 
 /*------------------------------------*\
-	#OVERRIDE STLES
-	This style sheet can be used for two different functions:
-	1. Override specific Bootstrap styles.
-	2. Add your own styles.
+#OVERRIDE STLES
+This style sheet can be used for two different functions:
+1. Override specific Bootstrap styles.
+2. Add your own styles.
 \*------------------------------------*/
 
 /**
- * Padding-top is required if using .navbar-fixed-top.
- * This can be removed Remove if using .navbar-static-top.
- * The height may need to be changed if the height of you
- * navigation changes.
+* Padding-top is required if using .navbar-fixed-top.
+* This can be removed Remove if using .navbar-static-top.
+* The height may need to be changed if the height of you
+* navigation changes.
 */
 
 body { padding-top: 70px; }
@@ -304,13 +301,13 @@ body { padding-top: 70px; }
 
 
 /**
- * Bootstrap requires a containing element to wrap site contents
- * and house the grid system. You may choose one of two containers.
- * Use .container for a responsive fixed width container.
- * Use .container-fluid for a full width container.
+* Bootstrap requires a containing element to wrap site contents
+* and house the grid system. You may choose one of two containers.
+* Use .container for a responsive fixed width container.
+* Use .container-fluid for a full width container.
 
- * If using container-fluid, you may need to set a maximum width,
- * so that the container will not spread to the entire viewport.
+* If using container-fluid, you may need to set a maximum width,
+* so that the container will not spread to the entire viewport.
 */
 
 .container-fluid { max-width: 1200px; }
@@ -318,10 +315,10 @@ body { padding-top: 70px; }
 
 
 /**
- * Bootstrap adds a 20px margin to the bottom of elements that
- * have been given the class of thumbnail. When images have a
- * caption after them, this margin may be too large. You can
- * override it like this:
+* Bootstrap adds a 20px margin to the bottom of elements that
+* have been given the class of thumbnail. When images have a
+* caption after them, this margin may be too large. You can
+* override it like this:
 */
 
 .thumbnail { margin-bottom: 5px; }
@@ -329,9 +326,9 @@ body { padding-top: 70px; }
 
 
 /**
- * We can add some "helper classes" to add or remove margins to
- * help aspects of the layout. These helper classes should only
- * be used sparingly.
+* We can add some "helper classes" to add or remove margins to
+* help aspects of the layout. These helper classes should only
+* be used sparingly.
 */
 
 .margin-t-0 { margin-top: 0; }
@@ -347,32 +344,32 @@ body { padding-top: 70px; }
 
 .margin-tb-0
 {
-	margin-top: 0;
-	margin-bottom: 0;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .margin-tb-h
 {
-	margin-top: .5em;
-	margin-bottom: .5em;
+  margin-top: .5em;
+  margin-bottom: .5em;
 }
 
 .margin-tb-1
 {
-	margin-top: 1em;
-	margin-bottom: 1em;
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 
 .margin-tb-2
 {
-	margin-top: 2em;
-	margin-bottom: 2em;
+  margin-top: 2em;
+  margin-bottom: 2em;
 }
 
 .margin-tb-3
 {
-	margin-top: 3em;
-	margin-bottom: 3em;
+  margin-top: 3em;
+  margin-bottom: 3em;
 }
 
 
@@ -396,225 +393,225 @@ body { padding-top: 70px; }
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-          flex-direction: column; }
+  -ms-flex-direction: column;
+  flex-direction: column; }
   @media screen and (max-width: 996px) {
     .preview {
       margin-bottom: 20px; } }
 
 
-.preview-pic {
-  -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1; }
+      .preview-pic {
+        -webkit-box-flex: 1;
+        -webkit-flex-grow: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1; }
 
-.preview-thumbnail.nav-tabs {
-  border: none;
-  margin-top: 15px; }
-  .preview-thumbnail.nav-tabs li {
-    width: 18%;
-    margin-right: 2.5%; }
-    .preview-thumbnail.nav-tabs li img {
-      max-width: 100%;
-      display: block; }
-    .preview-thumbnail.nav-tabs li a {
-      padding: 0;
-      margin: 0; }
-    .preview-thumbnail.nav-tabs li:last-of-type {
-      margin-right: 0; }
+        .preview-thumbnail.nav-tabs {
+          border: none;
+          margin-top: 15px; }
+          .preview-thumbnail.nav-tabs li {
+            width: 18%;
+            margin-right: 2.5%; }
+            .preview-thumbnail.nav-tabs li img {
+              max-width: 100%;
+              display: block; }
+              .preview-thumbnail.nav-tabs li a {
+                padding: 0;
+                margin: 0; }
+                .preview-thumbnail.nav-tabs li:last-of-type {
+                  margin-right: 0; }
 
-.tab-content {
-  overflow: hidden; }
-  .tab-content img {
-    width: 100%;
-    -webkit-animation-name: opacity;
-            animation-name: opacity;
-    -webkit-animation-duration: .3s;
-            animation-duration: .3s; }
+                  .tab-content {
+                    overflow: hidden; }
+                    .tab-content img {
+                      width: 100%;
+                      -webkit-animation-name: opacity;
+                      animation-name: opacity;
+                      -webkit-animation-duration: .3s;
+                      animation-duration: .3s; }
 
-.card {
-  margin-top: 50px;
-  background: #eee;
-  padding: 3em;
-  line-height: 1.5em; }
+                      .card {
+                        margin-top: 50px;
+                        background: #eee;
+                        padding: 3em;
+                        line-height: 1.5em; }
 
-@media screen and (min-width: 997px) {
-  .wrapper {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex; } }
+                        @media screen and (min-width: 997px) {
+                          .wrapper {
+                            display: -webkit-box;
+                            display: -webkit-flex;
+                            display: -ms-flexbox;
+                            display: flex; } }
 
-.details {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-          flex-direction: column; }
+                            .details {
+                              display: -webkit-box;
+                              display: -webkit-flex;
+                              display: -ms-flexbox;
+                              display: flex;
+                              -webkit-box-orient: vertical;
+                              -webkit-box-direction: normal;
+                              -webkit-flex-direction: column;
+                              -ms-flex-direction: column;
+                              flex-direction: column; }
 
-.colors {
-  -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1; }
+                              .colors {
+                                -webkit-box-flex: 1;
+                                -webkit-flex-grow: 1;
+                                -ms-flex-positive: 1;
+                                flex-grow: 1; }
 
-.product-title, .price, .sizes, .colors {
-  text-transform: UPPERCASE;
-  font-weight: bold; }
+                                .product-title, .price, .sizes, .colors {
+                                  text-transform: UPPERCASE;
+                                  font-weight: bold; }
 
-.checked, .price span {
-  color: #ff9f1a; }
+                                  .checked, .price span {
+                                    color: #ff9f1a; }
 
-.product-title, .rating, .product-description, .price, .vote, .sizes {
-  margin-bottom: 15px; }
+                                    .product-title, .rating, .product-description, .price, .vote, .sizes {
+                                      margin-bottom: 15px; }
 
-.product-title {
-  margin-top: 0; }
+                                      .product-title {
+                                        margin-top: 0; }
 
-.size {
-  margin-right: 10px; }
-  .size:first-of-type {
-    margin-left: 40px; }
+                                        .size {
+                                          margin-right: 10px; }
+                                          .size:first-of-type {
+                                            margin-left: 40px; }
 
-.color {
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 10px;
-  height: 2em;
-  width: 2em;
-  border-radius: 2px; }
-  .color:first-of-type {
-    margin-left: 20px; }
+                                            .color {
+                                              display: inline-block;
+                                              vertical-align: middle;
+                                              margin-right: 10px;
+                                              height: 2em;
+                                              width: 2em;
+                                              border-radius: 2px; }
+                                              .color:first-of-type {
+                                                margin-left: 20px; }
 
-.add-to-cart, .like {
-  background: #ff9f1a;
-  padding: 1.2em 1.5em;
-  border: none;
-  text-transform: UPPERCASE;
-  font-weight: bold;
-  color: #fff;
-  -webkit-transition: background .3s ease;
-          transition: background .3s ease; }
-  .add-to-cart:hover, .like:hover {
-    background: #b36800;
-    color: #fff; }
+                                                .add-to-cart, .like {
+                                                  background: #ff9f1a;
+                                                  padding: 1.2em 1.5em;
+                                                  border: none;
+                                                  text-transform: UPPERCASE;
+                                                  font-weight: bold;
+                                                  color: #fff;
+                                                  -webkit-transition: background .3s ease;
+                                                  transition: background .3s ease; }
+                                                  .add-to-cart:hover, .like:hover {
+                                                    background: #b36800;
+                                                    color: #fff; }
 
-.not-available {
-  text-align: center;
-  line-height: 2em; }
-  .not-available:before {
-    font-family: fontawesome;
-    content: "\f00d";
-    color: #fff; }
+                                                    .not-available {
+                                                      text-align: center;
+                                                      line-height: 2em; }
+                                                      .not-available:before {
+                                                        font-family: fontawesome;
+                                                        content: "\f00d";
+                                                        color: #fff; }
 
-.orange {
-  background: #ff9f1a; }
+                                                        .orange {
+                                                          background: #ff9f1a; }
 
-.green {
-  background: #85ad00; }
+                                                          .green {
+                                                            background: #85ad00; }
 
-.blue {
-  background: #0076ad; }
+                                                            .blue {
+                                                              background: #0076ad; }
 
-.tooltip-inner {
-  padding: 1.3em; }
+                                                              .tooltip-inner {
+                                                                padding: 1.3em; }
 
-@-webkit-keyframes opacity {
-  0% {
-    opacity: 0;
-    -webkit-transform: scale(3);
-            transform: scale(3); }
-  100% {
-    opacity: 1;
-    -webkit-transform: scale(1);
-            transform: scale(1); } }
+                                                                @-webkit-keyframes opacity {
+                                                                  0% {
+                                                                    opacity: 0;
+                                                                    -webkit-transform: scale(3);
+                                                                    transform: scale(3); }
+                                                                    100% {
+                                                                      opacity: 1;
+                                                                      -webkit-transform: scale(1);
+                                                                      transform: scale(1); } }
 
-@keyframes opacity {
-  0% {
-    opacity: 0;
-    -webkit-transform: scale(3);
-            transform: scale(3); }
-  100% {
-    opacity: 1;
-    -webkit-transform: scale(1);
-            transform: scale(1); } }
-
-
-/* stuff for discover */
-.profil-pic {
-  width: 285px;
-  height: 285px;
-}
+                                                                      @keyframes opacity {
+                                                                        0% {
+                                                                          opacity: 0;
+                                                                          -webkit-transform: scale(3);
+                                                                          transform: scale(3); }
+                                                                          100% {
+                                                                            opacity: 1;
+                                                                            -webkit-transform: scale(1);
+                                                                            transform: scale(1); } }
 
 
-.userprofile {
-	width: 100%;
-	float: left;
-	clear: both;
-	margin: 40px auto
-}
-.userprofile .userpic {
-	height: 100px;
-	width: 100px;
-	clear: both;
-	margin: 0 auto;
-	display: block;
-	border-radius: 100%;
-	box-shadow: 0px 3px 10px 0 rgba(0, 0, 0, 0.15);
-	-moz-box-shadow: 0px 3px 10px 0 rgba(0, 0, 0, 0.15);
-	-webkit-box-shadow: 0px 3px 10px 0 rgba(0, 0, 0, 0.15);
-	-ms-box-shadow: 0px 3px 10px 0 rgba(0, 0, 0, 0.15);
-	position: relative;
-}
-.userprofile .userpic .userpicimg {
-	height: 100%;
-	width: 100%;
-	border-radius: 100%;
-}
+                                                                            /* stuff for discover */
+                                                                            .profil-pic {
+                                                                              width: 285px;
+                                                                              height: 285px;
+                                                                            }
+
+
+                                                                            .userprofile {
+                                                                              width: 100%;
+                                                                              float: left;
+                                                                              clear: both;
+                                                                              margin: 40px auto
+                                                                            }
+                                                                            .userprofile .userpic {
+                                                                              height: 100px;
+                                                                              width: 100px;
+                                                                              clear: both;
+                                                                              margin: 0 auto;
+                                                                              display: block;
+                                                                              border-radius: 100%;
+                                                                              box-shadow: 0px 3px 10px 0 rgba(0, 0, 0, 0.15);
+                                                                              -moz-box-shadow: 0px 3px 10px 0 rgba(0, 0, 0, 0.15);
+                                                                              -webkit-box-shadow: 0px 3px 10px 0 rgba(0, 0, 0, 0.15);
+                                                                              -ms-box-shadow: 0px 3px 10px 0 rgba(0, 0, 0, 0.15);
+                                                                              position: relative;
+                                                                            }
+                                                                            .userprofile .userpic .userpicimg {
+                                                                              height: 100%;
+                                                                              width: 100%;
+                                                                              border-radius: 100%;
+                                                                            }
 
 
 
-/* stuff for modal */
+                                                                            /* stuff for modal */
 
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
-}
+                                                                            .modal {
+                                                                              display: none; /* Hidden by default */
+                                                                              position: fixed; /* Stay in place */
+                                                                              z-index: 1; /* Sit on top */
+                                                                              padding-top: 100px; /* Location of the box */
+                                                                              left: 0;
+                                                                              top: 0;
+                                                                              width: 100%; /* Full width */
+                                                                              height: 100%; /* Full height */
+                                                                              overflow: auto; /* Enable scroll if needed */
+                                                                              background-color: rgb(0,0,0); /* Fallback color */
+                                                                              background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+                                                                            }
 
-/* Modal Content (image) */
-.modal-content {
-    margin: auto;
-    display: block;
-}
+                                                                            /* Modal Content (image) */
+                                                                            .modal-content {
+                                                                              margin: auto;
+                                                                              display: block;
+                                                                            }
 
-/* Add Animation */
-.modal-content, #caption {
-    -webkit-animation-name: zoom;
-    -webkit-animation-duration: 0.6s;
-    animation-name: zoom;
-    animation-duration: 0.6s;
-}
+                                                                            /* Add Animation */
+                                                                            .modal-content, #caption {
+                                                                              -webkit-animation-name: zoom;
+                                                                              -webkit-animation-duration: 0.6s;
+                                                                              animation-name: zoom;
+                                                                              animation-duration: 0.6s;
+                                                                            }
 
-@-webkit-keyframes zoom {
-    from {-webkit-transform: scale(0)}
-    to {-webkit-transform: scale(1)}
-}
+                                                                            @-webkit-keyframes zoom {
+                                                                              from {-webkit-transform: scale(0)}
+                                                                              to {-webkit-transform: scale(1)}
+                                                                            }
 
-@keyframes zoom {
-    from {transform: scale(0.1)}
-    to {transform: scale(1)}
-}
+                                                                            @keyframes zoom {
+                                                                              from {transform: scale(0.1)}
+                                                                              to {transform: scale(1)}
+                                                                            }

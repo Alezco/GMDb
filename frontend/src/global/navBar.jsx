@@ -42,7 +42,7 @@ class NavBar extends Component {
     if (this.props.username && this.props.username >= 0) {
       return(
         <div>
-          <nav className="navbar navbar-fixed-top navbar-inverse" role="navigation">
+          <nav className="navbar navbar-fixed-top navbar-toggleable-md navbar-dark bg-primary" role="navigation">
             <div className="container-fluid">
               <div className="navbar-header">
                 <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -55,12 +55,12 @@ class NavBar extends Component {
               </div>
               <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul className="nav navbar-nav">
-                  <li><Link to="/discover">Discover</Link></li>
-                  <li><Link to="/profil">My Movies</Link></li>
-                  <li><Link to="/edit">My Profil</Link></li>
+                  <li className="nav-item"><Link className="nav-link" to="/discover">Discover</Link></li>
+                  <li className="nav-item"><Link to="/profil">My Movies</Link></li>
+                  <li className="nav-item"><Link to="/edit">My Profil</Link></li>
                 </ul>
                 <ul className="nav navbar-nav navbar-right">
-                  <li><Link href="" onClick={() => this.handleClick()}>Log out</Link></li>
+                  <li className="nav-item"><Link href="" onClick={() => this.handleClick()}>Log out</Link></li>
                 </ul>
               </div>
             </div>
@@ -70,7 +70,7 @@ class NavBar extends Component {
     } else {
       return (
         <div>
-          <nav className="navbar navbar-fixed-top navbar-inverse" role="navigation">
+            <nav className="navbar navbar-fixed-top navbar-toggleable-md navbar-dark bg-primary" role="navigation">
             <div className="container-fluid">
               <div className="navbar-header">
                 <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -83,11 +83,11 @@ class NavBar extends Component {
               </div>
               <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul className="nav navbar-nav">
-                  <li><Link to="/discover">Discover</Link></li>
+                  <li className="nav-item"><Link to="/discover">Discover</Link></li>
                 </ul>
                 <ul className="nav navbar-nav navbar-right">
-                  <li><Link to="/login">Log In</Link></li>
-                  <li><Link to="/register">Register</Link></li>
+                  <li className="nav-item"><Link to="/login">Log In</Link></li>
+                  <li className="nav-item"><Link to="/register">Register</Link></li>
                 </ul>
               </div>
             </div>
