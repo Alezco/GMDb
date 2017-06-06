@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import {render} from 'react-dom';
+import { render } from 'react-dom';
 const Redux =require('react-redux');
 import styles from '../style/index.css';
+import { DropdownButton, MenuItem } from 'react-bootstrap';
 
 class SearchForm extends Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class SearchForm extends Component {
     this.handleChangeFilterType = this.handleChangeFilterType.bind(this);
     this.handleChange = this.handleChange.bind(this);
 
+<<<<<<< 1ef45e3df6b8318e114b36f72faf4bf2c792b513
     this.state = {
       searchTxt : null
     };
@@ -24,6 +26,9 @@ class SearchForm extends Component {
     else {
       this.props.onKeyUp(null);
     }
+=======
+    this.state = {value: 'coconut'};
+>>>>>>> Improve search bar
   }
 
   // TODO
@@ -44,6 +49,12 @@ class SearchForm extends Component {
       this.props.onKeyUp(null);
     }
   }
+
+
+    handleChange(event) {
+       this.setState({value: event.target.value});
+     }
+
 
   render() {
     return(

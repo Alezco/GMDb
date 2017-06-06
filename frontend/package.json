@@ -42,6 +42,7 @@
   },
   "dependencies": {
     "react": "^15.5.4",
+    "react-bootstrap": "^0.31.0",
     "react-coverflow": "^0.2.3",
     "react-dom": "^15.5.4",
     "react-hot-loader": "next",
