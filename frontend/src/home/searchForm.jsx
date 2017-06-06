@@ -17,12 +17,11 @@ class SearchForm extends Component {
     }
   }
 
-  // TODO
   handleChangeFilterType(event) {
     console.log(event.currentTarget.textContent);
     this.setState({
       selected : event.currentTarget.textContent,
-      hint :"Search for movies by "+event.currentTarget.textContent+" ..."
+      hint :"Search for movies by " + event.currentTarget.textContent+" ..."
     });
   }
 
@@ -31,11 +30,10 @@ class SearchForm extends Component {
     this.props.onKeyUp(event.target.value, this.state.selected);
   }
 
-
   render() {
     let options = [];
     options.push("Title");
-    options.push("Actors");
+    options.push("Actor");
     options.push("Director");
     let rows = [];
     options.map((row, index) => {
@@ -49,7 +47,7 @@ class SearchForm extends Component {
       <div>
         <div className="container">
           <div className="row">
-            <div className="col-lg-12 col-lg-offset-3">
+            <div className="col-lg-12 col-lg-offset-1">
               <form className="form-inline">
                 <div className="md-form input-group">
                   <div className="customWidth md-group form-group">

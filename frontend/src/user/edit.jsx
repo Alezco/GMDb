@@ -60,7 +60,7 @@ class Edit extends Component {
       <div>
         <NavBar />
         <div className="container">
-          <div className="well well-sm">
+          <div className="well well-sm customCard">
             <div className="row">
               <div className="col-sm-4">
                 <img src={this.props.user.url} alt="" className="img-rounded img-responsive profil-pic" />

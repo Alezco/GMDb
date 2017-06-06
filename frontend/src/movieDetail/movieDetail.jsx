@@ -6,6 +6,7 @@ import { withRouter } from 'react-router';
 import NavBar from '../global/navBar.jsx';
 import Modal from './modal.jsx'
 import Carousel from '../carousel/carousel.jsx'
+import Footer from '../global/footer.jsx';
 
 class MovieDetail extends Component {
 
@@ -89,7 +90,7 @@ class MovieDetail extends Component {
         <NavBar />
         <Modal dismissModal={this.dismissModal} visible={this.state.modalStyle} source={this.state.movieObject.Poster}/>
         <div className="container">
-          <div className="card">
+          <div className="well well-sm customCard">
             <div className="container-fliud">
               <div className="wrapper row">
                 <div className="col-md-6">
@@ -158,6 +159,7 @@ class MovieDetail extends Component {
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     );
   }
