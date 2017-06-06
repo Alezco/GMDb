@@ -14,7 +14,7 @@ class RegisterForm extends Component {
     super(props);
     this.handleLogin = this.handleLogin.bind(this);
     this.handlePassword = this.handlePassword.bind(this);
-    this.handleRePassword = this.handlePassword.bind(this);
+    this.handleRePassword = this.handleRePassword.bind(this);
     this.state = {
       login: '',
       password: '',
