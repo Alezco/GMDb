@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {render} from 'react-dom';
 import {Link} from 'react-router';
 import Carousel from '../carousel/carousel.jsx';
+import {OverlayTrigger, Popover, Button } from 'react-bootstrap';
+const Redux = require('react-redux');
 
 
 class DiscoverItem extends Component {
@@ -13,10 +15,18 @@ class DiscoverItem extends Component {
     }
   }
 
+
+
   render() {
+    const popoverHoverFocus = (
+        <Popover id="popover-trigger-hover-focus" title="JS Joke">
+          {this.props.jokes[Math.floor(Math.random() * this.props.jokes.length)]}
+        </Popover>
+    );
     return(
       <div className="col-sm-6 col-md-3">
         <Link to={this.state.link}>
+          <OverlayTrigger trigger={['hover', 'focus']} placement="top" overlay={popoverHoverFocus}>
           <div className="panel panel-blue userlist">
             <div className="panel-body text-center">
               <div className="userprofile">
@@ -29,10 +39,20 @@ class DiscoverItem extends Component {
               <p></p>
             </div>
           </div>
+          </OverlayTrigger>
         </Link>
       </div>
     );
   }
 }
 
-export default DiscoverItem;
+
+      const mapStateToProps = (state, router) => {
+        return {
+          jokes: state.jokes
+        }
+      };
+
+
+
+      export default Redux.connect(mapStateToProps)(DiscoverItem);

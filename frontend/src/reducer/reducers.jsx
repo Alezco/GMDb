@@ -2,6 +2,9 @@ const Reducer = function(state, action) {
   if (state == undefined) {
     state = { };
   }
+  if (action.type === 'SET_JS_JOKES') {
+    return Object.assign({}, state, { jokes: action.jokes });
+  }
   if (action.type === 'SET_USER_ID') {
     return Object.assign({}, state, { username: action.username });
   }

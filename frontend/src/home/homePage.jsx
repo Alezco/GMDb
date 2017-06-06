@@ -45,7 +45,21 @@ class HomePage extends Component {
     req.send(null);
   }
 
+  initJSJoke() {
+    let jokes = [];
+    jokes.push("Javascript makes me want to flip the table and say 'F*** this s***', but i can never be sure what 'this' refers to");
+    jokes.push("Only thing you can't install is brain, for everything else there's npm.");
+    jokes.push("How do you comfort a JavaScript bug? You console it");
+    jokes.push("When a JavaScript date has gone bad, “Don’t call me, I’ll callback you. I promise!”");
+    jokes.push("Javascript is number 1.00000000000003");
+    this.props.dispatch({
+      type: 'SET_JS_JOKES',
+      jokes: jokes
+    });
+  }
+
   componentWillMount() {
+    this.initJSJoke();
     let req = new XMLHttpRequest();
     req.withCredentials = true;
     req.onreadystatechange = () => {
