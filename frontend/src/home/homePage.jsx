@@ -6,6 +6,8 @@ import styles from '../style/index.css';
 import NavBar from '../global/navBar.jsx';
 import MovieList from './movieList.jsx';
 import Authentification from '../authentification/authentification.jsx';
+import LoginForm from '../authentification/loginForm.jsx';
+import RegisterForm from '../authentification/registerForm.jsx';
 import NotFound from '../global/notFound.jsx';
 import Profil from '../user/profil.jsx';
 import Footer from '../global/footer.jsx';
@@ -102,7 +104,8 @@ class HomePage extends Component {
         <Router history={hashHistory}>
           <Route>
             <Route exact path='/' component={MovieList} />
-            <Route component={Authentification} router={this.props.router.router} path="/login" />
+            <Route component={LoginForm} router={this.props.router.router} path="/login" />
+            <Route component={RegisterForm} router={this.props.router.router} path="/register" />
             <Route component={Profil} router={this.props.router.router} path="/profil" />
             <Route component={Edit} router={this.props.router.router} path="/edit" />
             <Route component={Discover} router={this.props.router.router} path="/discover" />
