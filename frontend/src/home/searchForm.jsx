@@ -10,16 +10,20 @@ class SearchForm extends Component {
 
     this.handleChangeFilterType = this.handleChangeFilterType.bind(this);
     this.handleChange = this.handleChange.bind(this);
+
+    this.state = {
+      selected : "Title",
+      hint : "Search for movies by title ..."
+    }
   }
 
   // TODO
   handleChangeFilterType(event) {
-    if (event.target.value) {
-      //this.props.onKeyUp(event.target.value);
-    }
-    else {
-      //this.props.onKeyUp(null);
-    }
+    console.log(event.currentTarget.textContent);
+    this.setState({
+      selected : event.currentTarget.textContent,
+      hint :"Search for movies by "+event.currentTarget.textContent+" ..."
+    });
   }
 
   handleChange(event) {
@@ -29,6 +33,18 @@ class SearchForm extends Component {
 
 
   render() {
+    let options = [];
+    options.push("Title");
+    options.push("Actors");
+    options.push("Director");
+    let rows = [];
+    options.map((row, index) => {
+      if (row === this.state.selected) {
+        rows.push(<button key={index} type="button" className="btn btn-primary" onClick={this.handleChangeFilterType}>{row}</button>)
+      } else {
+        rows.push(<button key={index} type="button" className="btn btn-outline-info waves-effect" onClick={this.handleChangeFilterType}>{row}</button>)
+      }
+    });
     return(
       <div>
         <div className="container">
@@ -36,15 +52,11 @@ class SearchForm extends Component {
             <div className="col-lg-12 col-lg-offset-3">
               <form className="form-inline">
                 <div className="md-form input-group">
-                  <div className="md-group form-group">
-                    <input type="text" className="form-control" placeholder="Search for movies ..." onChange={this.handleChange} />
+                  <div className="customWidth md-group form-group">
+                    <input type="text" className="customWidth form-control" placeholder={this.state.hint} onChange={this.handleChange} />
                   </div>
-                  <span className="md-group form-group">
-                    <button className="btn btn-primary" type="button">
-                      <span className="glyphicon glyphicon-search"></span>
-                    </button>
-                  </span>
                 </div>
+                {rows}
               </form>
             </div>
           </div>

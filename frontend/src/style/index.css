@@ -16,6 +16,9 @@ h4 {
   color: #000000;
 }
 
+.customWidth {
+  width: 450px !important;
+}
 
 .heightRadio {
   height: 15px;
