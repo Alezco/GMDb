@@ -14,6 +14,8 @@ class LoginForm extends Component {
     super(props);
     this.handleLogin = this.handleLogin.bind(this);
     this.handlePassword = this.handlePassword.bind(this);
+    this.checkSignIn = this.checkSignIn.bind(this);
+
     this.state = {
       login: '',
       password: '',
@@ -42,7 +44,7 @@ class LoginForm extends Component {
     req.send(null);
   }
 
-  checkSignIn() {
+  checkSignIn(event) {
     let login = this.state.login;
     let password = this.state.password;
     let req = new XMLHttpRequest();
@@ -117,7 +119,7 @@ class LoginForm extends Component {
                     <input type="password" id="form4" className="form-control" placeholder="Password" required onChange={this.handlePassword}/>
                   </div>
                   <div className="text-center">
-                    <button className="btn btn-primary" id="submitBtn" type="submit" onClick={this.checkSignIn.bind(this)}>Login</button>
+                    <button className="btn btn-primary" id="submitBtn" type="submit" onClick={this.checkSignIn}>Login</button>
                   </div>
                 </div>
               </div>

@@ -112,13 +112,13 @@ app.get('/api/session', function(req, res) {
 app.get('/api/movie/:id', function(req, res) {
   if (!req.params.id) {
     res.statusCode = 400;
-    res.send('{ error : No id provided }');
+    res.send('No id provided');
   } else {
     var query = public.getFilmsByID(req.params.id, function(err, movie) {
       if (err) {
         console.log(err);
         res.statusCode = 400;
-        res.send('{ error : ' + err + '}');
+        res.send(err);
       } else {
         if (movie) {
           console.log('Sending movie detail');
@@ -143,14 +143,14 @@ app.get('/api/recommandation/:id', (req, res) => {
   console.log("Requesting users recommandation");
   if (!req.params.id) {
     res.statusCode = 400;
-    res.send('{ error : No user provided }');
+    res.send('No user provided');
   } else {
     shuffle(properties);
     var query = user.favoriteByCriteria(req.params.id, properties, function(err, movies) {
       if (err) {
         console.log(err);
         res.statusCode = 400;
-        res.send('{ error : ' + err + '}');
+        res.send(err);
       } else {
         if (movies) {
           console.log('Sending personnal recommandations');
@@ -230,7 +230,7 @@ app.post('/api/signIn', (req, res) => {
 app.post('/api/updateURL', (req, res) => {
   if (!req.body.url) {
     res.statusCode = 400;
-    res.send('{ error : No url provided }');
+    res.send('No url provided');
   }
   console.log(req.session);
   console.log(req.body);
@@ -280,7 +280,7 @@ app.post('/api/logIn', (req, res) => {
   let sess = req.session;
   if (!req.body.login || !req.body.pwd) {
     res.statusCode = 403;
-    res.send('{ error : Credentials can not be empty ! }');
+    res.send('Credentials can not be empty');
   } else {
     var newUser = auth.logUser(req.body.login, req.body.pwd, function(err, user) {
       if (err) {
@@ -369,13 +369,13 @@ app.get('/api/favorites/:id', ensureAuthentificated, (req, res) => {
   console.log("Requesting user favorites");
   if (!req.params.id) {
     res.statusCode = 400;
-    res.send('{ error : No user provided }');
+    res.send('No user provided');
   } else {
     var newUser = user.myMovies(req.params.id, function(err, movies) {
       if (err) {
         console.log(err);
         res.statusCode = 400;
-        res.send('{ error : ' + err + '}');
+        res.send(err);
       } else {
         if (movies) {
           console.log('Sending personnal movies');
@@ -456,7 +456,7 @@ app.get('/api/films', (req, res) => {
     if (err) {
       console.log(err);
       res.statusCode = 501;
-      res.send('{ error : ' + err + '}');
+      res.send(err);
     }
     if (movies) {
       res.statusCode = 200;
@@ -477,7 +477,7 @@ app.get('/api/users', (req, res) => {
     if (err) {
       console.log(err);
       res.statusCode = 501;
-      res.send('{ error : ' + err + '}');
+      res.send(err);
     }
     if (users) {
       res.statusCode = 200;
@@ -496,7 +496,7 @@ app.get('/api/users', (req, res) => {
 app.get('/api/user/:id', (req, res) => {
   if (!req.params.id) {
     res.statusCode = 400;
-    res.send('{ error : No user provided }');
+    res.send('No user provided');
   } else {
     var newUser = public.getUserByID(req.params.id, function(err, user) {
       if (err) {
