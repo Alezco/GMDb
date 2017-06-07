@@ -6,15 +6,19 @@ import styles from '../style/index.css';
 import MyNavItem from './myNavItem.jsx';
 import NavBar from '../global/navBar.jsx';
 import Footer from '../global/footer.jsx';
+const api = require('../api/authentification.js');
 
 const SET_USER_ID = 'SET_USER_ID';
 
 class LoginForm extends Component {
   constructor(props) {
     super(props);
+
     this.handleLogin = this.handleLogin.bind(this);
     this.handlePassword = this.handlePassword.bind(this);
     this.checkSignIn = this.checkSignIn.bind(this);
+    this.SignInResponse = this.SignInResponse.bind(this);
+    this.getUserFavoritesResponse = this.getUserFavoritesResponse.bind(this);
 
     this.state = {
       login: '',
@@ -23,54 +27,42 @@ class LoginForm extends Component {
     }
   }
 
-  getUserFavorites(userID) {
-    let req = new XMLHttpRequest();
-    req.withCredentials = true;
-    req.onreadystatechange = () => {
-      if (req.status == 403) {
-        this.props.router.push('/login');
-      }
-      else {
-        if (req.status == 200 && req.readyState == XMLHttpRequest.DONE) {
-          this.props.dispatch({
-            type: 'INIT_FAVORITES',
-            favorites: JSON.parse(req.responseText)
-          });
-        }
-        this.props.router.push('/profil');
-      }
+  getUserFavoritesResponse(err, favorites) {
+    if (err) {
+      this.props.router.push(err);
+    } else {
+      this.props.dispatch({
+        type: 'INIT_FAVORITES',
+        favorites: favorites
+      });
+      this.props.router.push('/profil');
     }
-    req.open('GET', 'http://localhost:4242/api/favorites/'+userID, true);
-    req.send(null);
+  }
+
+  getUserFavorites(userID) {
+    api.UserFavorites(userID, this.getUserFavoritesResponse);
+  }
+
+  SignInResponse(err, user) {
+    if (err) {
+      this.setState({formError: err});
+    } else {
+      this.props.dispatch({
+        type: SET_USER_ID,
+        username: user.id
+      });
+      this.props.dispatch({
+        type: 'SET_USER_OBJECT',
+        user: user
+      });
+      this.getUserFavorites(user.id);
+    }
   }
 
   checkSignIn(event) {
     let login = this.state.login;
     let password = this.state.password;
-    let req = new XMLHttpRequest();
-    req.withCredentials = true;
-    req.onreadystatechange = () => {
-      if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
-        let user = JSON.parse(req.responseText);
-        this.props.dispatch({
-          type: SET_USER_ID,
-          username: user.id
-        });
-        this.props.dispatch({
-          type: 'SET_USER_OBJECT',
-          user: user
-        });
-        this.props.dispatch({
-          type: 'SHOW_STORE'
-        });
-        this.getUserFavorites(user.id);
-      }
-      this.setState({formError: req.responseText});
-    }
-    req.open('POST', 'http://localhost:4242/api/logIn', true);
-    req.setRequestHeader("Content-Type", "application/json");
-    let jsonToSend = JSON.stringify({"login": login, "pwd": password});
-    req.send(jsonToSend);
+    api.SignIn(login, password, this.SignInResponse);
   }
 
   handleLogin(event) {
