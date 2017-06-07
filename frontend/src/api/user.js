@@ -42,7 +42,7 @@ exports.getFavoritesOfUser = (userID, back) => {
         back(null, JSON.parse(req.responseText));
       }
     } else {
-      back('./login', null);
+      back('/login', null);
     }
   }
   req.open('GET', 'http://localhost:4242/api/favorites/'+userID, true);
@@ -56,7 +56,7 @@ exports.getUserByID = (userID, back) => {
     if (req.status == 200) {
       back(null, JSON.parse(req.responseText)[0]);
     } else {
-      back('./login', null);
+      back('/login', null);
     }
   }
   req.open('GET', 'http://localhost:4242/api/user/'+userID, true);

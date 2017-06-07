@@ -21,7 +21,7 @@ const Reducer = function(state, action) {
   }
   if (action.type === 'ADD_FAVORITES_MOVIE_ID') {
     let newArray;
-    if (!state.favorites) {
+    if (!state.favorites || state.favorites.info) {
       newArray = []
     } else {
       newArray = state.favorites.slice();
