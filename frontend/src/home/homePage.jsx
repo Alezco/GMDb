@@ -27,7 +27,6 @@ class HomePage extends Component {
   }
 
   getUserFavoritesResponse(err, favorites) {
-    console.log('getUserFavoritesResponse');
     if (err) {
       this.props.router.push(err);
     } else {
@@ -59,7 +58,6 @@ class HomePage extends Component {
   }
 
   GetSessionResponse(err, res) {
-    console.log('GetSessionResponse');
     if (err) {
       this.props.dispatch({
         type: 'SET_USER_ID',
