@@ -3,18 +3,22 @@ import { render } from 'react-dom';
 const Redux = require('react-redux');
 const Router = require('react-router');
 import styles from '../style/index.css';
-import MyNavItem from './myNavItem.jsx';
 import NavBar from '../global/navBar.jsx';
 import Footer from '../global/footer.jsx';
+const api = require('../api/authentification.js');
 
 const SET_USER_ID = 'SET_USER_ID';
 
 class RegisterForm extends Component {
   constructor(props) {
     super(props);
+
     this.handleLogin = this.handleLogin.bind(this);
     this.handlePassword = this.handlePassword.bind(this);
     this.handleRePassword = this.handleRePassword.bind(this);
+    this.SignUpResponse = this.SignUpResponse.bind(this);
+    this.SignUp = this.SignUp.bind(this);
+
     this.state = {
       login: '',
       password: '',
@@ -23,27 +27,22 @@ class RegisterForm extends Component {
     }
   }
 
-  checkSignUp() {
+  SignUpResponse(err, res) {
+    if (err) {
+      this.setState({formError: err});
+    }
+    else {
+      this.setState({formError: res});
+    }
+  }
+
+  SignUp() {
     let login = this.state.login;
     let password = this.state.password;
     let rePassword = this.state.rePassword;
     if (password == rePassword) {
-      let req = new XMLHttpRequest();
-      req.withCredentials = true;
-      req.open('POST', 'http://localhost:4242/api/signIn', true);
-      req.setRequestHeader("Content-Type", "application/json");
-      let jsonToSend = JSON.stringify({"login": login, "pwd": password});
-      req.send(jsonToSend);
-      req.onreadystatechange = () => {
-        if (req.status == 200) {
-          this.setState({formError: 'Successfully registered!'});
-        }
-        else {
-          this.setState({formError: req.responseText});
-        }
-      }
-    }
-    else {
+      api.SignUp(SignUpResponse);
+    } else {
       this.setState({formError: 'Passwords not matching'});
     }
   }
@@ -109,7 +108,7 @@ class RegisterForm extends Component {
                   <input type="password" id="form4" className="form-control" placeholder="Repeat password" required onChange={this.handleRePassword}/>
                 </div>
                 <div className="text-center">
-                  <button className="btn btn-primary" id="submitBtn" type="submit" onClick={this.checkSignUp.bind(this)}>Register</button>
+                  <button className="btn btn-primary" id="submitBtn" type="submit" onClick={this.SignUp}>Register</button>
                 </div>
               </div>
             </div>

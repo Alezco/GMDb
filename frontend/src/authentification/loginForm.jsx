@@ -3,7 +3,6 @@ import { render } from 'react-dom';
 const Redux = require('react-redux');
 const Router = require('react-router');
 import styles from '../style/index.css';
-import MyNavItem from './myNavItem.jsx';
 import NavBar from '../global/navBar.jsx';
 import Footer from '../global/footer.jsx';
 const api = require('../api/authentification.js');
@@ -16,7 +15,7 @@ class LoginForm extends Component {
 
     this.handleLogin = this.handleLogin.bind(this);
     this.handlePassword = this.handlePassword.bind(this);
-    this.checkSignIn = this.checkSignIn.bind(this);
+    this.SignIn = this.SignIn.bind(this);
     this.SignInResponse = this.SignInResponse.bind(this);
     this.getUserFavoritesResponse = this.getUserFavoritesResponse.bind(this);
 
@@ -59,7 +58,7 @@ class LoginForm extends Component {
     }
   }
 
-  checkSignIn(event) {
+  SignIn(event) {
     let login = this.state.login;
     let password = this.state.password;
     api.SignIn(login, password, this.SignInResponse);
@@ -111,7 +110,7 @@ class LoginForm extends Component {
                     <input type="password" id="form4" className="form-control" placeholder="Password" required onChange={this.handlePassword}/>
                   </div>
                   <div className="text-center">
-                    <button className="btn btn-primary" id="submitBtn" type="submit" onClick={this.checkSignIn}>Login</button>
+                    <button className="btn btn-primary" id="submitBtn" type="submit" onClick={this.SignIn}>Login</button>
                   </div>
                 </div>
               </div>
