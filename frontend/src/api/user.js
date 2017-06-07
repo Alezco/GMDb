@@ -35,7 +35,12 @@ exports.getFavoritesOfUser = (userID, back) => {
   req.withCredentials = true;
   req.onload = () => {
     if (req.status == 200) {
-      back(null, JSON.parse(req.responseText));
+      let res = JSON.parse(req.responseText);
+      if (res.info) {
+        back(null, null);
+      } else {
+        back(null, JSON.parse(req.responseText));
+      }
     } else {
       back('./login', null);
     }

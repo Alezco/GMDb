@@ -382,6 +382,8 @@ app.get('/api/favorites/:id', ensureAuthentificated, (req, res) => {
           res.statusCode = 200;
           res.send(movies);
         }
+        res.statusCode = 200;
+        res.send('{ "info" : "no favorites" }');
       }
     });
   }

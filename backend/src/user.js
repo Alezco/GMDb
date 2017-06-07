@@ -41,7 +41,7 @@ exports.myMovies = function (userID, done) {
     if (rows.length) {
       done(null, JSON.stringify(rows));
     } else {
-      done('User does not have favorites', null);
+      done(null, null);
     };
   });
 };

@@ -41,7 +41,7 @@ class RegisterForm extends Component {
     let password = this.state.password;
     let rePassword = this.state.rePassword;
     if (password == rePassword) {
-      api.SignUp(SignUpResponse);
+      api.SignUp(login, password, this.SignUpResponse);
     } else {
       this.setState({formError: 'Passwords not matching'});
     }

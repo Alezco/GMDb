@@ -25,6 +25,7 @@ exports.UserFavorites = (userID, back) => {
       back("/login", null);
       this.props.router.push('/login');
     } else {
+      console.log(JSON.parse(req.responseText));
       back(null, JSON.parse(req.responseText));
     }
   }
@@ -32,7 +33,7 @@ exports.UserFavorites = (userID, back) => {
   req.send(null);
 }
 
-exports.SignUp = (back) => {
+exports.SignUp = (login, password, back) => {
   let req = new XMLHttpRequest();
   req.withCredentials = true;
   req.onload = () => {

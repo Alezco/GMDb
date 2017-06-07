@@ -27,7 +27,8 @@ class Profil extends Component {
   }
 
   render() {
-    if (this.props.favorites == null) {
+    console.log(this.props.favorites);
+    if (this.props.favorites == null || this.props.favorites.info) {
       return (
         <div>
           <NavBar />
