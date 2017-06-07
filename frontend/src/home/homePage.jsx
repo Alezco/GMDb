@@ -19,29 +19,28 @@ import User from '../user/user.jsx';
 class HomePage extends Component {
   constructor(props) {
     super(props);
+
+
+    this.getUserFavoritesResponse = this.getUserFavoritesResponse.bind(this);
+    this.GetSessionResponse = this.GetSessionResponse.bind(this);
+  }
+
+  getUserFavoritesResponse(err, favorites) {
+    if (err) {
+      this.props.router.push(err);
+    } else {
+      this.props.dispatch({
+        type: 'INIT_FAVORITES',
+        favorites: favorites
+      });
+      this.setState({
+        movies : favorites
+      });
+    }
   }
 
   getUserFavorites(userID) {
-    let req = new XMLHttpRequest();
-    req.withCredentials = true;
-    req.onreadystatechange = () => {
-      if (req.status == 403) {
-        this.props.router.push('/login');
-      }
-      else {
-        if (req.status == 200 && req.readyState == XMLHttpRequest.DONE) {
-          this.setState({
-            movies : JSON.parse(req.responseText)
-          });
-          this.props.dispatch({
-            type: 'INIT_FAVORITES',
-            favorites: JSON.parse(req.responseText)
-          });
-        }
-      }
-    }
-    req.open('GET', 'http://localhost:4242/api/favorites/'+userID, true);
-    req.send(null);
+    api.UserFavorites(userID, this.getUserFavoritesResponse);
   }
 
   initJSJoke() {
@@ -57,40 +56,28 @@ class HomePage extends Component {
     });
   }
 
+  GetSessionResponse(err, res) {
+    if (err) {
+      this.props.dispatch({
+        type: 'SET_USER_ID',
+        username: -1
+      });
+    } else {
+      this.props.dispatch({
+        type: 'SET_USER_ID',
+        username: res.id
+      });
+      this.props.dispatch({
+        type: 'SET_USER_OBJECT',
+        user: res
+      });
+      this.getUserFavorites(res.id);
+    }
+  }
+
   componentWillMount() {
     this.initJSJoke();
-    let req = new XMLHttpRequest();
-    req.withCredentials = true;
-    req.onreadystatechange = () => {
-      if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
-        let user = JSON.parse(req.responseText);
-        this.props.dispatch({
-          type: 'SET_USER_ID',
-          username: user.id
-        });
-        this.props.dispatch({
-          type: 'SET_USER_OBJECT',
-          user: user
-        });
-        this.props.dispatch({
-          type: 'SHOW_STORE'
-        });
-        this.getUserFavorites(user.id);
-      } else {
-        if (req.readyState == XMLHttpRequest.DONE && req.status == 403) {
-          this.props.dispatch({
-            type: 'SET_USER_ID',
-            username: -1
-          });
-          this.props.dispatch({
-            type: 'SHOW_STORE'
-          });
-        }
-      }
-    }
-    req.open('GET', 'http://localhost:4242/api/session', true);
-    req.setRequestHeader("Content-Type", "application/json");
-    req.send(null);
+    api.GetSession(this.GetSessionResponse)
   }
 
   render() {

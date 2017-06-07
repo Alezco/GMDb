@@ -3,10 +3,13 @@ import { render } from 'react-dom';
 import { Link } from 'react-router';
 const Redux =require('react-redux');
 import styles from '../style/index.css';
+const api = require('../api/authentification.js');
 
 class NavBar extends Component {
   constructor(props) {
     super(props);
+
+    this.LogOutResponse = this.LogOutResponse.bind(this);
   }
 
   deleteAllCookies() {
@@ -19,23 +22,20 @@ class NavBar extends Component {
     }
   }
 
+  LogOutResponse(err, res) {
+    if (err) {
+      console.log(err);
+    } else {
+      this.props.dispatch({
+        type: 'SET_USER_ID',
+        username: res
+      });
+    }
+  }
+
   handleClick() {
     this.deleteAllCookies();
-    let req = new XMLHttpRequest();
-    req.withCredentials = true;
-    req.onreadystatechange = () => {
-      if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
-        this.props.dispatch({
-          type: 'SET_USER_ID',
-          username: -1
-        });
-        this.props.dispatch({
-          type: 'SHOW_STORE'
-        });
-      }
-    }
-    req.open('POST', 'http://localhost:4242/api/logOut', true);
-    req.send(null);
+    api.LogOut(this.LogOutResponse);
   }
 
   render() {

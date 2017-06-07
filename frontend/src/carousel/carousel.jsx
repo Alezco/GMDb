@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {render} from 'react-dom';
 import CarouselItem from './carouselitem.jsx';
 import Slider from 'react-slick';
+const api = require('../api/recommandation.js');
 
 class Carousel extends Component {
   constructor(props) {
@@ -9,6 +10,7 @@ class Carousel extends Component {
 
     this.rightClick = this.moveRight.bind(this)
     this.leftClick = this.moveLeft.bind(this)
+    this.getRecommandatioResponse = this.getRecommandatioResponse.bind(this)
 
     this.state = {
       movies : null,
@@ -17,28 +19,20 @@ class Carousel extends Component {
     }
   }
 
-  componentWillMount() {
-    let req = new XMLHttpRequest();
-    req.withCredentials = true;
-    req.onreadystatechange = () => {
-      if (req.status == 403) {
-        console.log("Not Authorized");
-        this.props.router.push('/login');
-      }
-      else {
-        console.log("Authorized");
-        if (req.status == 200 && req.readyState == XMLHttpRequest.DONE) {
-          let NewMovies = JSON.parse(req.responseText);
-          this.setState({
-            movies : NewMovies,
-            active: this.state.active,
-            direction: this.state.direction
-          });
-        }
-      }
+  getRecommandatioResponse(err, movies) {
+    if (err) {
+      this.props.router.push(err);
+    } else {
+      this.setState({
+        movies : movies,
+        active: this.state.active,
+        direction: this.state.direction
+      });
     }
-    req.open('GET', 'http://localhost:4242/api/recommandation/'+this.props.username, true);
-    req.send(null);
+  }
+
+  componentWillMount() {
+    api.getRecommandation(this.props.username, this.getRecommandatioResponse)
   }
 
   moveLeft() {
