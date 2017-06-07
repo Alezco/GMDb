@@ -22,10 +22,16 @@ class SearchForm extends Component {
       selected : event.currentTarget.textContent,
       hint :"Search for movies by " + event.currentTarget.textContent+" ..."
     });
+    this.textInput.value = '';
+    this.handleChange(null);
   }
 
   handleChange(event) {
-    this.props.onKeyUp(event.target.value, this.state.selected);
+    if (event) {
+      this.props.onKeyUp(event.target.value, this.state.selected);
+    } else {
+      this.props.onKeyUp(null, this.state.selected);
+    }
   }
 
   render() {
@@ -49,7 +55,7 @@ class SearchForm extends Component {
               <form className="form-inline">
                 <div className="md-form input-group">
                   <div className="customWidth md-group form-group">
-                    <input type="text" className="customWidth form-control" placeholder={this.state.hint} onChange={this.handleChange} />
+                    <input ref={(input) => { this.textInput = input; }}  type="text" className="customWidth form-control" placeholder={this.state.hint} onChange={this.handleChange} />
                   </div>
                 </div>
                 {rows}
