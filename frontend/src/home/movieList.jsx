@@ -7,30 +7,34 @@ import NavBar from '../global/navBar.jsx';
 import MovieCell from '../movieCell/movieCell.jsx';
 import Footer from '../global/footer.jsx';
 import SearchForm from './searchForm.jsx';
+const api = require('../api/content.js');
 
 class MovieList extends Component {
   constructor(props) {
     super(props);
+
     this.searchByName = this.searchByName.bind(this);
+    this.GetFilmsResponse = this.GetFilmsResponse.bind(this);
+
     this.state = {
       movies : null,
       filteredMovies : null
     };
   }
 
-  componentWillMount() {
-    let req = new XMLHttpRequest();
-    req.withCredentials = true;
-    req.onreadystatechange = () => {
-      if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
-        this.setState({
-          movies : JSON.parse(req.responseText),
-          filteredMovies : JSON.parse(req.responseText)
-        });
-      }
+  GetFilmsResponse(err, res) {
+    if (err) {
+      console.log(err);
+    } else {
+      this.setState({
+        movies : res,
+        filteredMovies : res
+      });
     }
-    req.open('GET', 'http://localhost:4242/api/films', true);
-    req.send(null);
+  }
+
+  componentWillMount() {
+    api.GetFilms(GetFilmsResponse);
   }
 
   filterByTitle(elt) {
