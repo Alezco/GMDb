@@ -6,12 +6,16 @@ const Redux = require('react-redux');
 import NavBar from '../global/navBar.jsx';
 import MovieCell from '../movieCell/movieCell.jsx';
 import Footer from '../global/footer.jsx';
+const api = require('../api/user.js');
 
 class User extends Component {
   constructor(props) {
     super(props);
 
     const { router, params, location, routes } = this.props
+
+    this.OnUserByIDResponse = this.OnUserByIDResponse.bind(this);
+    this.getUserFavoritesResponse = this.getUserFavoritesResponse.bind(this);
 
     this.state = {
       userID : this.props.routeParams.id,
@@ -20,47 +24,37 @@ class User extends Component {
     }
   }
 
-  getUserFavorites(userID) {
-    let req = new XMLHttpRequest();
-    req.withCredentials = true;
-    req.onreadystatechange = () => {
-      if (req.status == 403) {
-        this.props.router.push('/login');
-      }
-      else {
-        if (req.status == 200 && req.readyState == XMLHttpRequest.DONE) {
-          this.setState({
-            userID : this.state.userID,
-            userObject : this.state.userObject,
-            favorites : JSON.parse(req.responseText)
-          });
-        }
-      }
+  getUserFavoritesResponse(err, res) {
+    if (err) {
+      this.props.router.push(err);
+    } else {
+      this.setState({
+        userID : this.state.userID,
+        userObject : this.state.userObject,
+        favorites : res
+      });
     }
-    req.open('GET', 'http://localhost:4242/api/favorites/'+userID, true);
-    req.send(null);
+  }
+
+  getUserFavorites(userID) {
+    api.getFavoritesOfUser(userID, this.getUserFavoritesResponse)
+  }
+
+  OnUserByIDResponse(err, res) {
+    if (err) {
+      this.props.router.push(err);
+    } else {
+      this.setState({
+        userID : this.state.userID,
+        userObject : res,
+        favorites : this.state.favorites
+      });
+      this.getUserFavorites(this.state.userID);
+    }
   }
 
   componentWillMount() {
-    let req = new XMLHttpRequest();
-    req.withCredentials = true;
-    req.onreadystatechange = () => {
-      if (req.status == 403) {
-        this.props.router.push('/login');
-      }
-      else {
-        if (req.status == 200 && req.readyState == XMLHttpRequest.DONE) {
-          this.setState({
-            userID : this.state.userID,
-            userObject : JSON.parse(req.responseText)[0],
-            favorites : this.state.favorites
-          });
-          this.getUserFavorites(this.state.userID);
-        }
-      }
-    }
-    req.open('GET', 'http://localhost:4242/api/user/'+this.state.userID, true);
-    req.send(null);
+    api.getUserByID(this.state.userID, this.OnUserByIDResponse)
   }
 
   render() {

@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 const Redux = require('react-redux');
 import styles from '../style/index.css';
 import { withRouter, Link } from 'react-router';
+const api = require('../api/content.js');
 
 class MovieCell extends Component {
 
@@ -10,6 +11,7 @@ class MovieCell extends Component {
     super(props);
 
     this.likeAction = this.likeAction.bind(this);
+    this.likeActionResponse = this.likeActionResponse.bind(this);
     this.lockLikeAnimation = false;
 
     if (!this.props.favorites) {
@@ -50,31 +52,28 @@ class MovieCell extends Component {
     this.setFavoriteStyle(Newprops);
   }
 
-  WebServiceCall(movieID)
-  {
-    let req = new XMLHttpRequest();
-    req.withCredentials = true;
-    req.onreadystatechange = () => {
-      if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
-        let val = JSON.parse(req.responseText);
-        if (val.res === "Liked") {
-          this.props.dispatch({
-            type: 'ADD_FAVORITES_MOVIE_ID',
-            index: this.props.index,
-            item: this.props.movieObject
-          });
-        } else {
-          this.props.dispatch({
-            type: 'REMOVE_FAVORITES_MOVIE_ID',
-            item: this.props.movieObject
-          });
-        }
+  likeActionResponse(err, res) {
+    if (err) {
+      console.log(err);
+    } else {
+      if (res.res === "Liked") {
+        this.props.dispatch({
+          type: 'ADD_FAVORITES_MOVIE_ID',
+          index: this.props.index,
+          item: this.props.movieObject
+        });
+      } else {
+        this.props.dispatch({
+          type: 'REMOVE_FAVORITES_MOVIE_ID',
+          item: this.props.movieObject
+        });
       }
     }
-    req.open('POST', 'http://localhost:4242/api/like', true);
-    req.setRequestHeader("Content-Type", "application/json");
-    let jsonToSend = JSON.stringify({"movieID": movieID});
-    req.send(jsonToSend);
+  }
+
+  WebServiceCall(movieID)
+  {
+    api.LikeAction(movieID, this.likeActionResponse)
   }
 
   removeLock() {

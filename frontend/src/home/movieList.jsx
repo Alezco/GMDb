@@ -23,6 +23,7 @@ class MovieList extends Component {
   }
 
   GetFilmsResponse(err, res) {
+    console.log('GetFilmsResponse');
     if (err) {
       console.log(err);
     } else {
@@ -34,7 +35,8 @@ class MovieList extends Component {
   }
 
   componentWillMount() {
-    api.GetFilms(GetFilmsResponse);
+    console.log('componentWillMount')
+    api.GetFilms(this.GetFilmsResponse);
   }
 
   filterByTitle(elt) {

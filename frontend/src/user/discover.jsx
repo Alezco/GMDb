@@ -3,10 +3,13 @@ import {render} from 'react-dom';
 import DiscoverItem from './discoveritem.jsx'
 import NavBar from '../global/navBar.jsx';
 import Footer from '../global/footer.jsx';
+const api = require('../api/user.js');
 
 class Discover extends Component {
   constructor(props) {
     super(props);
+
+    this.getUsersResponse = this.getUsersResponse.bind(this);
 
     this.state = {
       users : null,
@@ -15,20 +18,19 @@ class Discover extends Component {
     }
   }
 
+getUsersResponse(err, res) {
+  if (err) {
+    console.log(err);
+  } else {
+    this.setState({
+      users : res,
+      showDetail : this.state.showDetail,
+      detailID : this.state.detailID
+    });
+  }
+}
   componentWillMount() {
-    let req = new XMLHttpRequest();
-    req.withCredentials = true;
-    req.onreadystatechange = () => {
-      if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
-        this.setState({
-          users : JSON.parse(req.responseText),
-          showDetail : this.state.showDetail,
-          detailID : this.state.detailID
-        });
-      }
-    }
-    req.open('GET', 'http://localhost:4242/api/users', true);
-    req.send(null);
+    api.getUsers(this.getUsersResponse);
   }
 
   render() {

@@ -2,7 +2,7 @@
 
 
 
-exports.getRecommandation = (UserID, back) => {
+exports.getRecommandation = (userID, back) => {
   let req = new XMLHttpRequest();
   req.withCredentials = true;
   req.onload = () => {

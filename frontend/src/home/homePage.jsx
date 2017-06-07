@@ -15,6 +15,7 @@ import MovieDetail from '../movieDetail/movieDetail.jsx';
 import Edit from '../user/edit.jsx';
 import Discover from '../user/discover.jsx';
 import User from '../user/user.jsx';
+const api = require('../api/authentification');
 
 class HomePage extends Component {
   constructor(props) {
@@ -26,6 +27,7 @@ class HomePage extends Component {
   }
 
   getUserFavoritesResponse(err, favorites) {
+    console.log('getUserFavoritesResponse');
     if (err) {
       this.props.router.push(err);
     } else {
@@ -57,10 +59,11 @@ class HomePage extends Component {
   }
 
   GetSessionResponse(err, res) {
+    console.log('GetSessionResponse');
     if (err) {
       this.props.dispatch({
         type: 'SET_USER_ID',
-        username: -1
+        username: err
       });
     } else {
       this.props.dispatch({

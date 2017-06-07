@@ -7,6 +7,7 @@ import NavBar from '../global/navBar.jsx';
 import Modal from './modal.jsx'
 import Carousel from '../carousel/carousel.jsx'
 import Footer from '../global/footer.jsx';
+const api = require('../api/content.js');
 
 class MovieDetail extends Component {
 
@@ -16,6 +17,8 @@ class MovieDetail extends Component {
     this.showModal = this.showModal.bind(this);
     this.dismissModal = this.dismissModal.bind(this);
     this.likeAction = this.likeAction.bind(this);
+    this.likeActionResponse = this.likeActionResponse.bind(this);
+    this.GetMovieDetailResponse = this.GetMovieDetailResponse.bind(this);
 
     const { router, params, location, routes } = this.props
 
@@ -56,57 +59,48 @@ class MovieDetail extends Component {
     });
   }
 
-  updateMovieDetail() {
-    let req = new XMLHttpRequest();
-    req.withCredentials = true;
-    req.onreadystatechange = () => {
-      if (req.status == 403) {
-        this.props.router.push('/login');
-      }
-      else {
-        if (req.status == 200 && req.readyState == XMLHttpRequest.DONE) {
-          let movie = JSON.parse(req.responseText);
-          this.setState(
-            {
-              movieID : this.state.movieID,
-              movieObject : movie[0],
-              modalStyle : "none",
-              style: this.state.style
-            }
-          );
-          this.refreshButtonStyle();
+  GetMovieDetailResponse(err, res) {
+    if (err) {
+      his.props.router.push(err);
+    } else {
+      this.setState(
+        {
+          movieID : this.state.movieID,
+          movieObject : res[0],
+          modalStyle : "none",
+          style: this.state.style
         }
+      );
+      this.refreshButtonStyle();
+    }
+  }
+
+  updateMovieDetail() {
+    api.GetMovieDetail(this.state.movieID, this.GetMovieDetailResponse);
+  }
+
+  likeActionResponse(err, res) {
+    if (err) {
+      console.log(err);
+    } else {
+      if (res.res === "Liked") {
+        this.props.dispatch({
+          type: 'ADD_FAVORITES_MOVIE_ID',
+          index: this.props.index,
+          item: this.state.movieObject
+        });
+      } else {
+        this.props.dispatch({
+          type: 'REMOVE_FAVORITES_MOVIE_ID',
+          item: this.state.movieObject
+        });
       }
     }
-    req.open('GET', 'http://localhost:4242/api/movie/'+this.state.movieID, true);
-    req.send(null);
   }
 
   WebServiceCall(movieID)
   {
-    let req = new XMLHttpRequest();
-    req.withCredentials = true;
-    req.onreadystatechange = () => {
-      if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
-        let val = JSON.parse(req.responseText);
-        if (val.res === "Liked") {
-          this.props.dispatch({
-            type: 'ADD_FAVORITES_MOVIE_ID',
-            index: this.props.index,
-            item: this.state.movieObject
-          });
-        } else {
-          this.props.dispatch({
-            type: 'REMOVE_FAVORITES_MOVIE_ID',
-            item: this.state.movieObject
-          });
-        }
-      }
-    }
-    req.open('POST', 'http://localhost:4242/api/like', true);
-    req.setRequestHeader("Content-Type", "application/json");
-    let jsonToSend = JSON.stringify({"movieID": movieID});
-    req.send(jsonToSend);
+    api.LikeAction(movieID, this.likeActionResponse)
   }
 
   likeAction()

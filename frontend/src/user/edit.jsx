@@ -11,6 +11,7 @@ class Edit extends Component {
 
     this.updateUrl = this.updateUrl.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.onUpdateResponse = this.onUpdateResponse.bind(this);
 
     this.state = {
       url : ''
@@ -25,26 +26,24 @@ class Edit extends Component {
     return(url.match(/\.(jpeg|jpg|gif|png)$/) != null);
   }
 
+  onUpdateResponse(err, res) {
+    if (err) {
+      console.log(err)
+    } else {
+      let user = this.props.user;
+      user.url = res;
+      this.props.dispatch({
+        type: 'UPDATE_USER',
+        user: user
+      });
+    }
+  }
+
   updateUrl() {
     if (!this.checkURL(this.state.url)) {
       return;
     }
-    let req = new XMLHttpRequest();
-    req.withCredentials = true;
-    let user = this.props.user;
-    user.url = this.state.url;
-    req.onreadystatechange = () => {
-      if (req.readyState == XMLHttpRequest.DONE && req.status == 200) {
-        this.props.dispatch({
-          type: 'UPDATE_USER',
-          user: user
-        });
-      }
-    }
-    req.open('POST', 'http://localhost:4242/api/updateURL', true);
-    req.setRequestHeader("Content-Type", "application/json");
-    let jsonToSend = JSON.stringify({"url": this.state.url});
-    req.send(jsonToSend);
+    api.updateUrl(this.state.url, this.onUpdateResponse);
   }
 
   render() {
