@@ -31,7 +31,7 @@ class SearchForm extends Component {
   render() {
     let options = [];
     options.push("Title");
-    options.push("Actor");
+    options.push("Actors");
     options.push("Director");
     let rows = [];
     options.map((row, index) => {

@@ -4,6 +4,7 @@ const Redux = require('react-redux');
 
 import NavBar from '../global/navBar.jsx';
 import Footer from '../global/footer.jsx';
+const api = require('../api/user.js');
 
 class Edit extends Component {
   constructor(props) {
@@ -43,7 +44,7 @@ class Edit extends Component {
     if (!this.checkURL(this.state.url)) {
       return;
     }
-    api.updateUrl(this.state.url, this.onUpdateResponse);
+    api.updateUrl(this.props.user, this.state.url, this.onUpdateResponse);
   }
 
   render() {

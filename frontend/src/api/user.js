@@ -12,11 +12,11 @@ exports.getUsers = (back) => {
   req.send(null);
 }
 
-exports.updateUrl = (url, back) => {
+exports.updateUrl = (userParent, url, back) => {
   let req = new XMLHttpRequest();
   req.withCredentials = true;
-  let user = this.props.user;
-  user.url = this.state.url;
+  let user = userParent;
+  user.url = url;
   req.onload = () => {
     if (req.status == 200) {
       back(null, url);
