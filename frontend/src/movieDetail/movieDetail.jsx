@@ -7,6 +7,7 @@ import NavBar from '../global/navBar.jsx';
 import Modal from './modal.jsx'
 import Carousel from '../carousel/carousel.jsx'
 import Footer from '../global/footer.jsx';
+import LikeButton from './likeButton.jsx'
 const api = require('../api/content.js');
 
 class MovieDetail extends Component {
@@ -16,8 +17,6 @@ class MovieDetail extends Component {
 
     this.showModal = this.showModal.bind(this);
     this.dismissModal = this.dismissModal.bind(this);
-    this.likeAction = this.likeAction.bind(this);
-    this.likeActionResponse = this.likeActionResponse.bind(this);
     this.GetMovieDetailResponse = this.GetMovieDetailResponse.bind(this);
 
     const { router, params, location, routes } = this.props
@@ -25,28 +24,27 @@ class MovieDetail extends Component {
     this.state = {
       movieID : this.props.routeParams.id,
       movieObject : null,
-      modalStyle : "none",
-      style : ""
+      modalStyle : "none"
     }
   }
 
   componentWillReceiveProps(NewProps) {
+    if (NewProps.location != this.props.location) {
     this.setState({
       movieID : NewProps.routeParams.id,
       movieObject : null,
-      modalStyle : "none",
-      style : this.state.style
+      modalStyle : "none"
     }, () => {
       this.updateMovieDetail();
     });
   }
+}
 
   dismissModal() {
     this.setState({
       movieID : this.state.movieID,
       movieObject : this.state.movieObject,
-      modalStyle : "none",
-      style : this.state.style
+      modalStyle : "none"
     });
   }
 
@@ -54,8 +52,7 @@ class MovieDetail extends Component {
     this.setState({
       movieID : this.state.movieID,
       movieObject : this.state.movieObject,
-      modalStyle : "block",
-      style : this.state.style
+      modalStyle : "block"
     });
   }
 
@@ -67,11 +64,10 @@ class MovieDetail extends Component {
         {
           movieID : this.state.movieID,
           movieObject : res[0],
-          modalStyle : "none",
-          style: this.state.style
+          modalStyle : "none"
         }
       );
-      this.refreshButtonStyle();
+      console.log(this.state.movieObject);
     }
   }
 
@@ -79,62 +75,11 @@ class MovieDetail extends Component {
     api.GetMovieDetail(this.state.movieID, this.GetMovieDetailResponse);
   }
 
-  likeActionResponse(err, res) {
-    if (err) {
-      console.log(err);
-    } else {
-      if (res.res === "Liked") {
-        this.props.dispatch({
-          type: 'ADD_FAVORITES_MOVIE_ID',
-          index: this.props.index,
-          item: this.state.movieObject
-        });
-      } else {
-        this.props.dispatch({
-          type: 'REMOVE_FAVORITES_MOVIE_ID',
-          item: this.state.movieObject
-        });
-      }
-    }
-  }
-
-  WebServiceCall(movieID)
-  {
-    api.LikeAction(movieID, this.likeActionResponse)
-  }
-
-  likeAction()
-  {
-    this.WebServiceCall(this.state.movieObject.id);
-  }
-
   componentWillMount() {
     this.updateMovieDetail();
   }
 
-  refreshButtonStyle() {
-    if (this.props.favorites && this.state.movieObject
-      && this.props.favorites.filter(e => e.id == this.state.movieObject.id).length > 0) {
-      this.setState(
-        {
-          movieID : this.state.movieID,
-          movieObject : this.state.movieObject,
-          modalStyle : this.state.modalStyle,
-          style: "btn btn-yellow"
-        }
-      );
-    }
-      else {
-        this.setState(
-          {
-            movieID : this.state.movieID,
-            movieObject : this.state.movieObject,
-            modalStyle : this.state.modalStyle,
-            style: "btn btn-grey"
-          }
-        );
-      }
-    }
+
 
   render() {
     if (!this.state.movieObject) {
@@ -153,11 +98,7 @@ class MovieDetail extends Component {
                 </div>
                 <div className="details col-md-6">
                 { this.props.username !== -1 ?
-                  <div className="action">
-                    <button className={this.state.style} type="button" onClick={this.likeAction}>
-                      <span className="fa fa-star"></span>
-                    </button>
-                  </div>
+                  <LikeButton favorites={this.props.favorites} movieObject={this.state.movieObject} index={this.props.index}></LikeButton>
                  :
                <div></div>
                }
@@ -234,8 +175,7 @@ class MovieDetail extends Component {
 
 const mapStateToProps = (state, router) => {
   return {
-    username: state.username,
-    favorites : state.favorites
+    username: state.username
   }
 };
 

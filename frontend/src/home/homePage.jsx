@@ -30,6 +30,7 @@ class HomePage extends Component {
     if (err) {
       this.props.router.push(err);
     } else {
+      console.log("favorites are fetches");
       this.props.dispatch({
         type: 'INIT_FAVORITES',
         favorites: favorites
