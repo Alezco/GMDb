@@ -113,7 +113,8 @@ class MovieDetail extends Component {
   }
 
   refreshButtonStyle() {
-    if (this.props.favorites && this.state.movieObject && this.props.favorites.filter(e => e.id == this.state.movieObject.id).length > 0) {
+    if (this.props.favorites && this.state.movieObject
+      && this.props.favorites.filter(e => e.id == this.state.movieObject.id).length > 0) {
       this.setState(
         {
           movieID : this.state.movieID,
@@ -167,7 +168,6 @@ class MovieDetail extends Component {
                   <img onClick={this.showModal} className="center-img" src={this.state.movieObject.Poster} />
                 </div>
                 <div className="details col-md-6">
-
                   <p className="product-description">
                     <strong>Plot: </strong>
                     {this.state.movieObject.Plot}
@@ -208,8 +208,6 @@ class MovieDetail extends Component {
                     <strong>Duration: </strong>
                     {this.state.movieObject.Runtime}
                   </p>
-
-
                 </div>
               </div>
               <div className="wrapper row">

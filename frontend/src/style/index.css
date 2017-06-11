@@ -6,6 +6,15 @@ html {
   overflow-y: scroll;
 }
 
+.max-height-img {
+  height: 330px;
+}
+
+.favPadding {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 body {
   background: #E3F2FD;
   font-family: 'Roboto', sans-serif;

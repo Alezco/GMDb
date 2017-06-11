@@ -60,7 +60,7 @@ class NavBar extends Component {
                   <li className="nav-item"><Link className="blue" to="/edit">My Profile</Link></li>
                 </ul>
                 <ul className="nav navbar-nav navbar-right">
-                  <li className="nav-item"><Link className="blue" href="" onClick={() => this.handleClick()}>Log out</Link></li>
+                  <li className="nav-item"><Link className="blue" href="" onClick={() => this.handleClick()}>Log out<i className="fa fa-sign-out favPadding"></i></Link></li>
                 </ul>
               </div>
             </div>

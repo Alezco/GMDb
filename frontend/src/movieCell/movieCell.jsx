@@ -118,7 +118,7 @@ class MovieCell extends Component {
         <div>
           <div className="col-sm-6 col-md-3" style={divStyle}>
             <Link to={this.state.link}>
-              <img className="img-responsive" src={this.props.movieObject.Poster} alt=""/>
+              <img className="img-responsive max-height-img" src={this.props.movieObject.Poster} alt=""/>
             </Link>
             <div className="caption">
               <h4>{this.props.movieObject.Title}</h4>
@@ -132,7 +132,7 @@ class MovieCell extends Component {
         <div className="col-sm-6 col-md-3" style={divStyle}>
           <div className={this.state.style} onClick={this.likeAction}></div>
           <Link to={this.state.link}>
-            <img className="img-responsive" src={this.props.movieObject.Poster} alt=""/>
+            <img className="img-responsive max-height-img" src={this.props.movieObject.Poster} alt=""/>
           </Link>
           <div className="caption">
             <h4>{this.props.movieObject.Title}</h4>
